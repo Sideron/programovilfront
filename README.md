@@ -91,7 +91,7 @@ A continuación se presentarán los requerimientos no funcionales para la arquit
 
 ## Mockups
 
-| Imagen | Descripción |
+| Mockup | Descripción |
 |:------:|:------------|
 |**Pantalla de Registro (Sign In)**<br> <img src="/mockup/Log_In.png" width="150"/> |La pantalla de **Registro** permite a nuevos usuarios crear una cuenta en *ProfeStats*. <br><br>Incluye los siguientes campos:<br>- **Correo electrónico**: Campo para ingresar un correo válido.<br>- **Contraseña**: Campo para definir una contraseña segura.<br>- **Confirmar contraseña**: Campo para confirmar la contraseña ingresada.<br><br>Además, cuenta con un botón **Registrarse** para completar el proceso de creación de cuenta. |
 | **Pantalla de Inicio de Sesión (Log In)** <br> <img src="mockup/Sign_In.png" width="150"/>|La pantalla de **Inicio de Sesión** permite a los usuarios existentes ingresar a su cuenta en *ProfeStats*. <br><br>Incluye los siguientes campos:<br>- **Correo electrónico**: Campo para ingresar el correo registrado.<br>- **Contraseña**: Campo para ingresar la contraseña correspondiente.<br><br>Cuenta con un botón **Iniciar Sesión** para acceder a la aplicación. |
