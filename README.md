@@ -83,11 +83,15 @@ A continuación se presentarán los requerimientos no funcionales para la arquit
 -Los administradores tendrán la capacidad de supervisar y gestionar las calificaciones y comentarios dados por los estudiantes.
 
 
+## Diagrama de Casos de Uso
 
+![Diagrama de Casos de Uso](imgs/Diagrama%20de%20Casos%20de%20Uso.jpg)
 
-## Diagrama de clases
+## Diagrama Relacional
 
+![Diagrama Relacional](imgs/Diagrama%20Relacional.jpg)
 
+## Diagrama de Clases
 
 ## Mockups
 
