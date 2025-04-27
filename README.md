@@ -8,8 +8,11 @@ Al finalizar la evaluación, el aplicativo permitirá al usuario dejar un coment
 - [Configuración del Ambiente de Desarrollo](#configuracion-del-ambiente-de-desarrollo)
 - [Diagrama de despliegue](#diagrama-de-despliegue)
 - [Requerimientos no Funcionales](#requerimientos-no-funcionales)
+- [Requerimientos Funcionales](#requerimientos-funcionales)
+- [Diagrama de Casos de Uso](#diagrama-de-casos-de-uso)
+- [Diagrama Relacional](#diagrama-relacional)
 - [Diagrama de Clases](#diagrama-de-clases)
-
+- [Mockups](#mockups)
 
 ## Configuracion del Ambiente de Desarrollo
 
