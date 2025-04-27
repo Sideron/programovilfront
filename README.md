@@ -62,7 +62,7 @@ A continuación se presentarán los requerimientos no funcionales para la arquit
 
 ### 1. Registro de Usuario
  -El usuario podrá registrarse en el sistema proporcionando los datos requeridos (nombre, correo electrónico, contraseña).
- -El sistema validará la información del registro para asegurar que no haya duplicados (por ejemplo, orreo electrónico ya registrado).
+ 
 
 ### 2. Inicio de Sesión:
 -Los usuarios deberán iniciar sesión con sus credenciales (correo electrónico y contraseña) para acceder al sistema.
