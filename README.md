@@ -16,12 +16,12 @@ Al finalizar la evaluación, el aplicativo permitirá al usuario dejar un coment
 Paso a paso que se usará en el proyecto.
 
 
-![Android Studio](imgs/Android.webp)
+![Android Studio](https://storage.googleapis.com/gweb-developer-goog-blog-assets/images/Android-Studio-banner_1.original.png)
 *<b>Figura 1:</b> Instalación de Android Studio*
 
 ## Diagrama de despliegue
 
-![Diagrama de Despliegue](https://www.plantuml.com/plantuml/png/PP6zJYin48LxFyMHcrIvpUqeK9QV8aKW8f6ePzUpaONNizYp8GJnG3m7BqQyIeWKkf7yVMVcoBEib7JeWialFlQKg8FZbeQWQzvf5VmcTXmL3KVbPCm43-8acoYEOTSSlhzQYO8gkYJUMNmOW9BwbXg5hVhW6sgyH2nawuC5PNHbehutd-QOi_1DaYojejeFYV-aBETO9cavZtxcj3sxDvGPX-6ELFAbELh_N8tLQ_3A_qVVrMTxIP43dhc6ut1S8kaoPbxAjxGleAMCld1lFEPCS2kHTruYPsDFtIocqslOSgh5LK7oqF5ukc-yP3pThzRc-3wYhlu5WnBUiHaeEK8umAvqC_QqzYByiLQEdD18-IfA_i3EEBgX2py0)
+![Diagrama de Despliegue](https://www.plantuml.com/plantuml/png/POyxJWD138RxESMlQQX2GqU14Xu51IXASW7lsXkDc1alyuWI8Gx4ERWOiwi04ZIM9N_VRtkP2wLIWpVvnSMH4WMm35HzsScnhBpRno2ne6z5aZ4NU5RMRAAomEx4VtuC6XMho4aTMxmPe4MwWVe2kngzwwbt6l6a1-SjA2DC7OsZUJVddAsaWsDDsDJkz2zZ_OXrqa7oREV6_fgtb0MjkQUY-QyvMvVSOVlgNP6hsUTkijiZTnhbw5h9ndwVPB5OtC1EEook9oJN8FDErxx8s3niT-Oydr7kVa1V22ViAoKc-0RpT9GnIubSW_y2)
 
 *<b>Figura 2:</b> Diagrama de depliegue*
 La arquitectura física del sistema móvil. En él se muestra cómo la aplicación móvil, instalada en un teléfono Android, consume los servicios REST proporcionados por una API desplegada en Microsoft Azure. Esta API gestiona las solicitudes tanto desde la app como desde un panel web utilizado por los profesores para visualizar comentarios. Además, la API se conecta a una base de datos SQLite3 donde se consultan y almacenan las calificaciones y opiniones emitidas por los estudiantes.
