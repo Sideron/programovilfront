@@ -92,7 +92,7 @@ A continuación se presentarán los requerimientos no funcionales para la arquit
 ![Diagrama Relacional](imgs/Diagrama%20Relacional.jpg)
 
 ## Diagrama de Clases
-![Diagrama Relacional](imgs\DiagramaClasesPM.png)
+![Diagrama Relacional](imgs/DiagramaClasesPM.png)
 ## Mockups
 
 | Mockup | Descripción |
