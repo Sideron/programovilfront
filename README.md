@@ -49,7 +49,7 @@ Usaremos este motor en el mismo servidor para almacenar los datos tanto de nuest
 
 ![Diagrama de Despliegue](https://www.plantuml.com/plantuml/png/POyxJWD138RxESMlQQX2GqU14Xu51IXASW7lsXkDc1alyuWI8Gx4ERWOiwi04ZIM9N_VRtkP2wLIWpVvnSMH4WMm35HzsScnhBpRno2ne6z5aZ4NU5RMRAAomEx4VtuC6XMho4aTMxmPe4MwWVe2kngzwwbt6l6a1-SjA2DC7OsZUJVddAsaWsDDsDJkz2zZ_OXrqa7oREV6_fgtb0MjkQUY-QyvMvVSOVlgNP6hsUTkijiZTnhbw5h9ndwVPB5OtC1EEook9oJN8FDErxx8s3niT-Oydr7kVa1V22ViAoKc-0RpT9GnIubSW_y2)
 
-_<b>Figura 2:</b> Diagrama de depliegue_
+_<b>Figura 5:</b> Diagrama de depliegue_
 
 La arquitectura física de la aplicación móvil de evaluación de profesores, donde la aplicación instalada en un teléfono Android consume los servicios REST proporcionados por un servidor Ruby que ejecuta la API Profes. Esta API se encarga de procesar las solicitudes enviadas desde la app, gestionar la lógica de negocio y realizar operaciones de consulta y almacenamiento de datos en una base de datos local Profe.db basada en SQLite3, asegurando una comunicación eficiente entre los componentes.
 
@@ -125,7 +125,7 @@ A continuación se presentarán los requerimientos funcionales para la arquitect
 
 ![Diagrama de Casos de Uso](imgs/Diagrama%20de%20Casos%20de%20Uso.jpg)
 
-_<b>Figura 3:</b> Diagrama de Casos de uso_
+_<b>Figura 6:</b> Diagrama de Casos de uso_
 
 El diagrama de casos de uso representa las principales funcionalidades de la aplicación "ProfeStats" de evaluación positiva de profesores. En él, el usuario puede registrarse, iniciar sesión, buscar profesores, consultar el perfil de un profesor y calificarlo mediante una encuesta basada en criterios de puntualidad, claridad y dominio de la materia. Por otro lado, el administrador tiene acceso a funcionalidades específicas para administrar profesores y gestionar calificaciones y comentarios.
 
@@ -133,14 +133,14 @@ El diagrama de casos de uso representa las principales funcionalidades de la apl
 
 ![Diagrama Relacional](imgs/Diagrama%20Relacional.jpg)
 
-_<b>Figura 4:</b> Diagrama Relacional_
+_<b>Figura 7:</b> Diagrama Relacional_
 
 Este diagrama muestra la estructura de base de datos que soportará la aplicación. Define cómo se almacenan y relacionan los datos de usuarios, profesores, cursos, reseñas y niveles de satisfacción. Cada tabla representa una entidad clave como los usuarios o profesores, y las líneas indican las relaciones entre ellas, principalmente usando llaves foráneas (FK). Esto permitirá que la app registre evaluaciones positivas de profesores de manera organizada, asocie comentarios, calificaciones y cursos, y relacione cada evaluación con etiquetas y niveles de satisfacción.
 
 ## Diagrama de Clases
 
 ![Diagrama Relacional](imgs/DiagramaClasesPM.png)
-_<b>Figura 5:</b> Diagrama de Clases_
+_<b>Figura 8:</b> Diagrama de Clases_
 
 Este diagrama describe la estructura lógica y funcional de la aplicación desde el punto de vista de la programación. Define clases como el Usuario, Administrador, Profesor y Calificacion, etc. Estas clases están junto con sus respectivos atributos y métodos. También se muestran las relaciones entre las clases como por ejemplo:
 Un Usuario puede hacer múltiples Calificaciones y un Profesor puede recibir varias Calificaciones.
