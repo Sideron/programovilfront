@@ -18,28 +18,28 @@ Al finalizar la evaluación, el aplicativo permitirá al usuario dejar un coment
 Paso a paso que se usará en el proyecto.
 
 ![Android Studio](https://storage.googleapis.com/gweb-developer-goog-blog-assets/images/Android-Studio-banner_1.original.png)
-_<b>Figura 1:</b> Instalación de Android Studio_
+_<b>Figura 1:</b> Descripción de Android Studio_
 
 <b>Android Studio</b> es el entorno de desarrollo oficial para crear aplicaciones Android. Ofrece un editor de código inteligente, diseño visual de interfaces, emuladores de dispositivos y un sistema de compilación basado en Gradle.
 
 Este se estará usando con el objetivo de emular el dispositivo movil desde el cual podremos probar nuestra aplicación sin necesidad de exportarla. Ademas, al momento de exportar la aplicación este nos podrá proveer con los SDK necesarios para poder hacerlo.
 
 ![Flutter](https://css-tricks.com/wp-content/uploads/2022/08/flutter-clouds.jpg)
-_<b>Figura 2:</b> Instalación de Flutter_
+_<b>Figura 2:</b> Descripción de Flutter_
 
 <b>Flutter</b> es un framework de desarrollo de código abierto creado por Google para construir aplicaciones nativas multiplataforma (Android, iOS, web y escritorio) usando un solo código base. Utiliza el lenguaje <b>Dart</b> y destaca por su alta velocidad, su sistema de widgets personalizables y su enfoque en un rendimiento similar al nativo.
 
 Este nos permitirá desarrollar la parte del cliente de la aplicación de manera práctica adaptado para dispositivos Android como iOS.
 
 ![Ruby On Rails](https://miro.medium.com/v2/resize:fit:1000/1*lEXUSkEm6M6kIHmKP9HtWg.png)
-_<b>Figura 3:</b> Instalación de Ruby_
+_<b>Figura 3:</b> Descripción de Ruby_
 
 <b>Ruby on Rails</b> es un framework de desarrollo web basado en el lenguaje Ruby. Facilita la creación de aplicaciones web siguiendo el modelo MVC (Modelo-Vista-Controlador) y promueve el desarrollo rápido mediante convenciones y buenas prácticas.
 
 Usaremos Ruby on Rails para la parte del servidor, creando una API REST que permita a la aplicación móvil Android consultar, enviar y actualizar información. Rails se encargaría de procesar las solicitudes del teléfono, gestionar la lógica de negocio y comunicarse con la base de datos.
 
 ![Ruby On Rails](https://miro.medium.com/v2/resize:fit:1200/1*fMPUMki182HzyVZvo_awDw.png)
-_<b>Figura 3:</b> Instalación de SQLite_
+_<b>Figura 4:</b> Descripción de SQLite_
 
 <b>SQLite</b> es un motor de base de datos relacional, ligero y autónomo, que almacena los datos en un único archivo local. Funciona sin necesidad de un servidor y es ampliamente utilizado en diversos tipos de aplicaciones donde se requiere una gestión sencilla y eficiente de datos.
 
