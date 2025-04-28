@@ -1,6 +1,6 @@
 # Descripción del Aplicativo Móvil
 
-Este aplicativo móvil está diseñado como un sistema interactivo de preguntas y respuestas orientado a calificar a los profesores de manera positiva. Los estudiantes podrán responder a una serie de preguntas rápidas y sencillas que evaluarán aspectos como claridad al explicar, puntualidad, actitud en clase y dominio del tema. Las respuestas estarán enfocadas en destacar las fortalezas del docente, fomentando una retroalimentación constructiva y motivadora.
+El aplicativo móvil "ProfeStats" está diseñado como un sistema interactivo de preguntas y respuestas orientado a calificar a los profesores de manera positiva. Los estudiantes podrán responder a una serie de preguntas rápidas y sencillas que evaluarán aspectos como claridad al explicar, puntualidad, actitud en clase y dominio del tema. Las respuestas estarán enfocadas en destacar las fortalezas del docente, fomentando una retroalimentación constructiva y motivadora.
 
 Al finalizar la evaluación, el aplicativo permitirá al usuario dejar un comentario adicional para el profesor, el cual será presentado de forma respetuosa y con un enfoque positivo. Esta herramienta busca fortalecer la relación entre docentes y estudiantes, promover buenas prácticas docentes y contribuir al mejoramiento continuo en el ámbito educativo a través de la retroalimentación positiva.
 
@@ -8,6 +8,9 @@ Al finalizar la evaluación, el aplicativo permitirá al usuario dejar un coment
 - [Configuración del Ambiente de Desarrollo](#configuracion-del-ambiente-de-desarrollo)
 - [Diagrama de despliegue](#diagrama-de-despliegue)
 - [Requerimientos no Funcionales](#requerimientos-no-funcionales)
+- [Requerimientos Funcionales](#requerimientos-funcionales)
+- [Diagrama de Casos de Uso](#diagrama-de-casos-de-uso)
+- [Diagrama Relacional](#diagrama-relacional)
 - [Diagrama de Clases](#diagrama-de-clases)
 
 
@@ -24,7 +27,8 @@ Paso a paso que se usará en el proyecto.
 ![Diagrama de Despliegue](https://www.plantuml.com/plantuml/png/POyxJWD138RxESMlQQX2GqU14Xu51IXASW7lsXkDc1alyuWI8Gx4ERWOiwi04ZIM9N_VRtkP2wLIWpVvnSMH4WMm35HzsScnhBpRno2ne6z5aZ4NU5RMRAAomEx4VtuC6XMho4aTMxmPe4MwWVe2kngzwwbt6l6a1-SjA2DC7OsZUJVddAsaWsDDsDJkz2zZ_OXrqa7oREV6_fgtb0MjkQUY-QyvMvVSOVlgNP6hsUTkijiZTnhbw5h9ndwVPB5OtC1EEook9oJN8FDErxx8s3niT-Oydr7kVa1V22ViAoKc-0RpT9GnIubSW_y2)
 
 *<b>Figura 2:</b> Diagrama de depliegue*
-La arquitectura física del sistema móvil. En él se muestra cómo la aplicación móvil, instalada en un teléfono Android, consume los servicios REST proporcionados por una API desplegada en Microsoft Azure. Esta API gestiona las solicitudes tanto desde la app como desde un panel web utilizado por los profesores para visualizar comentarios. Además, la API se conecta a una base de datos SQLite3 donde se consultan y almacenan las calificaciones y opiniones emitidas por los estudiantes.
+
+La arquitectura física de la aplicación móvil de evaluación de profesores, donde la aplicación instalada en un teléfono Android consume los servicios REST proporcionados por un servidor Ruby que ejecuta la API Profes. Esta API se encarga de procesar las solicitudes enviadas desde la app, gestionar la lógica de negocio y realizar operaciones de consulta y almacenamiento de datos en una base de datos local Profe.db basada en SQLite3, asegurando una comunicación eficiente entre los componentes.
 
 ## Requerimientos No Funcionales
 
@@ -57,8 +61,7 @@ La aplicación debe minimizar el uso de batería y memoria, asegurando que no co
 
 
 ## Requerimientos Funcionales
-
-A continuación se presentarán los requerimientos no funcionales para la arquitectura descrita en el diagrama anterior visto. Coonsiderando que se usará Flutter para el desarrollo del proyecto.
+A continuación se presentarán los requerimientos funcionales para la arquitectura descrita en el diagrama anterior visto. Coonsiderando que se usará Flutter para el desarrollo del proyecto.
 
 ### 1. Registro de Usuario
  -El usuario podrá registrarse en el sistema proporcionando los datos requeridos (nombre, correo electrónico, contraseña).
@@ -87,12 +90,28 @@ A continuación se presentarán los requerimientos no funcionales para la arquit
 
 ![Diagrama de Casos de Uso](imgs/Diagrama%20de%20Casos%20de%20Uso.jpg)
 
+*<b>Figura 3:</b> Diagrama de Casos de uso*
+
+El diagrama de casos de uso representa las principales funcionalidades de la aplicación "ProfeStats" de evaluación positiva de profesores. En él, el usuario puede registrarse, iniciar sesión, buscar profesores, consultar el perfil de un profesor y calificarlo mediante una encuesta basada en criterios de puntualidad, claridad y dominio de la materia. Por otro lado, el administrador tiene acceso a funcionalidades específicas para administrar profesores y gestionar calificaciones y comentarios. 
+
+
 ## Diagrama Relacional
 
 ![Diagrama Relacional](imgs/Diagrama%20Relacional.jpg)
 
+*<b>Figura 4:</b> Diagrama Relacional*
+
+Este diagrama muestra la estructura de base de datos que soportará la aplicación. Define cómo se almacenan y relacionan los datos de usuarios, profesores, cursos, reseñas y niveles de satisfacción. Cada tabla representa una entidad clave como los usuarios o profesores, y las líneas indican las relaciones entre ellas, principalmente usando llaves foráneas (FK). Esto permitirá que la app registre evaluaciones positivas de profesores de manera organizada, asocie comentarios, calificaciones y cursos, y relacione cada evaluación con etiquetas y niveles de satisfacción.
+
+
 ## Diagrama de Clases
 ![Diagrama Relacional](imgs/DiagramaClasesPM.png)
+*<b>Figura 5:</b> Diagrama de Clases*
+
+Este diagrama describe la estructura lógica y funcional de la aplicación desde el punto de vista de la programación. Define clases como el Usuario, Administrador, Profesor y Calificacion, etc. Estas clases están junto con sus respectivos atributos  y métodos. También se muestran las relaciones entre las clases como por ejemplo:
+Un Usuario puede hacer múltiples Calificaciones y un Profesor puede recibir varias Calificaciones.
+
+
 ## Mockups
 
 | Mockup | Descripción |
