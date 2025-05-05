@@ -19,12 +19,26 @@ class LoginPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 inputBox(),
                 SizedBox(
                   height: 15,
                 ),
-                inputBox()
+                inputBox(),
+                SizedBox(
+                  height: 15,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Iniciar Sesión',
+                    style: TextStyle(fontSize: 17),
+                  ),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 67, 191, 152),
+                      foregroundColor: Colors.white),
+                )
               ],
             ),
           )
