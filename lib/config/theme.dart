@@ -25,7 +25,7 @@ class MaterialTheme {
       onError: Color(0xffffffff),
       errorContainer: Color(0xffffd72c),
       onErrorContainer: Color(0xff715d00),
-      surface: Color(0xfff9f9f7),
+      surface: Color(0xffc5eadc),
       onSurface: Color(0xff1a1c1b),
       onSurfaceVariant: Color(0xff3b4a42),
       outline: Color(0xff6b7b72),
@@ -335,22 +335,19 @@ class MaterialTheme {
     return theme(darkHighContrastScheme());
   }
 
-
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
-     useMaterial3: true,
-     brightness: colorScheme.brightness,
-     colorScheme: colorScheme,
-     textTheme: textTheme.apply(
-       bodyColor: colorScheme.onSurface,
-       displayColor: colorScheme.onSurface,
-     ),
-     scaffoldBackgroundColor: colorScheme.background,
-     canvasColor: colorScheme.surface,
-  );
+        useMaterial3: true,
+        brightness: colorScheme.brightness,
+        colorScheme: colorScheme,
+        textTheme: textTheme.apply(
+          bodyColor: colorScheme.onSurface,
+          displayColor: colorScheme.onSurface,
+        ),
+        scaffoldBackgroundColor: colorScheme.background,
+        canvasColor: colorScheme.surface,
+      );
 
-
-  List<ExtendedColor> get extendedColors => [
-  ];
+  List<ExtendedColor> get extendedColors => [];
 }
 
 class ExtendedColor {
