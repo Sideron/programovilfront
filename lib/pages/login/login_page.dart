@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:programovilfront/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginController control = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +29,25 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        inputBox('email@domain.com', Icons.mail_outline),
+                        inputBox(control.textUser, 'email@domain.com',
+                            Icons.mail_outline),
                         SizedBox(
                           height: 15,
                         ),
-                        inputBox('Contraseña', Icons.remove_red_eye_outlined),
+                        Obx(() => inputBox(
+                                control.textPassword,
+                                'Contraseña',
+                                Icons.remove_red_eye_outlined,
+                                control.showPassword.value, () {
+                              control.switchViewPassword();
+                            })),
                         SizedBox(
                           height: 15,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            control.logIn();
+                          },
                           child: Text(
                             'Iniciar Sesión',
                             style: TextStyle(fontSize: 17),
@@ -58,13 +69,20 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  TextField inputBox(String hintText, IconData icon) {
+  TextField inputBox(
+      TextEditingController txtControl, String hintText, IconData icon,
+      [bool obscure = false, void Function()? suffixFunc]) {
     return TextField(
+      controller: txtControl,
+      obscureText: obscure,
       decoration: InputDecoration(
-          suffixIcon: Icon(
-            icon,
-            size: 30,
-            color: Color.fromARGB(255, 67, 191, 152),
+          suffixIcon: IconButton(
+            onPressed: suffixFunc ?? () {},
+            icon: Icon(
+              icon,
+              size: 30,
+              color: Color.fromARGB(255, 67, 191, 152),
+            ),
           ),
           border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(15))),
