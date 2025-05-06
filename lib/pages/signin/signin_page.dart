@@ -24,6 +24,7 @@ class SigninPage extends StatelessWidget {
                     "Crea una cuenta",
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                   ),
+                  Text('Ingresa tu correo y contraseña'),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 15),
