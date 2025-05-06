@@ -8,49 +8,68 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          centerLogo(),
-          Text(
-            "Ingresa tu cuenta",
-            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                inputBox(),
-                SizedBox(
-                  height: 15,
-                ),
-                inputBox(),
-                SizedBox(
-                  height: 15,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Iniciar Sesión',
-                    style: TextStyle(fontSize: 17),
+          Expanded(flex: 1, child: Container()),
+          Expanded(
+            flex: 20,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  centerLogo(),
+                  Text(
+                    "Ingresa tu cuenta",
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                   ),
-                  style: TextButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 67, 191, 152),
-                      foregroundColor: Colors.white),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        inputBox('email@domain.com', Icons.mail_outline),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        inputBox('Contraseña', Icons.remove_red_eye_outlined),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Iniciar Sesión',
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          style: TextButton.styleFrom(
+                              backgroundColor:
+                                  Color.fromARGB(255, 67, 191, 152),
+                              foregroundColor: Colors.white),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  TextField inputBox() {
+  TextField inputBox(String hintText, IconData icon) {
     return TextField(
       decoration: InputDecoration(
-          border: OutlineInputBorder(), hintText: 'email@domain.com'),
+          suffixIcon: Icon(
+            icon,
+            size: 30,
+            color: Color.fromARGB(255, 67, 191, 152),
+          ),
+          border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(15))),
+          hintText: hintText),
     );
   }
 
