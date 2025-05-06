@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:programovilfront/config/theme.dart';
 import 'package:programovilfront/pages/login/login_page.dart';
+import 'package:programovilfront/pages/signin/signin_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: MaterialTheme.lightScheme(),
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      home: SigninPage(),
     );
   }
 }

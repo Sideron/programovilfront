@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/components/forms/input_box.dart';
-import 'package:programovilfront/pages/login/login_controller.dart';
+import 'package:programovilfront/pages/signin/signin_controller.dart';
 
-class LoginPage extends StatelessWidget {
-  final LoginController control = Get.put(LoginController());
+class SigninPage extends StatelessWidget {
+  final SigninController control = Get.put(SigninController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
                 children: [
                   centerLogo(),
                   Text(
-                    "Ingresa tu cuenta",
+                    "Crea una cuenta",
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                   ),
                   Padding(
@@ -48,12 +48,21 @@ class LoginPage extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
+                        InputBox(
+                          txtControl: control.textSecondPassword,
+                          hintText: 'Confirmar contraseña',
+                          icon: Icons.repeat,
+                          obscure: true,
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         TextButton(
                           onPressed: () {
                             control.logIn();
                           },
                           child: Text(
-                            'Iniciar Sesión',
+                            'Registrate',
                             style: TextStyle(fontSize: 17),
                           ),
                           style: TextButton.styleFrom(
