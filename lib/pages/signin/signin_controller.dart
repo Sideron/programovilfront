@@ -14,8 +14,9 @@ class SigninController extends GetxController {
     print(showPassword.value);
   }
 
-  void logIn() {
+  void logIn(BuildContext context) {
     print(textUser.text);
     print(textPassword.text);
+    Navigator.pushNamed(context, '/loginpage');
   }
 }

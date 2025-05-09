@@ -60,7 +60,7 @@ class SigninPage extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            control.logIn();
+                            control.logIn(context);
                           },
                           child: Text(
                             'Registrate',

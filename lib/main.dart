@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:programovilfront/config/theme.dart';
 import 'package:programovilfront/pages/login/login_page.dart';
 import 'package:programovilfront/pages/signin/signin_page.dart';
+import 'package:programovilfront/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +26,10 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: SigninPage(),
+      routes: {
+        '/loginpage': (context) => LoginPage(),
+        '/signinpage': (context) => SigninPage(),
+      },
     );
   }
 }
