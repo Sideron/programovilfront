@@ -9,8 +9,6 @@ class LoginController extends GetxController {
 
   void switchViewPassword() {
     showPassword.value = !showPassword.value;
-    print("####################################");
-    print(showPassword.value);
   }
 
   void logIn() {

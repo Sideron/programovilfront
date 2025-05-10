@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:programovilfront/components/alerts/error_message_box.dart';
 import 'package:programovilfront/components/forms/input_box.dart';
 import 'package:programovilfront/pages/signin/signin_controller.dart';
 
@@ -32,7 +33,7 @@ class SigninPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         InputBox(
-                            txtControl: control.textUser,
+                            txtControl: control.textMail,
                             hintText: 'email@domain.com',
                             icon: Icons.mail_outline),
                         SizedBox(
@@ -55,6 +56,9 @@ class SigninPage extends StatelessWidget {
                           icon: Icons.repeat,
                           obscure: true,
                         ),
+                        Obx(() => control.errorMessage.value == ''
+                            ? Container()
+                            : ErrorMessageBox(control.errorMessage.value)),
                         SizedBox(
                           height: 15,
                         ),
