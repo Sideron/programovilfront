@@ -56,11 +56,14 @@ class SigninPage extends StatelessWidget {
                           icon: Icons.repeat,
                           obscure: true,
                         ),
+                        SizedBox(
+                          height: 7,
+                        ),
                         Obx(() => control.errorMessage.value == ''
                             ? Container()
                             : ErrorMessageBox(control.errorMessage.value)),
                         SizedBox(
-                          height: 15,
+                          height: 7,
                         ),
                         TextButton(
                           onPressed: () {

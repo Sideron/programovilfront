@@ -18,17 +18,28 @@ class SigninController extends GetxController {
     if (!RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(textMail.text)) {
-      errorMessage.value = 'Email invalido';
+      _setErrorMessage('Email invalido');
       return;
     }
     if (textPassword.text.length < 8) {
-      errorMessage.value = 'Contraseña debe tener como mínimo 8 caracteres.';
+      _setErrorMessage('Contraseña debe tener como mínimo 8 caracteres.');
       return;
     }
     if (textPassword.text != textSecondPassword.text) {
-      errorMessage.value = 'Las contraseñas no coinciden';
+      _setErrorMessage('Las contraseñas no coinciden');
       return;
     }
+    Navigator.pushNamed(context, AppRoutes.main);
+  }
+
+  void goLogin(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.login);
+  }
+
+  void _setErrorMessage(String message) {
+    errorMessage.value = message;
+    Future.delayed(Duration(seconds: 5), () {
+      errorMessage.value = '';
+    });
   }
 }

@@ -9,7 +9,7 @@ class ErrorMessageBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(top: 15),
+      //margin: EdgeInsets.only(top: 15),
       child: Text(
         message,
         style: TextStyle(
