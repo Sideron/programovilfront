@@ -1,7 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/components/forms/input_box.dart';
+import 'package:programovilfront/components/forms/logo_app.dart';
 import 'package:programovilfront/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -19,7 +20,7 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  centerLogo(),
+                  LogoApp(),
                   Text(
                     "Ingresa tu cuenta",
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
@@ -60,7 +61,7 @@ class LoginPage extends StatelessWidget {
                               backgroundColor:
                                   Color.fromARGB(255, 67, 191, 152),
                               foregroundColor: Colors.white),
-                        )
+                        ),
                       ],
                     ),
                   )
@@ -70,22 +71,6 @@ class LoginPage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Row centerLogo() {
-    return Row(
-      children: [
-        Expanded(flex: 1, child: Container()),
-        Expanded(
-          flex: 6,
-          child: SvgPicture.asset(
-            'assets/images/logoLight.svg',
-            height: 300,
-          ),
-        ),
-        Expanded(flex: 1, child: Container()),
-      ],
     );
   }
 }

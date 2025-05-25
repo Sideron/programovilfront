@@ -1,8 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/components/alerts/error_message_box.dart';
 import 'package:programovilfront/components/forms/input_box.dart';
+import 'package:programovilfront/components/forms/logo_app.dart';
 import 'package:programovilfront/pages/signin/signin_controller.dart';
 
 class SigninPage extends StatelessWidget {
@@ -20,7 +21,7 @@ class SigninPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  centerLogo(),
+                  LogoApp(),
                   Text(
                     "Crea una cuenta",
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
@@ -77,7 +78,12 @@ class SigninPage extends StatelessWidget {
                               backgroundColor:
                                   Color.fromARGB(255, 67, 191, 152),
                               foregroundColor: Colors.white),
-                        )
+                        ),
+                        linkText(context,
+                            firstText: 'Ya tienes una cuenta? ',
+                            secondText: 'Ingresa aquí', onClick: () {
+                          control.goLogin(context);
+                        }),
                       ],
                     ),
                   )
@@ -90,19 +96,27 @@ class SigninPage extends StatelessWidget {
     );
   }
 
-  Row centerLogo() {
-    return Row(
-      children: [
-        Expanded(flex: 1, child: Container()),
-        Expanded(
-          flex: 6,
-          child: SvgPicture.asset(
-            'assets/images/logoLight.svg',
-            height: 300,
-          ),
+  Center linkText(BuildContext context,
+      {String? firstText, String? secondText, void Function()? onClick}) {
+    return Center(
+      child: RichText(
+        text: TextSpan(
+          style: TextStyle(fontSize: 17),
+          children: [
+            TextSpan(
+              text: firstText,
+              style: TextStyle(color: Theme.of(context).hintColor),
+            ),
+            TextSpan(
+              text: secondText,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w600),
+              recognizer: TapGestureRecognizer()..onTap = onClick,
+            ),
+          ],
         ),
-        Expanded(flex: 1, child: Container()),
-      ],
+      ),
     );
   }
 }
