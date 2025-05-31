@@ -1,7 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/components/forms/input_box.dart';
+import 'package:programovilfront/components/forms/link_text.dart';
 import 'package:programovilfront/components/forms/logo_app.dart';
 import 'package:programovilfront/pages/login/login_controller.dart';
 
@@ -51,7 +51,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            control.logIn();
+                            control.logIn(context);
                           },
                           child: Text(
                             'Iniciar Sesión',
@@ -62,6 +62,12 @@ class LoginPage extends StatelessWidget {
                                   Color.fromARGB(255, 67, 191, 152),
                               foregroundColor: Colors.white),
                         ),
+                        LinkText(
+                            firstText: 'No tienes una cuenta? ',
+                            secondText: 'Resgistrate aquí',
+                            onClick: () {
+                              control.goSignIn(context);
+                            }),
                       ],
                     ),
                   )
