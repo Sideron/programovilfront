@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:programovilfront/components/alerts/error_message_box.dart';
 import 'package:programovilfront/components/forms/input_box.dart';
 import 'package:programovilfront/components/forms/link_text.dart';
 import 'package:programovilfront/components/forms/logo_app.dart';
@@ -47,7 +48,13 @@ class LoginPage extends StatelessWidget {
                               control.switchViewPassword();
                             })),
                         SizedBox(
-                          height: 15,
+                          height: 7,
+                        ),
+                        Obx(() => control.errorMessage.value == ''
+                            ? Container()
+                            : ErrorMessageBox(control.errorMessage.value)),
+                        SizedBox(
+                          height: 8,
                         ),
                         TextButton(
                           onPressed: () {

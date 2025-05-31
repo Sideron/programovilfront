@@ -5,6 +5,6 @@ class FilterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Pagina de filtro');
+    return Center(child: Text('Pagina de filtro (Placeholder)'));
   }
 }
