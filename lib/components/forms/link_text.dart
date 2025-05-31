@@ -22,7 +22,7 @@ class LinkText extends StatelessWidget {
             TextSpan(
               text: secondText,
               style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                  color: Color.fromARGB(255, 67, 191, 152),
                   fontWeight: FontWeight.w600),
               recognizer: TapGestureRecognizer()..onTap = onClick,
             ),
