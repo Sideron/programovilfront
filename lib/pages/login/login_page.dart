@@ -5,9 +5,21 @@ import 'package:programovilfront/components/forms/input_box.dart';
 import 'package:programovilfront/components/forms/link_text.dart';
 import 'package:programovilfront/components/forms/logo_app.dart';
 import 'package:programovilfront/pages/login/login_controller.dart';
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-class LoginPage extends StatelessWidget {
-  final LoginController control = Get.put(LoginController());
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late final LoginController control;
+
+  @override
+  void initState() {
+    super.initState();
+    control = Get.put(LoginController());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,42 +48,37 @@ class LoginPage extends StatelessWidget {
                             txtControl: control.textUser,
                             hintText: 'email@domain.com',
                             icon: Icons.mail_outline),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Obx(() => InputBox(
-                            txtControl: control.textPassword,
-                            hintText: 'Contraseña',
-                            icon: Icons.remove_red_eye_outlined,
-                            obscure: control.showPassword.value,
-                            suffixFunc: () {
-                              control.switchViewPassword();
-                            })),
-                        SizedBox(
-                          height: 7,
-                        ),
+                              txtControl: control.textPassword,
+                              hintText: 'Contraseña',
+                              icon: Icons.remove_red_eye_outlined,
+                              obscure: control.showPassword.value,
+                              suffixFunc: () {
+                                control.switchViewPassword();
+                              },
+                            )),
+                        SizedBox(height: 7),
                         Obx(() => control.errorMessage.value == ''
                             ? Container()
                             : ErrorMessageBox(control.errorMessage.value)),
-                        SizedBox(
-                          height: 8,
-                        ),
+                        SizedBox(height: 8),
                         TextButton(
                           onPressed: () {
                             control.logIn(context);
                           },
-                          child: Text(
-                            'Iniciar Sesión',
-                            style: TextStyle(fontSize: 17),
-                          ),
                           style: TextButton.styleFrom(
                               backgroundColor:
                                   Color.fromARGB(255, 67, 191, 152),
                               foregroundColor: Colors.white),
+                          child: Text(
+                            'Iniciar Sesión',
+                            style: TextStyle(fontSize: 17),
+                          ),
                         ),
                         LinkText(
                             firstText: 'No tienes una cuenta? ',
-                            secondText: 'Resgistrate aquí',
+                            secondText: 'Regístrate aquí',
                             onClick: () {
                               control.goSignIn(context);
                             }),

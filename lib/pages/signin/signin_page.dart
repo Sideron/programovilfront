@@ -6,8 +6,21 @@ import 'package:programovilfront/components/forms/link_text.dart';
 import 'package:programovilfront/components/forms/logo_app.dart';
 import 'package:programovilfront/pages/signin/signin_controller.dart';
 
-class SigninPage extends StatelessWidget {
-  final SigninController control = Get.put(SigninController());
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
+
+  @override
+  State<SigninPage> createState() => _SigninPageState();
+}
+
+class _SigninPageState extends State<SigninPage> {
+  late final SigninController control;
+
+  @override
+  void initState() {
+    super.initState();
+    control = Get.put(SigninController());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,47 +50,40 @@ class SigninPage extends StatelessWidget {
                             txtControl: control.textMail,
                             hintText: 'email@domain.com',
                             icon: Icons.mail_outline),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Obx(() => InputBox(
-                            txtControl: control.textPassword,
-                            hintText: 'Contraseña',
-                            icon: Icons.remove_red_eye_outlined,
-                            obscure: control.showPassword.value,
-                            suffixFunc: () {
-                              control.switchViewPassword();
-                            })),
-                        SizedBox(
-                          height: 15,
-                        ),
+                              txtControl: control.textPassword,
+                              hintText: 'Contraseña',
+                              icon: Icons.remove_red_eye_outlined,
+                              obscure: control.showPassword.value,
+                              suffixFunc: () {
+                                control.switchViewPassword();
+                              },
+                            )),
+                        SizedBox(height: 15),
                         InputBox(
                           txtControl: control.textSecondPassword,
                           hintText: 'Confirmar contraseña',
                           icon: Icons.repeat,
                           obscure: true,
                         ),
-                        SizedBox(
-                          height: 7,
-                        ),
+                        SizedBox(height: 7),
                         Obx(() => control.errorMessage.value == ''
                             ? Container()
                             : ErrorMessageBox(control.errorMessage.value)),
-                        SizedBox(
-                          height: 7,
-                        ),
+                        SizedBox(height: 7),
                         TextButton(
                           onPressed: () {
                             control.logIn(context);
                           },
-                          child: Text(
-                            'Registrate',
-                            style: TextStyle(fontSize: 17),
-                          ),
                           style: TextButton.styleFrom(
                               backgroundColor:
                                   Color.fromARGB(255, 67, 191, 152),
                               foregroundColor: Colors.white),
+                          child: Text(
+                            'Registrate',
+                            style: TextStyle(fontSize: 17),
+                          ),
                         ),
                         LinkText(
                             firstText: 'Ya tienes una cuenta? ',
@@ -97,3 +103,4 @@ class SigninPage extends StatelessWidget {
     );
   }
 }
+
