@@ -4,7 +4,6 @@ import 'package:programovilfront/pages/main/main_page.dart';
 import 'package:programovilfront/pages/signin/signin_page.dart';
 import 'package:programovilfront/pages/Filtro_Universidad/profesores.dart';
 
-
 class AppRoutes {
   static const String login = '/loginpage';
   static const String signin = '/signinpage';
@@ -17,8 +16,7 @@ class AppRoutes {
     return {
       AppRoutes.login: (context) => LoginPage(),
       AppRoutes.signin: (context) => SigninPage(),
-      AppRoutes.main: (context) => SearchScreen(),
-
+      AppRoutes.main: (context) => MainPage(),
     };
   }
 }
