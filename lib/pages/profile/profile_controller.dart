@@ -23,50 +23,52 @@ class ProfileController extends GetxController {
     loadTeacherProfile();
     loadReviews();
   }
-void loadTeacherProfile() async {
-  // Cargar datos del profesor
-  final teacherData = await rootBundle.loadString('assets/json/teachers.json');
-  final List<dynamic> teacherJsonList = json.decode(teacherData);
-  final teacherJson = teacherJsonList.firstWhere((t) => t['teacher_id'] == 1);
-  final teacher = Teacher.fromJson(teacherJson);
 
-  name.value = teacher.name;
-  image.value = teacher.imageUrl;
+  void loadTeacherProfile() async {
+    final teacherData =
+        await rootBundle.loadString('assets/json/teachers.json');
+    final List<dynamic> teacherJsonList = json.decode(teacherData);
+    final teacherJson = teacherJsonList.firstWhere((t) => t['teacher_id'] == 1);
+    final teacher = Teacher.fromJson(teacherJson);
 
-  // Cargar todos los colleges
-  final collegesData = await rootBundle.loadString('assets/json/colleges.json');
-  final List<dynamic> collegesJsonList = json.decode(collegesData);
-  final List<College> allColleges = collegesJsonList.map((json) => College.fromJson(json)).toList();
+    name.value = teacher.name;
+    image.value = teacher.imageUrl;
 
-  // Cargar la relación teacher_colleges
-  final teacherCollegesData = await rootBundle.loadString('assets/json/teachers_colleges.json');
-  final List<dynamic> teacherCollegesJsonList = json.decode(teacherCollegesData);
-  final List<TeacherCollege> teacherColleges = teacherCollegesJsonList
-      .map((json) => TeacherCollege.fromJson(json))
-      .where((tc) => tc.teacherId == teacher.teacherId)
-      .toList();
+    final collegesData =
+        await rootBundle.loadString('assets/json/colleges.json');
+    final List<dynamic> collegesJsonList = json.decode(collegesData);
+    final List<College> allColleges =
+        collegesJsonList.map((json) => College.fromJson(json)).toList();
 
-  // Obtener los IDs de colleges asociados al profesor
-  final Set<int> teacherCollegeIds = teacherColleges.map((tc) => tc.collegeId).toSet();
+    final teacherCollegesData =
+        await rootBundle.loadString('assets/json/teachers_colleges.json');
+    final List<dynamic> teacherCollegesJsonList =
+        json.decode(teacherCollegesData);
+    final List<TeacherCollege> teacherColleges = teacherCollegesJsonList
+        .map((json) => TeacherCollege.fromJson(json))
+        .where((tc) => tc.teacherId == teacher.teacherId)
+        .toList();
 
-  // Filtrar colleges que estén relacionados con el profesor
-  final List<College> filteredColleges = allColleges
-      .where((college) => teacherCollegeIds.contains(college.collegeId))
-      .toList();
+    final Set<int> teacherCollegeIds =
+        teacherColleges.map((tc) => tc.collegeId).toSet();
 
-  colleges.assignAll(filteredColleges);
+    final List<College> filteredColleges = allColleges
+        .where((college) => teacherCollegeIds.contains(college.collegeId))
+        .toList();
 
-  if (colleges.isNotEmpty) {
-    selectCollege.value = colleges.first;
+    colleges.assignAll(filteredColleges);
+
+    if (colleges.isNotEmpty) {
+      selectCollege.value = colleges.first;
+    }
   }
-}
-
 
   void loadReviews() async {
     final reviewsData = await rootBundle.loadString('assets/json/review.json');
-    final reviewLabelsData = await rootBundle.loadString('assets/json/review_labels.json');
+    final reviewLabelsData =
+        await rootBundle.loadString('assets/json/review_labels.json');
     final labelsData = await rootBundle.loadString('assets/json/labels.json');
-    final usersData = await rootBundle.loadString('assets/json/users.json'); 
+    final usersData = await rootBundle.loadString('assets/json/users.json');
 
     final reviewsJson = json.decode(reviewsData) as List<dynamic>;
     final reviewLabelsJson = json.decode(reviewLabelsData) as List<dynamic>;
@@ -100,7 +102,14 @@ void loadTeacherProfile() async {
       final review = Review.fromJson(reviewJson);
 
       final int userId = reviewJson['user_id'] as int;
-      final user = userMap[userId] ?? User( username: 'Anónimo', userId: 0, email: '', password: '', collegeId: 0, imageUrl: '');
+      final user = userMap[userId] ??
+          User(
+              username: 'Anónimo',
+              userId: 0,
+              email: '',
+              password: '',
+              collegeId: 0,
+              imageUrl: '');
 
       final display = ReviewDisplay.fromModels(
         review: review,
