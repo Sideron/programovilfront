@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    pages = [SearchScreen(), ProfilePage()];
+    pages = [FilterPage(), ProfilePage()];
   }
 
   void navigateBottomBar(int index) {
