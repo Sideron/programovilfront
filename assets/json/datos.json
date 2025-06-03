@@ -1,0 +1,46 @@
+{
+  "reviews": [
+    {
+      "review_id": 1,
+      "comment": "Muy buen profesor",
+      "user_id": 101,
+      "course_id": 201,
+      "teacher_id": 1,
+      "date": "2024-06-01",
+      "username": "Juan Pérez",
+      "emoji": "😁",
+      "labels": [
+        {
+          "label_id": 1,
+          "name": "Explica bien",
+          "image_url": "",
+          "group_id": 1
+        },
+        {
+          "label_id": 2,
+          "name": "Paciente",
+          "image_url": "",
+          "group_id": 1
+        }
+      ]
+    },
+    {
+      "review_id": 2,
+      "comment": "Le falta dinamismo",
+      "user_id": 102,
+      "course_id": 202,
+      "teacher_id": 1,
+      "date": "2024-06-02",
+      "username": "Ana Gómez",
+      "emoji": "😐",
+      "labels": [
+        {
+          "label_id": 3,
+          "name": "Monótono",
+          "image_url": "",
+          "group_id": 2
+        }
+      ]
+    }
+  ]
+}

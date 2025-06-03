@@ -1,0 +1,26 @@
+[
+  {
+    "label_id": 1,
+    "name": "Muy claro",
+    "image_url": "",
+    "group_id": 1
+  },
+  {
+    "label_id": 2,
+    "name": "Claro",
+    "image_url": "",
+    "group_id": 1
+  },
+  {
+    "label_id": 3,
+    "name": "Algo claro",
+    "image_url": "",
+    "group_id": 1
+  },
+  {
+    "label_id": 4,
+    "name": "Un poco claro",
+    "image_url": "",
+    "group_id": 1
+  }
+]

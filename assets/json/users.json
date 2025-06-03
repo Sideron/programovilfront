@@ -1,0 +1,10 @@
+[
+  {
+    "user_id": 1,
+    "username": "juanperez",
+    "email": "juan@example.com",
+    "password": "123456",
+    "college_id": 1,
+    "image_url": "https://example.com/images/juan.png"
+  }
+]

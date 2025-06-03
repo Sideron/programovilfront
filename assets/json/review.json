@@ -1,0 +1,18 @@
+[
+  {
+    "review_id": 1,
+    "user_id": 1,
+    "teacher_id": 1,
+    "course_id": 5,
+    "comment": "Muy buen profesor, explica claramente.",
+    "date": "2025-05-29"
+  },
+  {
+    "review_id": 2,
+    "user_id": 1,
+    "teacher_id": 1,
+    "course_id": 3,
+    "comment": "Le falta mejorar ejemplos prácticos.",
+    "date": "2025-05-20"
+  }
+]

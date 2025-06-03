@@ -1,0 +1,2 @@
+/Users/brendajazmin/Desktop/Programacion Movil/Proyecto/programovilfront/android/app/.cxx/Debug/555l4t4v/x86/CMakeFiles/edit_cache.dir
+/Users/brendajazmin/Desktop/Programacion Movil/Proyecto/programovilfront/android/app/.cxx/Debug/555l4t4v/x86/CMakeFiles/rebuild_cache.dir

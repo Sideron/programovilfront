@@ -1,0 +1,52 @@
+[
+  {
+    "review_label_id": 1,
+    "review_id": 1,
+    "label_id": 1
+  },
+  {
+    "review_label_id": 2,
+    "review_id": 1,
+    "label_id": 2
+  },
+  {
+    "review_label_id": 3,
+    "review_id": 2,
+    "label_id": 2
+  },
+  {
+    "review_label_id": 4,
+    "review_id": 2,
+    "label_id": 3
+  },
+  {
+    "review_label_id": 5,
+    "review_id": 3,
+    "label_id": 2
+  },
+  {
+    "review_label_id": 6,
+    "review_id": 3,
+    "label_id": 4
+  },
+  {
+    "review_label_id": 7,
+    "review_id": 4,
+    "label_id": 1
+  },
+  {
+    "review_label_id": 8,
+    "review_id": 4,
+    "label_id": 2
+  },
+  {
+    "review_label_id": 9,
+    "review_id": 5,
+    "label_id": 3
+  },
+  {
+    "review_label_id": 10,
+    "review_id": 5,
+    "label_id": 4
+  }
+]
