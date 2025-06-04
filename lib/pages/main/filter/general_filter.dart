@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
 class GeneralFilter extends StatelessWidget {
-  const GeneralFilter({super.key});
+  final void Function(int num) goPage;
+  const GeneralFilter({super.key, required this.goPage});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: TextButton(
+          onPressed: () {
+            goPage(1);
+          },
+          child: Text('Ir a profesores')),
+    );
   }
 }
