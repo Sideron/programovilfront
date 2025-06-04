@@ -25,4 +25,13 @@ class User {
       imageUrl: json['image_url'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'username': username,
+        'email': email,
+        'password': password,
+        'college_id': collegeId,
+        'image_url': imageUrl,
+      };
 }

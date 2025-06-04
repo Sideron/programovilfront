@@ -4,6 +4,7 @@ import 'user.dart';
 
 class ReviewDisplay {
   final String username;
+  final String imageUrl;
   final String date;
   final String comment;
   final String emoji;
@@ -11,6 +12,7 @@ class ReviewDisplay {
 
   ReviewDisplay({
     required this.username,
+    required this.imageUrl,
     required this.date,
     required this.comment,
     required this.emoji,
@@ -25,6 +27,7 @@ class ReviewDisplay {
   }) {
     return ReviewDisplay(
       username: user.username,
+      imageUrl: user.imageUrl,
       date: review.date,
       comment: review.comment,
       emoji: emoji,
@@ -33,16 +36,30 @@ class ReviewDisplay {
   }
 
   factory ReviewDisplay.fromJson(Map<String, dynamic> json) {
-    final labels = (json['labels'] as List)
-        .map((label) => label['name'] as String)
-        .toList();
+    final labels = (json['labels'] as List?)?.map((label) {
+      if (label is String) return label;
+      if (label is Map<String, dynamic> && label.containsKey('name')) {
+        return label['name'] as String;
+      }
+      return '';
+    }).where((name) => name.isNotEmpty).toList() ?? [];
 
     return ReviewDisplay(
       username: json['username'] ?? 'user',
-      date: json['date'],
-      comment: json['comment'],
+      imageUrl: json['image_url'] ?? '',
+      date: json['date'] ?? '',
+      comment: json['comment'] ?? '',
       emoji: json['emoji'] ?? '',
       labelNames: labels,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'username': username,
+    'image_url': imageUrl,
+    'date': date,
+    'comment': comment,
+    'emoji': emoji,
+    'labels': labelNames.map((name) => {'name': name}).toList(),
+  };
 }

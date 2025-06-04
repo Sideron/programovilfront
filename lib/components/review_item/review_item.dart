@@ -23,10 +23,11 @@ class ReviewItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.person,
-            size: 40,
-            color: Theme.of(context).colorScheme.primary,
+          Image.asset(
+            review.imageUrl,
+            width: 40,
+            height: 40,
+            fit: BoxFit.cover,
           ),
           SizedBox(width: 12),
           Expanded(
