@@ -89,7 +89,7 @@ class ProfileTeacherPage extends StatelessWidget {
               ),
               Obx(() => Column(
                     children: control.reviews.map((rev) {
-                      return ReviewItem(review: rev);
+                      return ReviewItem(review: rev, showCourse: false,);
                     }).toList(),
                   )),
               SizedBox(height: 80),

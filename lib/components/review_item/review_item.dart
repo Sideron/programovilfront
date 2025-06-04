@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import '../../models/review_display.dart';
+
 class ReviewItem extends StatelessWidget {
   final ReviewDisplay review;
   final bool showEmoji;
   final bool showDate;
   final bool showComment;
+  final bool showCourse;
 
-  const ReviewItem({
-    Key? key,
-    required this.review,
-    this.showEmoji = true,
-    this.showDate = true,
-    this.showComment = true,
-  }) : super(key: key);
+  const ReviewItem(
+      {Key? key,
+      required this.review,
+      this.showEmoji = true,
+      this.showDate = true,
+      this.showComment = true,
+      this.showCourse = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +66,18 @@ class ReviewItem extends StatelessWidget {
                     ),
                   ]
                 ]),
+                if (showCourse) ...[
+                  SizedBox(height: 4),
+                  Text(
+                    review.courseName,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ],
+                SizedBox(height: 4),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

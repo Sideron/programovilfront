@@ -13,7 +13,7 @@ class AppRoutes {
   static const String profileUser = '/profileUser';
   static const String main = '/mainpage';
 
-  static Widget mainPage = ProfileUserPage();
+  static Widget mainPage = ProfileTeacherPage();
 
   static Map<String, Widget Function(BuildContext)> routes(
       BuildContext context) {

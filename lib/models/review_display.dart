@@ -9,6 +9,7 @@ class ReviewDisplay {
   final String comment;
   final String emoji;
   final List<String> labelNames;
+  final String courseName;
 
   ReviewDisplay({
     required this.username,
@@ -17,6 +18,7 @@ class ReviewDisplay {
     required this.comment,
     required this.emoji,
     required this.labelNames,
+    required this.courseName,
   });
 
   factory ReviewDisplay.fromModels({
@@ -24,6 +26,7 @@ class ReviewDisplay {
     required User user,
     required String emoji,
     required List<Label> labels,
+    required String courseName,
   }) {
     return ReviewDisplay(
       username: user.username,
@@ -32,6 +35,7 @@ class ReviewDisplay {
       comment: review.comment,
       emoji: emoji,
       labelNames: labels.map((l) => l.name).toList(),
+      courseName: courseName,
     );
   }
 
@@ -51,6 +55,7 @@ class ReviewDisplay {
       comment: json['comment'] ?? '',
       emoji: json['emoji'] ?? '',
       labelNames: labels,
+      courseName: json['course_name'] ?? '', 
     );
   }
 
@@ -61,5 +66,6 @@ class ReviewDisplay {
     'comment': comment,
     'emoji': emoji,
     'labels': labelNames.map((name) => {'name': name}).toList(),
+    'course_name': courseName,
   };
 }
