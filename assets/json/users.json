@@ -5,7 +5,7 @@
     "email": "juan@example.com",
     "password": "123456",
     "college_id": 1,
-    "image_url": "/assets/images/users/juan.png"
+    "image_url": "assets/images/users/juan.png"
   },
   {
     "user_id": 2,
@@ -21,7 +21,7 @@
     "email": "carlos@example.com",
     "password": "qwerty",
     "college_id": 1,
-    "image_url": "assets/images/users/carlos.png"
+    "image_url": "assets/images/profileDefault.png"
   },
   {
     "user_id": 4,
@@ -29,7 +29,7 @@
     "email": "laura@example.com",
     "password": "123abc",
     "college_id": 3,
-    "image_url": "assets/images/users/laura.png"
+    "image_url": "assets/images/profileDefault.png"
   },
   {
     "user_id": 5,
@@ -37,6 +37,6 @@
     "email": "andres@example.com",
     "password": "lopez456",
     "college_id": 2,
-    "image_url": "assets/images/users/andres.png"
+    "image_url": "assets/images/profileDefault.png"
   }
 ]

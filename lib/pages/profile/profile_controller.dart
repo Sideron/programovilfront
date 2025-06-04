@@ -12,7 +12,7 @@ class ProfileController extends GetxController {
   var reviews = <ReviewDisplay>[].obs;
   var colleges = <College>[].obs;
   var selectCollege = Rx<College?>(null);
-  var teacherSelect = 1;
+  var teacherSelect = 3;
   final _teacherService = TeacherService();
   final _collegeService = CollegeService();
   final _reviewService = ReviewService();
