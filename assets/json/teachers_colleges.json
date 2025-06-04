@@ -11,7 +11,7 @@
   },
   {
     "teacher_college_id": 3,
-    "college_id": 1,
+    "college_id": 2,
     "teacher_id": 2
   },
   {
@@ -21,7 +21,7 @@
   },
   {
     "teacher_college_id": 5,
-    "college_id": 2,
+    "college_id": 1,
     "teacher_id": 3
   },
   {
@@ -31,22 +31,42 @@
   },
   {
     "teacher_college_id": 7,
-    "college_id": 5,
-    "teacher_id": 1
-  },
-  {
-    "teacher_college_id": 8,
     "college_id": 3,
     "teacher_id": 4
   },
   {
-    "teacher_college_id": 9,
-    "college_id": 6,
+    "teacher_college_id": 8,
+    "college_id": 5,
     "teacher_id": 4
   },
   {
+    "teacher_college_id": 9,
+    "college_id": 2,
+    "teacher_id": 5
+  },
+  {
     "teacher_college_id": 10,
+    "college_id": 6,
+    "teacher_id": 5
+  },
+  {
+    "teacher_college_id": 11,
+    "college_id": 1,
+    "teacher_id": 6
+  },
+  {
+    "teacher_college_id": 12,
     "college_id": 7,
-    "teacher_id": 2
+    "teacher_id": 6
+  },
+  {
+    "teacher_college_id": 13,
+    "college_id": 3,
+    "teacher_id": 7
+  },
+  {
+    "teacher_college_id": 14,
+    "college_id": 8,
+    "teacher_id": 7
   }
 ]

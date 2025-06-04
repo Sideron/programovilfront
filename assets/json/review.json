@@ -14,5 +14,45 @@
     "course_id": 3,
     "comment": "Le falta mejorar ejemplos prácticos.",
     "date": "2025-05-20"
+  },
+  {
+    "review_id": 3,
+    "user_id": 2,
+    "teacher_id": 2,
+    "course_id": 4,
+    "comment": "Excelente dominio del tema y buena actitud.",
+    "date": "2025-05-21"
+  },
+  {
+    "review_id": 4,
+    "user_id": 3,
+    "teacher_id": 3,
+    "course_id": 2,
+    "comment": "Muy paciente, resuelve todas las dudas.",
+    "date": "2025-05-23"
+  },
+  {
+    "review_id": 5,
+    "user_id": 2,
+    "teacher_id": 1,
+    "course_id": 5,
+    "comment": "Las clases son algo monótonas, pero efectivas.",
+    "date": "2025-05-25"
+  },
+  {
+    "review_id": 6,
+    "user_id": 4,
+    "teacher_id": 4,
+    "course_id": 1,
+    "comment": "Inspira mucho con su pasión por enseñar.",
+    "date": "2025-05-28"
+  },
+  {
+    "review_id": 7,
+    "user_id": 5,
+    "teacher_id": 2,
+    "course_id": 4,
+    "comment": "Utiliza muchos recursos interactivos, muy útil.",
+    "date": "2025-05-26"
   }
 ]

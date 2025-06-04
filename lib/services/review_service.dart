@@ -8,7 +8,6 @@ import '../models/user.dart';
 class ReviewResult {
   final List<ReviewDisplay> reviews;
   final List<String> usedLabelNames;
-
   ReviewResult({required this.reviews, required this.usedLabelNames});
 }
 
@@ -20,13 +19,11 @@ class ReviewService {
     final usersJson = await _loadJsonList('assets/json/users.json');
 
     final labelMap = {
-      for (var l in labelsJson)
-        l['label_id']: Label.fromJson(l),
+      for (var l in labelsJson) l['label_id']: Label.fromJson(l),
     };
 
     final userMap = {
-      for (var u in usersJson)
-        u['user_id']: User.fromJson(u),
+      for (var u in usersJson) u['user_id']: User.fromJson(u),
     };
 
     final teacherReviews = reviewsJson.where((r) => r['teacher_id'] == teacherId);
@@ -35,26 +32,34 @@ class ReviewService {
 
     for (var reviewJson in teacherReviews) {
       final reviewId = reviewJson['review_id'];
+
       final labelIds = reviewLabelsJson
           .where((rl) => rl['review_id'] == reviewId)
           .map((rl) => rl['label_id'])
           .toList();
 
-      final labels = labelIds.map((id) => labelMap[id]!).toList();
-      final review = Review.fromJson(reviewJson);
+      final allLabels = labelIds.map((id) => labelMap[id]!).toList();
 
+      final emojiLabel = allLabels.firstWhere(
+        (l) => l.groupId == 1,
+        orElse: () => Label(labelId: 0, name: '', imageUrl: '', groupId: 1),
+      );
+
+      final otherLabels = allLabels.where((l) => l.groupId != 1).toList();
+
+      final review = Review.fromJson(reviewJson);
       final userId = reviewJson['user_id'];
       final user = userMap[userId] ?? User( username: 'Anónimo', userId: 0, email: '', password: '', collegeId: 0, imageUrl: '',);
 
       final display = ReviewDisplay.fromModels(
         review: review,
         user: user,
-        emoji: reviewJson['emoji'] ?? '',
-        labels: labels,
+        emoji: emojiLabel.name,
+        labels: otherLabels,
       );
 
       reviewList.add(display);
-      labelNames.addAll(labels.map((l) => l.name));
+      labelNames.addAll(otherLabels.map((l) => l.name));
     }
 
     return ReviewResult(

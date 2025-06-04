@@ -1,52 +1,29 @@
 [
-  {
-    "review_label_id": 1,
-    "review_id": 1,
-    "label_id": 1
-  },
-  {
-    "review_label_id": 2,
-    "review_id": 1,
-    "label_id": 2
-  },
-  {
-    "review_label_id": 3,
-    "review_id": 2,
-    "label_id": 2
-  },
-  {
-    "review_label_id": 4,
-    "review_id": 2,
-    "label_id": 3
-  },
-  {
-    "review_label_id": 5,
-    "review_id": 3,
-    "label_id": 2
-  },
-  {
-    "review_label_id": 6,
-    "review_id": 3,
-    "label_id": 4
-  },
-  {
-    "review_label_id": 7,
-    "review_id": 4,
-    "label_id": 1
-  },
-  {
-    "review_label_id": 8,
-    "review_id": 4,
-    "label_id": 2
-  },
-  {
-    "review_label_id": 9,
-    "review_id": 5,
-    "label_id": 3
-  },
-  {
-    "review_label_id": 10,
-    "review_id": 5,
-    "label_id": 4
-  }
+  { "review_label_id": 1, "review_id": 1, "label_id": 1 },
+  { "review_label_id": 2, "review_id": 1, "label_id": 6 },
+  { "review_label_id": 3, "review_id": 1, "label_id": 9 },
+
+  { "review_label_id": 4, "review_id": 2, "label_id": 2 },
+  { "review_label_id": 5, "review_id": 2, "label_id": 7 },
+  { "review_label_id": 6, "review_id": 2, "label_id": 10 },
+
+  { "review_label_id": 7, "review_id": 3, "label_id": 1 },
+  { "review_label_id": 8, "review_id": 3, "label_id": 5 },
+  { "review_label_id": 9, "review_id": 3, "label_id": 12 },
+
+  { "review_label_id": 10, "review_id": 4, "label_id": 2 },
+  { "review_label_id": 11, "review_id": 4, "label_id": 8 },
+  { "review_label_id": 12, "review_id": 4, "label_id": 10 },
+
+  { "review_label_id": 13, "review_id": 5, "label_id": 3 },
+  { "review_label_id": 14, "review_id": 5, "label_id": 7 },
+  { "review_label_id": 15, "review_id": 5, "label_id": 11 },
+
+  { "review_label_id": 16, "review_id": 6, "label_id": 1 },
+  { "review_label_id": 17, "review_id": 6, "label_id": 5 },
+  { "review_label_id": 18, "review_id": 6, "label_id": 9 },
+
+  { "review_label_id": 19, "review_id": 7, "label_id": 2 },
+  { "review_label_id": 20, "review_id": 7, "label_id": 6 },
+  { "review_label_id": 21, "review_id": 7, "label_id": 12 }
 ]

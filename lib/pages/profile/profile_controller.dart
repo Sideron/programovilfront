@@ -25,7 +25,7 @@ class ProfileController extends GetxController {
   }
 
   void _loadTeacherProfile() async {
-    final teacher = await _teacherService.getTeacherById(1);
+    final teacher = await _teacherService.getTeacherById(2);
     name.value = teacher.name;
     image.value = teacher.imageUrl;
 
@@ -43,7 +43,7 @@ class ProfileController extends GetxController {
   }
 
   void _loadReviews() async {
-    final result = await _reviewService.getReviewsForTeacher(1);
+    final result = await _reviewService.getReviewsForTeacher(2);
     reviews.assignAll(result.reviews);
     labels.assignAll(result.usedLabelNames);
   }

@@ -6,5 +6,37 @@
     "password": "123456",
     "college_id": 1,
     "image_url": "https://example.com/images/juan.png"
+  },
+  {
+    "user_id": 2,
+    "username": "mariagomez",
+    "email": "maria@example.com",
+    "password": "abcdef",
+    "college_id": 2,
+    "image_url": "https://example.com/images/maria.png"
+  },
+  {
+    "user_id": 3,
+    "username": "carlossanchez",
+    "email": "carlos@example.com",
+    "password": "qwerty",
+    "college_id": 1,
+    "image_url": "https://example.com/images/carlos.png"
+  },
+  {
+    "user_id": 4,
+    "username": "laurafernandez",
+    "email": "laura@example.com",
+    "password": "123abc",
+    "college_id": 3,
+    "image_url": "https://example.com/images/laura.png"
+  },
+  {
+    "user_id": 5,
+    "username": "andreslopez",
+    "email": "andres@example.com",
+    "password": "lopez456",
+    "college_id": 2,
+    "image_url": "https://example.com/images/andres.png"
   }
 ]
