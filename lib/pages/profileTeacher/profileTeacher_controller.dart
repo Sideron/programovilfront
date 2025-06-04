@@ -5,14 +5,14 @@ import '../../services/college_service.dart';
 import '../../services/review_service.dart';
 import '../../services/teacher_service.dart';
 
-class ProfileController extends GetxController {
+class ProfileTeacherController extends GetxController {
   var name = ''.obs;
   var image = ''.obs;
   var labels = <String>[].obs;
   var reviews = <ReviewDisplay>[].obs;
   var colleges = <College>[].obs;
   var selectCollege = Rx<College?>(null);
-  var teacherSelect = 3;
+  var teacherSelect = 1;
   final _teacherService = TeacherService();
   final _collegeService = CollegeService();
   final _reviewService = ReviewService();

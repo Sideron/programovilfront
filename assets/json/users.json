@@ -1,40 +1,40 @@
 [
   {
     "user_id": 1,
-    "username": "juanperez",
-    "email": "juan@example.com",
+    "username": "alvaromendoza",
+    "email": "alvaro.mendoza@example.com",
     "password": "123456",
     "college_id": 1,
-    "image_url": "assets/images/users/juan.png"
+    "image_url": "assets/images/users/alvaro.png"
   },
   {
     "user_id": 2,
-    "username": "mariagomez",
-    "email": "maria@example.com",
+    "username": "paulinatorres",
+    "email": "paulina.torres@example.com",
     "password": "abcdef",
     "college_id": 2,
-    "image_url": "assets/images/users/maria.png"
+    "image_url": "assets/images/users/paulina.png"
   },
   {
     "user_id": 3,
-    "username": "carlossanchez",
-    "email": "carlos@example.com",
+    "username": "diegoalvarez",
+    "email": "diego.alvarez@example.com",
     "password": "qwerty",
     "college_id": 1,
     "image_url": "assets/images/profileDefault.png"
   },
   {
     "user_id": 4,
-    "username": "laurafernandez",
-    "email": "laura@example.com",
+    "username": "veronicaramirez",
+    "email": "veronica.ramirez@example.com",
     "password": "123abc",
     "college_id": 3,
     "image_url": "assets/images/profileDefault.png"
   },
   {
     "user_id": 5,
-    "username": "andreslopez",
-    "email": "andres@example.com",
+    "username": "fernandosalazar",
+    "email": "fernando.salazar@example.com",
     "password": "lopez456",
     "college_id": 2,
     "image_url": "assets/images/profileDefault.png"

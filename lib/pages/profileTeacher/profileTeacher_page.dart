@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/review_item/review_item.dart';
-import 'package:programovilfront/pages/profile/profile_controller.dart';
+import 'package:programovilfront/pages/profileTeacher/profileTeacher_controller.dart';
 
-class ProfilePage extends StatelessWidget {
-  final ProfileController control = Get.put(ProfileController());
+class ProfileTeacherPage extends StatelessWidget {
+  final ProfileTeacherController control = Get.put(ProfileTeacherController());
 
   @override
   Widget build(BuildContext context) {
