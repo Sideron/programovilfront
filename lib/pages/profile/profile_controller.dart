@@ -12,11 +12,11 @@ class ProfileController extends GetxController {
   var reviews = <ReviewDisplay>[].obs;
   var colleges = <College>[].obs;
   var selectCollege = Rx<College?>(null);
-
+  var teacherSelect = 1;
   final _teacherService = TeacherService();
   final _collegeService = CollegeService();
   final _reviewService = ReviewService();
-
+  
   @override
   void onInit() {
     super.onInit();
@@ -25,7 +25,7 @@ class ProfileController extends GetxController {
   }
 
   void _loadTeacherProfile() async {
-    final teacher = await _teacherService.getTeacherById(2);
+    final teacher = await _teacherService.getTeacherById(teacherSelect);
     name.value = teacher.name;
     image.value = teacher.imageUrl;
 
@@ -43,7 +43,7 @@ class ProfileController extends GetxController {
   }
 
   void _loadReviews() async {
-    final result = await _reviewService.getReviewsForTeacher(2);
+    final result = await _reviewService.getReviewsForTeacher(teacherSelect);
     reviews.assignAll(result.reviews);
     labels.assignAll(result.usedLabelNames);
   }
