@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../models/review_display.dart';
-
 class ReviewItem extends StatelessWidget {
   final ReviewDisplay review;
-  const ReviewItem({Key? key, required this.review}) : super(key: key);
+  final bool showEmoji;
+  final bool showDate;
+  final bool showComment;
+
+  const ReviewItem({
+    Key? key,
+    required this.review,
+    this.showEmoji = true,
+    this.showDate = true,
+    this.showComment = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,29 +52,34 @@ class ReviewItem extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  SizedBox(width: 12),
-                  Text(
-                    review.date,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Theme.of(context).colorScheme.primary,
+                  if (showDate) ...[
+                    SizedBox(width: 12),
+                    Text(
+                      review.date,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
-                  ),
+                  ]
                 ]),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Text(
-                        review.comment,
-                        style: TextStyle(fontSize: 16),
+                    if (showComment)
+                      Expanded(
+                        child: Text(
+                          review.comment,
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      review.emoji,
-                      style: TextStyle(fontSize: 28),
-                    ),
+                    if (showEmoji) ...[
+                      SizedBox(width: 8),
+                      Text(
+                        review.emoji,
+                        style: TextStyle(fontSize: 28),
+                      ),
+                    ]
                   ],
                 ),
               ],

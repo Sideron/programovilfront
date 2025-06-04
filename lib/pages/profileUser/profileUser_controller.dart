@@ -1,50 +1,54 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../models/colleges.dart';
 import '../../models/review_display.dart';
+import '../../models/user.dart';
 import '../../services/college_service.dart';
 import '../../services/review_service.dart';
-import '../../services/teacher_service.dart';
 
 class ProfileUserController extends GetxController {
   var name = ''.obs;
+  var email = ''.obs;
+  var college = ''.obs;
   var image = ''.obs;
-  var labels = <String>[].obs;
   var reviews = <ReviewDisplay>[].obs;
-  var colleges = <College>[].obs;
-  var selectCollege = Rx<College?>(null);
-  var teacherSelect = 3;
-  final _teacherService = TeacherService();
-  final _collegeService = CollegeService();
-  final _reviewService = ReviewService();
-  
+
+  final reviewService = ReviewService();
+  final collegeService = CollegeService();
+
+  final int loggedUserId = 1;
+
   @override
   void onInit() {
     super.onInit();
-    _loadTeacherProfile();
-    _loadReviews();
+    loadUserProfile();
   }
 
-  void _loadTeacherProfile() async {
-    final teacher = await _teacherService.getTeacherById(teacherSelect);
-    name.value = teacher.name;
-    image.value = teacher.imageUrl;
+  Future<void> loadUserProfile() async {
+    final usersJson = await rootBundle.loadString('assets/json/users.json');
+    final usersData = json.decode(usersJson) as List<dynamic>;
+    final userMap = {
+      for (var u in usersData) u['user_id']: User.fromJson(u),
+    };
 
-    final allColleges = await _collegeService.getAllColleges();
-    final teacherCollegeIds = await _teacherService.getTeacherCollegeIds(teacher.teacherId);
+    final user = userMap[loggedUserId];
 
-    final filtered = allColleges
-        .where((c) => teacherCollegeIds.contains(c.collegeId))
-        .toList();
+    if (user != null) {
+      name.value = user.username;
+      email.value = user.email;
+      image.value = user.imageUrl;
 
-    colleges.assignAll(filtered);
-    if (colleges.isNotEmpty) {
-      selectCollege.value = colleges.first;
+      final colleges = await collegeService.getAllColleges();
+      final collegeName = colleges
+              .firstWhere((c) => c.collegeId == user.collegeId,
+                  orElse: () => College(collegeId: 0, name: '', imageUrl: ''))
+              .name ??
+          '';
+      college.value = collegeName;
+
+      final revs = await reviewService.getReviewsByUser(loggedUserId);
+      reviews.assignAll(revs);
     }
-  }
-
-  void _loadReviews() async {
-    final result = await _reviewService.getReviewsForTeacher(teacherSelect);
-    reviews.assignAll(result.reviews);
-    labels.assignAll(result.usedLabelNames);
   }
 }

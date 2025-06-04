@@ -11,7 +11,7 @@ class ProfileUserPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 34),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -21,66 +21,48 @@ class ProfileUserPage extends StatelessWidget {
                   imageProfile(),
                   SizedBox(width: 24),
                   Expanded(
-                    child: Obx(() => Text(
-                          control.name.value,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        )),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(() => Text(
+                                control.name.value,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              )),
+                          Obx(() => Text(
+                                control.email.value,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              )),
+                          Obx(() => Text(
+                                control.college.value,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              )),
+                                SizedBox(height: 16),
+                           EditProfileButton(onPressed: () {
+                print("Presionaste 'Editar'");
+              }),
+                        ]),
                   ),
                 ],
               ),
-              SizedBox(height: 24),
-              Text(
-                "Universidad",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              SizedBox(height: 8),
-              Obx(() => Wrap(
-                    spacing: 8,
-                    children: control.colleges.map((college) {
-                      return ChoiceChip(
-                        label: Text(college.name),
-                        selected: control.selectCollege.value == college,
-                        onSelected: (_) =>
-                            control.selectCollege.value = college,
-                        shape: StadiumBorder(),
-                      );
-                    }).toList(),
-                  )),
-              SizedBox(height: 8),
-              Text(
-                "Categorías",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              SizedBox(height: 8),
-              Obx(() => Wrap(
-                    spacing: 8,
-                    children: control.labels.map((label) {
-                      return Chip(
-                        label: Text(label),
-                        backgroundColor: Colors.blue[50],
-                        shape: StadiumBorder(),
-                      );
-                    }).toList(),
-                  )),
               SizedBox(height: 8),
               Divider(
                 color: Theme.of(context).colorScheme.primary,
                 thickness: 1,
               ),
               Text(
-                "Reseñas",
+                "Historial de calificaciones",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -89,7 +71,8 @@ class ProfileUserPage extends StatelessWidget {
               ),
               Obx(() => Column(
                     children: control.reviews.map((rev) {
-                      return ReviewItem(review: rev);
+                      return ReviewItem(
+                          review: rev, showComment: false, showEmoji: false);
                     }).toList(),
                   )),
               SizedBox(height: 80),
@@ -97,27 +80,23 @@ class ProfileUserPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: RateTeacherButton(
-        onPressed: () {
-          print("Presionaste 'Calificar profesor");
-        },
-      ),
+     
     );
   }
 
-  Widget RateTeacherButton({required VoidCallback onPressed}) {
+  Widget EditProfileButton({required VoidCallback onPressed}) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(4.0),
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 67, 191, 152),
           foregroundColor: Colors.white,
-          minimumSize: Size(220, 50),
+          minimumSize: Size(180, 10),
         ),
         child: const Text(
-          'Calificar profesor',
-          style: TextStyle(fontSize: 20),
+          'Editar',
+          style: TextStyle(fontSize: 16),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 [
   {
     "user_id": 1,
-    "username": "alvaromendoza",
+    "username": "Alvaro Mendoza",
     "email": "alvaro.mendoza@example.com",
     "password": "123456",
     "college_id": 1,
@@ -9,7 +9,7 @@
   },
   {
     "user_id": 2,
-    "username": "paulinatorres",
+    "username": "Paulina torres",
     "email": "paulina.torres@example.com",
     "password": "abcdef",
     "college_id": 2,
@@ -17,7 +17,7 @@
   },
   {
     "user_id": 3,
-    "username": "diegoalvarez",
+    "username": "Diego Alvarez",
     "email": "diego.alvarez@example.com",
     "password": "qwerty",
     "college_id": 1,
