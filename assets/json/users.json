@@ -5,7 +5,7 @@
     "email": "juan@example.com",
     "password": "123456",
     "college_id": 1,
-    "image_url": "assets/images/users/juan.png"
+    "image_url": "/assets/images/users/juan.png"
   },
   {
     "user_id": 2,
