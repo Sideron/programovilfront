@@ -1,0 +1,42 @@
+[
+  {
+    "user_id": 1,
+    "username": "Alvaro Mendoza",
+    "email": "alvaro.mendoza@example.com",
+    "password": "123456",
+    "college_id": 1,
+    "image_url": "assets/images/users/alvaro.png"
+  },
+  {
+    "user_id": 2,
+    "username": "Paulina torres",
+    "email": "paulina.torres@example.com",
+    "password": "abcdef",
+    "college_id": 2,
+    "image_url": "assets/images/users/paulina.png"
+  },
+  {
+    "user_id": 3,
+    "username": "Diego Alvarez",
+    "email": "diego.alvarez@example.com",
+    "password": "qwerty",
+    "college_id": 1,
+    "image_url": "assets/images/profileDefault.png"
+  },
+  {
+    "user_id": 4,
+    "username": "veronicaramirez",
+    "email": "veronica.ramirez@example.com",
+    "password": "123abc",
+    "college_id": 3,
+    "image_url": "assets/images/profileDefault.png"
+  },
+  {
+    "user_id": 5,
+    "username": "fernandosalazar",
+    "email": "fernando.salazar@example.com",
+    "password": "lopez456",
+    "college_id": 2,
+    "image_url": "assets/images/profileDefault.png"
+  }
+]
