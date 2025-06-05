@@ -51,7 +51,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
     _universityId = widget.universityId;
     Future<College>? infoCollegeTemp =
         _collegeService.getCollegeById(_universityId);
-    infoCollegeTemp!.then((value) {
+    infoCollegeTemp.then((value) {
       setState(() {
         _universityInfo = value;
         isLoading = false;
@@ -109,13 +109,23 @@ class _UniversityFilterState extends State<UniversityFilter> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/logo.png', height: 40),
-              const SizedBox(width: 8),
-              Text(
-                _universityInfo!.name,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              TextButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.arrow_back, size: 35),
+                label: SizedBox(),
+              ),
+              Row(
+                children: [
+                  Image.asset('assets/images/logo.png', height: 40),
+                  const SizedBox(width: 8),
+                  Text(
+                    _universityInfo!.name,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ],
               ),
             ],
           ),

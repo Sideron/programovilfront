@@ -186,14 +186,14 @@ class _GeneralFilterState extends State<GeneralFilter> {
   }
 
   Widget buildColleges(void Function(int num) goPage) {
-    final filteredCourses = allColleges
+    final filteredColleges = allColleges
         .where((c) => c['name'].toLowerCase().contains(searchText))
         .toList();
 
     return ListView.builder(
-      itemCount: filteredCourses.length,
+      itemCount: filteredColleges.length,
       itemBuilder: (context, index) {
-        final c = filteredCourses[index];
+        final c = filteredColleges[index];
         return ListTile(
           onTap: () {
             goPage(1);
