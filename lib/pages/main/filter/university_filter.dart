@@ -16,33 +16,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
   final TextEditingController searchController = TextEditingController();
   String searchText = '';
 
-  List<Map<String, dynamic>> allTeachers = [
-    {
-      'name': 'Ana Lopez',
-      'ratings': 300000,
-      'image': 'assets/images/profile.png',
-    },
-    {
-      'name': 'Luis Hernández',
-      'ratings': 280000,
-      'image': 'assets/images/profile.png',
-    },
-    {
-      'name': 'Susan Quiroz',
-      'ratings': 310000,
-      'image': 'assets/images/profile.png',
-    },
-    {
-      'name': 'Carlos Mejía',
-      'ratings': 290000,
-      'image': 'assets/images/profile.png',
-    },
-    {
-      'name': 'Universidad Nacional del Callao',
-      'ratings': 250000,
-      'image': 'assets/images/profile.png',
-    },
-  ];
+  List<Map<String, dynamic>> allTeachers = [];
 
   Future<List<dynamic>>? allTeachers2;
 
