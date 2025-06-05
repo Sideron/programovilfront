@@ -1,18 +1,27 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:programovilfront/models/colleges.dart';
 import 'package:programovilfront/routes/app_routes.dart';
+import 'package:programovilfront/services/college_service.dart';
 import 'package:programovilfront/services/course_service.dart';
 import 'package:programovilfront/services/teacher_service.dart';
 
 class UniversityFilter extends StatefulWidget {
-  const UniversityFilter({Key? key}) : super(key: key);
+  final int universityId;
+  const UniversityFilter({Key? key, required this.universityId})
+      : super(key: key);
 
   @override
   State<UniversityFilter> createState() => _UniversityFilterState();
 }
 
 class _UniversityFilterState extends State<UniversityFilter> {
+  late final int _universityId;
+  late final College? _universityInfo;
+  bool isLoading = true;
+  final CollegeService _collegeService = CollegeService();
   final TeacherService _teacherService = TeacherService();
   final CourseService _courseService = CourseService();
   int selectedFilter = 0; // 0 = Profesores, 1 = Cursos
@@ -39,7 +48,17 @@ class _UniversityFilterState extends State<UniversityFilter> {
   @override
   void initState() {
     super.initState();
-    allTeachers2 = _teacherService.getTeachersInCollege(1);
+    _universityId = widget.universityId;
+    Future<College>? infoCollegeTemp =
+        _collegeService.getCollegeById(_universityId);
+    infoCollegeTemp!.then((value) {
+      setState(() {
+        _universityInfo = value;
+        isLoading = false;
+      });
+      print(jsonEncode(_universityInfo));
+    });
+    allTeachers2 = _teacherService.getTeachersInCollege(_universityId);
     allCourses2 = _courseService.loadCoursesFromJsonAsMap();
     allCourses2!.then((value) {
       if (value.first is Map<String, dynamic>) {
@@ -80,6 +99,12 @@ class _UniversityFilterState extends State<UniversityFilter> {
   }
 
   Widget buildHeader() {
+    if (isLoading) {
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: CircularProgressIndicator(),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -88,8 +113,8 @@ class _UniversityFilterState extends State<UniversityFilter> {
             children: [
               Image.asset('assets/images/logo.png', height: 40),
               const SizedBox(width: 8),
-              const Text(
-                "Universidad de Lima",
+              Text(
+                _universityInfo!.name,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ],

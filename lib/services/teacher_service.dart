@@ -24,6 +24,11 @@ class TeacherService {
     return data.where((x) => x['college_id'] == collegeId).toList();
   }
 
+  Future<List<dynamic>> getAllTeachers() async {
+    final data = await _loadJsonList('assets/json/teachers.json');
+    return data.toList();
+  }
+
   Future<List<dynamic>> _loadJsonList(String path) async {
     final jsonStr = await rootBundle.loadString(path);
     return json.decode(jsonStr);

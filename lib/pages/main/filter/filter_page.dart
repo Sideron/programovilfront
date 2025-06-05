@@ -26,7 +26,9 @@ class _FilterPageState extends State<FilterPage> {
       GeneralFilter(
         goPage: goToPage,
       ),
-      UniversityFilter()
+      UniversityFilter(
+        universityId: 2,
+      )
     ];
   }
 

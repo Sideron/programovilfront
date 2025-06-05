@@ -14,8 +14,9 @@ class GeneralFilter extends StatefulWidget {
 }
 
 class _GeneralFilterState extends State<GeneralFilter> {
-  TeacherService _teacherService = TeacherService();
-  CollegeService _collegeService = CollegeService();
+  late void Function(int num) goPage;
+  final TeacherService _teacherService = TeacherService();
+  final CollegeService _collegeService = CollegeService();
   int selectedFilter = 0; // 0 = Profesores, 1 = Cursos
   final TextEditingController searchController = TextEditingController();
   String searchText = '';
@@ -30,7 +31,8 @@ class _GeneralFilterState extends State<GeneralFilter> {
   @override
   void initState() {
     super.initState();
-    allTeachers2 = _teacherService.getTeachersInCollege(1);
+    goPage = widget.goPage;
+    allTeachers2 = _teacherService.getAllTeachers();
     allColleges2 = _collegeService.loadCollegessFromJsonAsMap();
     allColleges2!.then((value) {
       if (value.first is Map<String, dynamic>) {
@@ -59,7 +61,11 @@ class _GeneralFilterState extends State<GeneralFilter> {
           buildHeader(),
           buildFilters(),
           Expanded(
-            child: selectedFilter == 1 ? buildTeachers() : buildColleges(),
+            child: selectedFilter == 1
+                ? buildTeachers()
+                : buildColleges((int n) {
+                    goPage(n);
+                  }),
           ),
         ],
       ),
@@ -179,7 +185,7 @@ class _GeneralFilterState extends State<GeneralFilter> {
     );
   }
 
-  Widget buildColleges() {
+  Widget buildColleges(void Function(int num) goPage) {
     final filteredCourses = allColleges
         .where((c) => c['name'].toLowerCase().contains(searchText))
         .toList();
@@ -189,7 +195,9 @@ class _GeneralFilterState extends State<GeneralFilter> {
       itemBuilder: (context, index) {
         final c = filteredCourses[index];
         return ListTile(
-          onTap: () {},
+          onTap: () {
+            goPage(1);
+          },
           leading: CircleAvatar(
             backgroundImage:
                 c['image_url'] != null && c['image_url'].startsWith('http')
