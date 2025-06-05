@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:programovilfront/pages/main/filter/filter_page.dart';
-import 'package:programovilfront/pages/main/profile/profile_page.dart';
 import 'package:programovilfront/pages/profileUser/profileUser_page.dart';
 
 class MainPage extends StatefulWidget {

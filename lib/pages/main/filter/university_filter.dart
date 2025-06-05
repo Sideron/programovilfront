@@ -17,31 +17,26 @@ class _UniversityFilterState extends State<UniversityFilter> {
       'name': 'Ana Lopez',
       'ratings': '300000 calificaciones',
       'image': 'assets/images/profile.png',
-      'status': Colors.green
     },
     {
       'name': 'Luis Hernández',
       'ratings': '280000 calificaciones',
       'image': 'assets/images/profile.png',
-      'status': Colors.red
     },
     {
       'name': 'Susan Quiroz',
       'ratings': '310000 calificaciones',
       'image': 'assets/images/profile.png',
-      'status': Colors.green
     },
     {
       'name': 'Carlos Mejía',
       'ratings': '290000 calificaciones',
       'image': 'assets/images/profile.png',
-      'status': Colors.green
     },
     {
       'name': 'Universidad Nacional del Callao',
       'ratings': '250000 calificaciones',
       'image': 'assets/images/profile.png',
-      'status': Colors.red
     },
   ];
 
@@ -93,7 +88,6 @@ class _UniversityFilterState extends State<UniversityFilter> {
           ],
         ),
       ),
-      //bottomNavigationBar: buildBottomBar(),
     );
   }
 
@@ -195,21 +189,9 @@ class _UniversityFilterState extends State<UniversityFilter> {
       itemBuilder: (context, index) {
         final t = filteredTeachers[index];
         return ListTile(
-          leading: Stack(
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(t['image']),
-                radius: 24,
-              ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: CircleAvatar(
-                  backgroundColor: t['status'],
-                  radius: 6,
-                ),
-              ),
-            ],
+          leading: CircleAvatar(
+            backgroundImage: AssetImage(t['image']),
+            radius: 24,
           ),
           title: Text(t['name']),
           subtitle: Text(t['ratings']),
@@ -233,21 +215,6 @@ class _UniversityFilterState extends State<UniversityFilter> {
           subtitle: Text(c['profesores']),
         );
       },
-    );
-  }
-
-  Widget buildBottomBar() {
-    return BottomAppBar(
-      color: const Color(0xFF48C59E),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          IconButton(
-              icon: Icon(Icons.search, color: Colors.black), onPressed: null),
-          IconButton(
-              icon: Icon(Icons.person, color: Colors.black), onPressed: null),
-        ],
-      ),
     );
   }
 }
