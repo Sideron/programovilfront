@@ -1,8 +1,62 @@
 [
   {
+    "group_id": 2,
+    "name": "curso",
+    "text": "Elige el curso",
+    "image_url": ""
+  },
+  {
+    "group_id": 4,
+    "name": "Puntualidad",
+    "text": "¿El profesor llega y termina a tiempo sus clases?",
+    "image_url": "https://example.com/images/puntualidad.png"
+  },
+  {
+    "group_id": 5,
+    "name": "Uso de recursos",
+    "text": "¿Utiliza materiales o recursos que apoyan el aprendizaje?",
+    "image_url": "https://example.com/images/recursos.png"
+  },
+  {
+    "group_id": 6,
+    "name": "Interacción con estudiantes",
+    "text": "¿Fomenta la participación y responde preguntas?",
+    "image_url": "https://example.com/images/interaccion.png"
+  },
+  {
+    "group_id": 7,
+    "name": "Evaluación justa",
+    "text": "¿Las evaluaciones son coherentes con lo enseñado?",
+    "image_url": "https://example.com/images/evaluacion.png"
+  },
+  {
+    "group_id": 8,
+    "name": "Retroalimentación",
+    "text": "¿Proporciona comentarios útiles para mejorar?",
+    "image_url": "https://example.com/images/retroalimentacion.png"
+  },
+  {
+    "group_id": 9,
+    "name": "Actitud profesional",
+    "text": "¿Mantiene una actitud respetuosa y profesional?",
+    "image_url": "https://example.com/images/profesionalismo.png"
+  },
+  {
+    "group_id": 10,
+    "name": "Motivación",
+    "text": "¿Inspira o motiva a los estudiantes a aprender?",
+    "image_url": "https://example.com/images/motivacion.png"
+  },
+  {
     "group_id": 1,
-    "name": "Claridad al explicar",
+    "name": "claridad",
     "text": "¿Qué tan claro explica el profesor?",
-    "image_url": "https://example.com/images/claridad.png"
+    "image_url": ""
+  },
+  {
+    "group_id": 3,
+    "name": "comentario",
+    "text": "Añade un comentario (opcional)",
+    "image_url": ""
   }
 ]

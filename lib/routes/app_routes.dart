@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:programovilfront/pages/login/login_page.dart';
 import 'package:programovilfront/pages/main/main_page.dart';
+import 'package:programovilfront/pages/rateTeacher/rateTeacher_page.dart';
 import 'package:programovilfront/pages/signin/signin_page.dart';
 import 'package:programovilfront/pages/Filtro_Universidad/profesores.dart';
 import 'package:programovilfront/pages/profileTeacher/profileTeacher_page.dart';
@@ -12,8 +13,9 @@ class AppRoutes {
   static const String main = '/mainpage';
   static const String profileTeacher = '/profileTeacher';
   static const String profileUser = '/profileUser';
+  static const String rateTeacher = '/rateTeacher';
 
-  static Widget mainPage = ProfileTeacherPage();
+  static Widget mainPage = RateTeacherPage();
 
   static Map<String, Widget Function(BuildContext)> routes(
       BuildContext context) {
@@ -23,6 +25,7 @@ class AppRoutes {
       AppRoutes.main: (context) => MainPage(),
       AppRoutes.profileTeacher: (context) => ProfileTeacherPage(),
       AppRoutes.profileUser: (context) => ProfileUserPage(),
+      AppRoutes.rateTeacher: (context) => RateTeacherPage(),
     };
   }
 }
