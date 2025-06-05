@@ -15,62 +15,42 @@ class _UniversityFilterState extends State<UniversityFilter> {
   final List<Map<String, dynamic>> allTeachers = [
     {
       'name': 'Ana Lopez',
-      'ratings': '300000 calificaciones',
+      'ratings': 300000,
       'image': 'assets/images/profile.png',
     },
     {
       'name': 'Luis Hernández',
-      'ratings': '280000 calificaciones',
+      'ratings': 280000,
       'image': 'assets/images/profile.png',
     },
     {
       'name': 'Susan Quiroz',
-      'ratings': '310000 calificaciones',
+      'ratings': 310000,
       'image': 'assets/images/profile.png',
     },
     {
       'name': 'Carlos Mejía',
-      'ratings': '290000 calificaciones',
+      'ratings': 290000,
       'image': 'assets/images/profile.png',
     },
     {
       'name': 'Universidad Nacional del Callao',
-      'ratings': '250000 calificaciones',
+      'ratings': 250000,
       'image': 'assets/images/profile.png',
     },
   ];
 
   final List<Map<String, dynamic>> allCourses = [
-    {
-      "name": "Programación Móvil",
-      "profesores": "4 Profesores",
-      "color": Colors.pink
-    },
+    {"name": "Programación Móvil", "profesores": 4, "color": Colors.pink},
     {
       "name": "Interacción Humano Computadora",
-      "profesores": "2 Profesores",
+      "profesores": 2,
       "color": Colors.blue
     },
-    {
-      "name": "Simulación...",
-      "profesores": "10 Profesores",
-      "color": Colors.pinkAccent
-    },
-    {
-      "name": "Programación Web",
-      "profesores": "4 Profesores",
-      "color": Colors.green
-    },
-    {
-      "name": "Analítica de Big Data",
-      "profesores": "4 Profesores",
-      "color": Colors.orange
-    },
-    {
-      "name": "Algoritmos",
-      "profesores": "4 Profesores",
-      "color": Colors.purple
-    },
+    {"name": "Simulación...", "profesores": 10, "color": Colors.pinkAccent},
+    {"name": "Programación Web", "profesores": 4, "color": Colors.green},
+    {"name": "Analítica de Big Data", "profesores": 4, "color": Colors.orange},
+    {"name": "Algoritmos", "profesores": 4, "color": Colors.purple},
   ];
 
   @override
@@ -194,7 +174,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
             radius: 24,
           ),
           title: Text(t['name']),
-          subtitle: Text(t['ratings']),
+          subtitle: Text(t['ratings'].toString() + " calificaciones"),
         );
       },
     );
@@ -212,7 +192,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
         return ListTile(
           leading: CircleAvatar(backgroundColor: c['color']),
           title: Text(c['name']),
-          subtitle: Text(c['profesores']),
+          subtitle: Text(c['profesores'].toString() + " profesores"),
         );
       },
     );

@@ -2,41 +2,49 @@
   {
     "course_id": 1,
     "name": "Programación I",
-    "faculty_id": 1
+    "faculty_id": 1,
+    "teachers_amount": 5
   },
   {
     "course_id": 2,
     "name": "Álgebra Lineal",
-    "faculty_id": 2
+    "faculty_id": 2,
+    "teachers_amount": 3
   },
   {
     "course_id": 3,
     "name": "Estructuras de Datos",
-    "faculty_id": 1
+    "faculty_id": 1,
+    "teachers_amount": 2
   },
   {
     "course_id": 4,
     "name": "Cálculo Diferencial",
-    "faculty_id": 2
+    "faculty_id": 2,
+    "teachers_amount": 10
   },
   {
     "course_id": 5,
     "name": "Psicología General",
-    "faculty_id": 3
+    "faculty_id": 3,
+    "teachers_amount": 6
   },
   {
     "course_id": 6,
     "name": "Física I",
-    "faculty_id": 2
+    "faculty_id": 2,
+    "teachers_amount": 15
   },
   {
     "course_id": 7,
     "name": "Bases de Datos",
-    "faculty_id": 1
+    "faculty_id": 1,
+    "teachers_amount": 3
   },
   {
     "course_id": 8,
     "name": "Sociología",
-    "faculty_id": 3
+    "faculty_id": 3,
+    "teachers_amount": 9
   }
 ]
