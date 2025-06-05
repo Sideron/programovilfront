@@ -48,10 +48,10 @@ class ProfileUserPage extends StatelessWidget {
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                               )),
-                                SizedBox(height: 16),
-                           EditProfileButton(onPressed: () {
-                print("Presionaste 'Editar'");
-              }),
+                          SizedBox(height: 16),
+                          EditProfileButton(onPressed: () {
+                            print("Presionaste 'Editar'");
+                          }),
                         ]),
                   ),
                 ],
@@ -80,7 +80,6 @@ class ProfileUserPage extends StatelessWidget {
           ),
         ),
       ),
-     
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:programovilfront/routes/app_routes.dart';
 import '../../components/review_item/review_item.dart';
 import 'package:programovilfront/pages/profileTeacher/profileTeacher_controller.dart';
 
@@ -100,6 +101,7 @@ class ProfileTeacherPage extends StatelessWidget {
       bottomNavigationBar: RateTeacherButton(
         onPressed: () {
           print("Presionaste 'Calificar profesor");
+          Navigator.pushNamed(context, AppRoutes.rateTeacher);
         },
       ),
     );
