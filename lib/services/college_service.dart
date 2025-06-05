@@ -3,6 +3,11 @@ import 'package:flutter/services.dart';
 import '../models/colleges.dart';
 
 class CollegeService {
+  Future<List<dynamic>> loadCollegessFromJsonAsMap() async {
+    final jsonStr = await rootBundle.loadString('assets/json/colleges.json');
+    return json.decode(jsonStr);
+  }
+
   Future<List<College>> getAllColleges() async {
     final jsonStr = await rootBundle.loadString('assets/json/colleges.json');
     final data = json.decode(jsonStr) as List<dynamic>;

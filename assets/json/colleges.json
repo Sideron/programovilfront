@@ -2,51 +2,51 @@
   {
     "college_id": 1,
     "name": "Universidad de Lima",
-    "image_url": "https://example.com/images/ulima.png"
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV7QKUXe0yNPpaBBv7c2YO-w45tYVIfdKKw&s"
   },
   {
     "college_id": 2,
-    "name": "Pontificia Universidad Católica del Perú",
-    "image_url": "https://example.com/images/pucp.png"
+    "name": "Universidad Autonoma Metropolitana",
+    "image_url": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/012011/untitled-1_6.png?itok=kAcHD1tL"
   },
   {
     "college_id": 3,
-    "name": "Universidad Peruana Cayetano Heredia",
-    "image_url": "https://example.com/images/upch.png"
+    "name": "Pontificia Universidad Católica del Perú",
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxPWMnGYOZ0ZwhAzmtDxon-JMjnr3sDRkCqQ&s"
   },
   {
     "college_id": 4,
     "name": "Universidad de Ingeniería y Tecnología (UTEC)",
-    "image_url": "https://example.com/images/utec.png"
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/UTEC-Logo.jpg/960px-UTEC-Logo.jpg"
   },
   {
     "college_id": 5,
     "name": "Universidad Nacional de San Agustín de Arequipa",
-    "image_url": "https://example.com/images/unsa.png"
+    "image_url": "https://xxvicongresoperuanoquimica2012.wordpress.com/wp-content/uploads/2012/07/unsa.png"
   },
   {
     "college_id": 6,
     "name": "Universidad Nacional de Trujillo",
-    "image_url": "https://example.com/images/unt.png"
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo-teRUlBUWINfwycZRLFvwmxrGxVnnsrqbg&s"
   },
   {
     "college_id": 7,
      "name": "Universidad Nacional Mayor de San Marcos",
-    "image_url": "https://example.com/images/unmsm.png"
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxf49uTNFrTn-j01GqhHYJBd0XIc5IgNKAtg&s"
   },
   {
     "college_id": 8,
     "name": "Universidad ESAN",
-    "image_url": "https://example.com/images/esan.png"
+    "image_url": "https://carrerasuniversitarias.pe/logos/original/logo-universidad-esan.webp"
   },
   {
     "college_id": 9,
     "name": "Universidad del Pacífico",
-    "image_url": "https://example.com/images/upacifico.png"
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIC0AeNPiyXIht6eyDqTTRFL1gMNWC0GnGlQ&s"
   },
   {
     "college_id": 10,
     "name": "Universidad Nacional de San Antonio Abad del Cusco",
-    "image_url": "https://example.com/images/unsaac.png"
+    "image_url": "https://dondeestudiar.pe/wp-content/uploads/2023/01/Unsaac.jpg"
   }
 ]
