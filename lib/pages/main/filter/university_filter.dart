@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:programovilfront/services/course_service.dart';
 import 'package:programovilfront/services/teacher_service.dart';
 
 class UniversityFilter extends StatefulWidget {
@@ -11,31 +12,15 @@ class UniversityFilter extends StatefulWidget {
 }
 
 class _UniversityFilterState extends State<UniversityFilter> {
-  TeacherService teacherService = TeacherService();
+  TeacherService _teacherService = TeacherService();
+  CourseService _courseService = CourseService();
   int selectedFilter = 0; // 0 = Profesores, 1 = Cursos
   final TextEditingController searchController = TextEditingController();
   String searchText = '';
 
   List<Map<String, dynamic>> allTeachers = [];
 
-  Future<List<dynamic>>? allTeachers2;
-
-  @override
-  void initState() {
-    super.initState();
-    allTeachers2 = teacherService.getTeachersInCollege(1);
-
-    allTeachers2!.then((value) {
-      if (value.first is Map<String, dynamic>) {
-        setState(() {
-          allTeachers = value.cast<Map<String, dynamic>>();
-        });
-        print(jsonEncode(allTeachers));
-      }
-    });
-  }
-
-  final List<Map<String, dynamic>> allCourses = [
+  List<Map<String, dynamic>> allCourses = [
     {"name": "Programación Móvil", "profesores": 4, "color": Colors.pink},
     {
       "name": "Interacción Humano Computadora",
@@ -47,6 +32,36 @@ class _UniversityFilterState extends State<UniversityFilter> {
     {"name": "Analítica de Big Data", "profesores": 4, "color": Colors.orange},
     {"name": "Algoritmos", "profesores": 4, "color": Colors.purple},
   ];
+
+  Future<List<dynamic>>? allTeachers2;
+  Future<List<dynamic>>? allCourses2;
+
+  @override
+  void initState() {
+    super.initState();
+    allTeachers2 = _teacherService.getTeachersInCollege(1);
+    allCourses2 = _courseService.loadCoursesFromJsonAsMap();
+    allCourses2!.then((value) {
+      if (value.first is Map<String, dynamic>) {
+        setState(() {
+          allCourses = value.cast<Map<String, dynamic>>();
+          allCourses = allCourses.map((x) {
+            return {...x, 'color': Colors.amber};
+          }).toList();
+        });
+        //print(jsonEncode(allCourses));
+      }
+    });
+
+    allTeachers2!.then((value) {
+      if (value.first is Map<String, dynamic>) {
+        setState(() {
+          allTeachers = value.cast<Map<String, dynamic>>();
+        });
+        print(jsonEncode(allTeachers));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +203,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
         return ListTile(
           leading: CircleAvatar(backgroundColor: c['color']),
           title: Text(c['name']),
-          subtitle: Text(c['profesores'].toString() + " profesores"),
+          subtitle: Text(c['teachers_amount'].toString() + " profesores"),
         );
       },
     );
