@@ -4,6 +4,7 @@ import '../models/courses.dart';
 import '../models/review_display.dart';
 import '../models/labels.dart';
 import '../models/review.dart';
+import '../models/teachers.dart';
 import '../models/user.dart';
 
 class ReviewResult {
@@ -16,7 +17,8 @@ class ReviewService {
   Future<ReviewResult> getReviewsForTeacher(int teacherId) async {
     final data = await _loadAllData();
 
-    final teacherReviews = data.reviews.where((r) => r['teacher_id'] == teacherId);
+    final teacherReviews =
+        data.reviews.where((r) => r['teacher_id'] == teacherId);
     final List<ReviewDisplay> reviewList = [];
     final Set<String> labelNames = {};
 
@@ -24,6 +26,7 @@ class ReviewService {
       final display = _buildReviewDisplay(
         reviewJson,
         data,
+        useTeacherAsUser: false,
         collectLabelNames: labelNames,
       );
       reviewList.add(display);
@@ -42,7 +45,11 @@ class ReviewService {
     final List<ReviewDisplay> reviewList = [];
 
     for (var reviewJson in userReviews) {
-      final display = _buildReviewDisplay(reviewJson, data);
+      final display = _buildReviewDisplay(
+        reviewJson,
+        data,
+        useTeacherAsUser: true,
+      );
       reviewList.add(display);
     }
 
@@ -60,6 +67,7 @@ class ReviewService {
     final labels = await _loadJsonList('assets/json/labels.json');
     final users = await _loadJsonList('assets/json/users.json');
     final courses = await _loadJsonList('assets/json/courses.json');
+    final teachers = await _loadJsonList('assets/json/teachers.json');
 
     return _ReviewData(
       reviews: reviews,
@@ -67,6 +75,9 @@ class ReviewService {
       labelMap: {for (var l in labels) l['label_id']: Label.fromJson(l)},
       userMap: {for (var u in users) u['user_id']: User.fromJson(u)},
       courseMap: {for (var c in courses) c['course_id']: Course.fromJson(c)},
+      teacherMap: {
+        for (var t in teachers) t['teacher_id']: Teacher.fromJson(t)
+      },
     );
   }
 
@@ -74,6 +85,7 @@ class ReviewService {
     Map<String, dynamic> reviewJson,
     _ReviewData data, {
     Set<String>? collectLabelNames,
+    bool useTeacherAsUser = false,
   }) {
     final reviewId = reviewJson['review_id'];
     final userId = reviewJson['user_id'];
@@ -93,15 +105,35 @@ class ReviewService {
     final otherLabels = allLabels.where((l) => l.groupId != 1).toList();
 
     final review = Review.fromJson(reviewJson);
-    final user = data.userMap[userId] ??
-        User(
-          username: 'Anónimo',
-          userId: 0,
-          email: '',
-          password: '',
-          collegeId: 0,
-          imageUrl: '',
-        );
+
+    User user;
+    if (useTeacherAsUser) {
+      final teacherId = reviewJson['teacher_id'];
+      final teacher = data.teacherMap[teacherId] ??
+          Teacher(
+            teacherId: 0,
+            name: 'Profesor desconocido',
+            imageUrl: '',
+          );
+      user = User(
+        userId: teacher.teacherId,
+        username: teacher.name,
+        email: '',
+        password: '',
+        collegeId: 0,
+        imageUrl: teacher.imageUrl,
+      );
+    } else {
+      user = data.userMap[userId] ??
+          User(
+            username: 'Anónimo',
+            userId: 0,
+            email: '',
+            password: '',
+            collegeId: 0,
+            imageUrl: '',
+          );
+    }
 
     final course = data.courseMap[review.courseId];
     final courseName = course?.name ?? '';
@@ -124,6 +156,7 @@ class _ReviewData {
   final Map<int, Label> labelMap;
   final Map<int, User> userMap;
   final Map<int, Course> courseMap;
+  final Map<int, Teacher> teacherMap;
 
   _ReviewData({
     required this.reviews,
@@ -131,5 +164,6 @@ class _ReviewData {
     required this.labelMap,
     required this.userMap,
     required this.courseMap,
+    required this.teacherMap,
   });
 }
