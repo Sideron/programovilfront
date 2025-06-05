@@ -11,7 +11,7 @@ class GeneralFilter extends StatelessWidget {
           onPressed: () {
             goPage(1);
           },
-          child: Text('Ir a profesores')),
+          child: Text('Ir a universidad')),
     );
   }
 }

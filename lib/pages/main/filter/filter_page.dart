@@ -32,6 +32,6 @@ class _FilterPageState extends State<FilterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return pages[currentPage.value];
+    return Obx(() => pages[currentPage.value]);
   }
 }
