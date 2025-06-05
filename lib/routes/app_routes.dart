@@ -3,13 +3,17 @@ import 'package:programovilfront/pages/login/login_page.dart';
 import 'package:programovilfront/pages/main/main_page.dart';
 import 'package:programovilfront/pages/signin/signin_page.dart';
 import 'package:programovilfront/pages/Filtro_Universidad/profesores.dart';
+import 'package:programovilfront/pages/profileTeacher/profileTeacher_page.dart';
+import 'package:programovilfront/pages/profileUser/profileUser_page.dart';
 
 class AppRoutes {
   static const String login = '/loginpage';
   static const String signin = '/signinpage';
   static const String main = '/mainpage';
+  static const String profileTeacher = '/profileTeacher';
+  static const String profileUser = '/profileUser';
 
-  static Widget mainPage = SigninPage();
+  static Widget mainPage = ProfileTeacherPage();
 
   static Map<String, Widget Function(BuildContext)> routes(
       BuildContext context) {
@@ -17,6 +21,8 @@ class AppRoutes {
       AppRoutes.login: (context) => LoginPage(),
       AppRoutes.signin: (context) => SigninPage(),
       AppRoutes.main: (context) => MainPage(),
+      AppRoutes.profileTeacher: (context) => ProfileTeacherPage(),
+      AppRoutes.profileUser: (context) => ProfileUserPage(),
     };
   }
 }
