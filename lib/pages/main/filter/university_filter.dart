@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:programovilfront/services/teacher_service.dart';
 
 class UniversityFilter extends StatefulWidget {
   const UniversityFilter({Key? key}) : super(key: key);
@@ -8,11 +11,12 @@ class UniversityFilter extends StatefulWidget {
 }
 
 class _UniversityFilterState extends State<UniversityFilter> {
+  TeacherService teacherService = TeacherService();
   int selectedFilter = 0; // 0 = Profesores, 1 = Cursos
   final TextEditingController searchController = TextEditingController();
   String searchText = '';
 
-  final List<Map<String, dynamic>> allTeachers = [
+  List<Map<String, dynamic>> allTeachers = [
     {
       'name': 'Ana Lopez',
       'ratings': 300000,
@@ -39,6 +43,23 @@ class _UniversityFilterState extends State<UniversityFilter> {
       'image': 'assets/images/profile.png',
     },
   ];
+
+  Future<List<dynamic>>? allTeachers2;
+
+  @override
+  void initState() {
+    super.initState();
+    allTeachers2 = teacherService.getTeachersInCollege(1);
+
+    allTeachers2!.then((value) {
+      if (value.first is Map<String, dynamic>) {
+        setState(() {
+          allTeachers = value.cast<Map<String, dynamic>>();
+        });
+        print(jsonEncode(allTeachers));
+      }
+    });
+  }
 
   final List<Map<String, dynamic>> allCourses = [
     {"name": "Programación Móvil", "profesores": 4, "color": Colors.pink},
@@ -170,7 +191,8 @@ class _UniversityFilterState extends State<UniversityFilter> {
         final t = filteredTeachers[index];
         return ListTile(
           leading: CircleAvatar(
-            backgroundImage: AssetImage(t['image']),
+            backgroundImage:
+                AssetImage(t['image_url'] ?? 'assets/images/profile.png'),
             radius: 24,
           ),
           title: Text(t['name']),

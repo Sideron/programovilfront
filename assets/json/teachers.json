@@ -4,48 +4,48 @@
     "name": "Juan Pérez",
     "image_url": "assets/images/teachers/profile.png",
     "college_id": 1,
-    "reviews_amount": 15
+    "ratings": 15
   },
   {
     "teacher_id": 2,
     "name": "María Gómez",
     "image_url": "assets/images/teachers/profile2.png",
     "college_id": 2,
-    "reviews_amount": 12
+    "ratings": 12
   },
   {
     "teacher_id": 3,
     "name": "Carlos Sánchez",
     "image_url": "assets/images/profileDefault.png",
     "college_id": 1,
-    "reviews_amount": 16
+    "ratings": 16
   },
   {
     "teacher_id": 4,
     "name": "Laura Fernández",
     "image_url": "assets/images/profileDefault.png",
     "college_id": 3,
-    "reviews_amount": 19
+    "ratings": 19
   },
   {
     "teacher_id": 5,
     "name": "Ana Torres",
     "image_url": "assets/images/profileDefault.png",
     "college_id": 2,
-    "reviews_amount": 13
+    "ratings": 13
   },
   {
     "teacher_id": 6,
     "name": "Miguel Rodríguez",
     "image_url": "assets/images/profileDefault.png",
     "college_id": 1,
-    "reviews_amount": 11
+    "ratings": 11
   },
   {
     "teacher_id": 7,
     "name": "Sofía Martínez",
     "image_url": "assets/images/profileDefault.png",
     "college_id": 3,
-    "reviews_amount": 12
+    "ratings": 12
   }
 ]
