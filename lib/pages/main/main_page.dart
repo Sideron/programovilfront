@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:programovilfront/pages/Filtro_Universidad/profesores.dart';
 import 'package:programovilfront/pages/main/filter/filter_page.dart';
-import 'package:programovilfront/pages/main/profile/profile_page.dart';
+import 'package:programovilfront/pages/profileUser/profileUser_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,7 +18,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    pages = [FilterPage(), ProfilePage()];
+    pages = [FilterPage(), ProfileUserPage()];
   }
 
   void navigateBottomBar(int index) {
