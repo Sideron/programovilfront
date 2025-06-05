@@ -10,6 +10,15 @@ class ProfileTeacherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(0, 255, 255, 255),
+        scrolledUnderElevation: 0,
+        toolbarHeight: 40,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, size: 35),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
@@ -90,7 +99,10 @@ class ProfileTeacherPage extends StatelessWidget {
               ),
               Obx(() => Column(
                     children: control.reviews.map((rev) {
-                      return ReviewItem(review: rev, showCourse: false,);
+                      return ReviewItem(
+                        review: rev,
+                        showCourse: false,
+                      );
                     }).toList(),
                   )),
               SizedBox(height: 80),

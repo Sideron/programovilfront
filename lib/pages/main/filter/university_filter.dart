@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:programovilfront/routes/app_routes.dart';
 import 'package:programovilfront/services/course_service.dart';
 import 'package:programovilfront/services/teacher_service.dart';
 
@@ -13,8 +13,8 @@ class UniversityFilter extends StatefulWidget {
 }
 
 class _UniversityFilterState extends State<UniversityFilter> {
-  TeacherService _teacherService = TeacherService();
-  CourseService _courseService = CourseService();
+  final TeacherService _teacherService = TeacherService();
+  final CourseService _courseService = CourseService();
   int selectedFilter = 0; // 0 = Profesores, 1 = Cursos
   final TextEditingController searchController = TextEditingController();
   String searchText = '';
@@ -49,7 +49,6 @@ class _UniversityFilterState extends State<UniversityFilter> {
             return {...x, 'color': getRandomColor()};
           }).toList();
         });
-        //print(jsonEncode(allCourses));
       }
     });
 
@@ -58,7 +57,6 @@ class _UniversityFilterState extends State<UniversityFilter> {
         setState(() {
           allTeachers = value.cast<Map<String, dynamic>>();
         });
-        print(jsonEncode(allTeachers));
       }
     });
   }
@@ -179,6 +177,9 @@ class _UniversityFilterState extends State<UniversityFilter> {
       itemBuilder: (context, index) {
         final t = filteredTeachers[index];
         return ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.profileTeacher);
+          },
           leading: CircleAvatar(
             backgroundImage:
                 AssetImage(t['image_url'] ?? 'assets/images/profile.png'),
@@ -201,6 +202,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
       itemBuilder: (context, index) {
         final c = filteredCourses[index];
         return ListTile(
+          onTap: () {},
           leading: CircleAvatar(backgroundColor: c['color']),
           title: Text(c['name']),
           subtitle: Text(c['teachers_amount'].toString() + " profesores"),
