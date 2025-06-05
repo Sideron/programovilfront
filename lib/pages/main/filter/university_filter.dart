@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:programovilfront/services/course_service.dart';
@@ -18,20 +19,19 @@ class _UniversityFilterState extends State<UniversityFilter> {
   final TextEditingController searchController = TextEditingController();
   String searchText = '';
 
+  final random = Random();
+
+  Color getRandomColor() {
+    double hue = random.nextDouble() * 360; // Tonalidad entre 0 y 360
+    double saturation = 1; // 0.7 - 1.0
+    double brightness = 1; // 0.7 - 1.0
+
+    return HSVColor.fromAHSV(1.0, hue, saturation, brightness).toColor();
+  }
+
   List<Map<String, dynamic>> allTeachers = [];
 
-  List<Map<String, dynamic>> allCourses = [
-    {"name": "Programación Móvil", "profesores": 4, "color": Colors.pink},
-    {
-      "name": "Interacción Humano Computadora",
-      "profesores": 2,
-      "color": Colors.blue
-    },
-    {"name": "Simulación...", "profesores": 10, "color": Colors.pinkAccent},
-    {"name": "Programación Web", "profesores": 4, "color": Colors.green},
-    {"name": "Analítica de Big Data", "profesores": 4, "color": Colors.orange},
-    {"name": "Algoritmos", "profesores": 4, "color": Colors.purple},
-  ];
+  List<Map<String, dynamic>> allCourses = [];
 
   Future<List<dynamic>>? allTeachers2;
   Future<List<dynamic>>? allCourses2;
@@ -46,7 +46,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
         setState(() {
           allCourses = value.cast<Map<String, dynamic>>();
           allCourses = allCourses.map((x) {
-            return {...x, 'color': Colors.amber};
+            return {...x, 'color': getRandomColor()};
           }).toList();
         });
         //print(jsonEncode(allCourses));
