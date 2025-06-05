@@ -5,7 +5,12 @@ import '../../components/review_item/review_item.dart';
 import 'package:programovilfront/pages/profileTeacher/profileTeacher_controller.dart';
 
 class ProfileTeacherPage extends StatelessWidget {
-  final ProfileTeacherController control = Get.put(ProfileTeacherController());
+  final int idTeacher;
+
+  ProfileTeacherPage({super.key, required this.idTeacher});
+
+  late final ProfileTeacherController control =
+      Get.put(ProfileTeacherController(idTeacher), tag: 'profile_$idTeacher');
 
   @override
   Widget build(BuildContext context) {

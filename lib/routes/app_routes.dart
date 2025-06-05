@@ -22,9 +22,20 @@ class AppRoutes {
       AppRoutes.login: (context) => LoginPage(),
       AppRoutes.signin: (context) => SigninPage(),
       AppRoutes.main: (context) => MainPage(),
-      AppRoutes.profileTeacher: (context) => ProfileTeacherPage(),
+      /* AppRoutes.profileTeacher: (context) => ProfileTeacherPage(
+            idTeacher: 1,
+          ), */
       AppRoutes.profileUser: (context) => ProfileUserPage(),
       AppRoutes.rateTeacher: (context) => RateTeacherPage(),
     };
+  }
+
+  static void goToProfileTeacher(BuildContext context, int idTeacher) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ProfileTeacherPage(idTeacher: idTeacher),
+      ),
+    );
   }
 }

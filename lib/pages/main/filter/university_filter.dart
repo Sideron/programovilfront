@@ -178,7 +178,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
         final t = filteredTeachers[index];
         return ListTile(
           onTap: () {
-            Navigator.pushNamed(context, AppRoutes.profileTeacher);
+            AppRoutes.goToProfileTeacher(context, t['teacher_id']);
           },
           leading: CircleAvatar(
             backgroundImage:

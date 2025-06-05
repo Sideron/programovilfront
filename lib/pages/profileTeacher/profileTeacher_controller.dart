@@ -12,11 +12,13 @@ class ProfileTeacherController extends GetxController {
   var reviews = <ReviewDisplay>[].obs;
   var colleges = <College>[].obs;
   var selectCollege = Rx<College?>(null);
-  var teacherSelect = 1;
+  late final int teacherSelect;
   final _teacherService = TeacherService();
   final _collegeService = CollegeService();
   final _reviewService = ReviewService();
-  
+
+  ProfileTeacherController(this.teacherSelect);
+
   @override
   void onInit() {
     super.onInit();
@@ -30,7 +32,8 @@ class ProfileTeacherController extends GetxController {
     image.value = teacher.imageUrl;
 
     final allColleges = await _collegeService.getAllColleges();
-    final teacherCollegeIds = await _teacherService.getTeacherCollegeIds(teacher.teacherId);
+    final teacherCollegeIds =
+        await _teacherService.getTeacherCollegeIds(teacher.teacherId);
 
     final filtered = allColleges
         .where((c) => teacherCollegeIds.contains(c.collegeId))
