@@ -56,15 +56,12 @@ class RateTeacherController extends GetxController {
     selectedIndex.value = index;
   }
 
- void goToNextQuestion() {
-  if (currentQuestionIndex.value < questions.length - 1) {
-    currentQuestionIndex++;
-    updateCurrentOptions();
+  void goToNextQuestion() {
+    if (currentQuestionIndex.value < questions.length - 1) {
+      currentQuestionIndex++;
+      updateCurrentOptions();
+    }
   }
-}
-
-
-
 
   @override
   void onClose() {

@@ -67,6 +67,7 @@ flutter:
     - assets/images/profile.png
     - assets/images/teachers/
     - assets/images/users/
+    - assets/images/groups/
     - assets/json/
   #   - images/a_dot_ham.jpeg
 
