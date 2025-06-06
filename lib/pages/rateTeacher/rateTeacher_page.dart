@@ -164,7 +164,8 @@ class RateTeacherPage extends StatelessWidget {
                               children: List.generate(
                                   control.currentOptions.length, (index) {
                                 final label = control.currentOptions[index];
-                                final isSelected = control.selectedIndex.value == index;
+                                final isSelected =
+                                    control.selectedIndex.value == index;
                                 return Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 6),
@@ -240,7 +241,7 @@ class RateTeacherPage extends StatelessWidget {
                           onPressed: () {
                             if (control.currentQuestionIndex.value ==
                                 control.questions.length - 1) {
-                              AppRoutes.goToProfileTeacher(context, idTeacher);
+                              Navigator.pop(context);
                             } else {
                               control.goToNextQuestion();
                             }
@@ -278,7 +279,7 @@ class RateTeacherPage extends StatelessWidget {
                   icon: const Icon(Icons.close, size: 28),
                   color: Theme.of(context).colorScheme.onPrimaryFixed,
                   onPressed: () {
-                    AppRoutes.goToProfileTeacher(context, idTeacher);
+                    Navigator.pop(context);
                   },
                 ),
               ),
