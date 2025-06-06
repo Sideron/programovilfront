@@ -11,6 +11,7 @@ class RateTeacherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final RateTeacherController control =
         Get.put(RateTeacherController(idTeacher: idTeacher));
+    control.reset();
 
     return Scaffold(
       body: SafeArea(
