@@ -131,7 +131,7 @@ El diagrama de casos de uso representa las principales funcionalidades de la apl
 
 ## Diagrama Relacional
 
-![Diagrama Relacional](imgs/Diagrama%20Relacional.jpg)
+![Diagrama Relacional](imgs/DiagERD.png)
 
 _<b>Figura 7:</b> Diagrama Relacional_
 
