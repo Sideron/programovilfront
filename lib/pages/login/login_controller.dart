@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/routes/app_routes.dart';
+import 'package:programovilfront/services/user_services.dart';
 
 class LoginController extends GetxController {
+  UserService _userService = UserService();
   TextEditingController textUser = TextEditingController();
   TextEditingController textPassword = TextEditingController();
 
@@ -16,11 +18,14 @@ class LoginController extends GetxController {
   void logIn(BuildContext context) {
     print(textUser.text);
     print(textPassword.text);
-    if (textUser.text == 'user' && textPassword.text == '123') {
-      Navigator.pushNamed(context, AppRoutes.main);
-    } else {
-      _setErrorMessage('Usuario o contraseña incorrectos');
-    }
+    Future<bool> canLog = _userService.login(textUser.text, textPassword.text);
+    canLog.then((value) {
+      if (value) {
+        Navigator.pushNamed(context, AppRoutes.main);
+      } else {
+        _setErrorMessage('Usuario o contraseña incorrectos');
+      }
+    });
   }
 
   void goSignIn(BuildContext context) {
