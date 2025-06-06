@@ -115,12 +115,9 @@ class ProfileTeacherPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: RateTeacherButton(
-        onPressed: () {
-          print("Presionaste 'Calificar profesor");
-          Navigator.pushNamed(context, AppRoutes.rateTeacher);
-        },
-      ),
+      bottomNavigationBar: RateTeacherButton(onPressed: () {
+        AppRoutes.goToRateTeacherPage(context, idTeacher);
+      }),
     );
   }
 

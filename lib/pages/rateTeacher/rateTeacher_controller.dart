@@ -8,6 +8,9 @@ import 'package:programovilfront/services/rate_service.dart';
 import 'package:programovilfront/services/course_service.dart';
 
 class RateTeacherController extends GetxController {
+  final int idTeacher;
+  RateTeacherController({required this.idTeacher});
+
   final RateService _rateService = RateService();
   final LabelService _labelService = LabelService();
   final CourseService _courseService = CourseService();
@@ -53,16 +56,15 @@ class RateTeacherController extends GetxController {
     selectedIndex.value = index;
   }
 
-  void goToNextQuestion() {
-    if (currentQuestionIndex.value < questions.length - 1) {
-      currentQuestionIndex++;
-      updateCurrentOptions();
-    } else {
-      if (Get.context != null) {
-        Get.snackbar("¡Gracias!", "Has completado la evaluación");
-      }
-    }
+ void goToNextQuestion() {
+  if (currentQuestionIndex.value < questions.length - 1) {
+    currentQuestionIndex++;
+    updateCurrentOptions();
   }
+}
+
+
+
 
   @override
   void onClose() {

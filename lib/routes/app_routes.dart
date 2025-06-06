@@ -26,7 +26,6 @@ class AppRoutes {
             idTeacher: 1,
           ), */
       AppRoutes.profileUser: (context) => ProfileUserPage(),
-      AppRoutes.rateTeacher: (context) => RateTeacherPage(),
     };
   }
 
@@ -35,6 +34,15 @@ class AppRoutes {
       context,
       MaterialPageRoute(
         builder: (_) => ProfileTeacherPage(idTeacher: idTeacher),
+      ),
+    );
+  }
+
+  static void goToRateTeacherPage(BuildContext context, int idTeacher) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => RateTeacherPage(idTeacher: idTeacher),
       ),
     );
   }
