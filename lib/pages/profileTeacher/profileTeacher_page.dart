@@ -110,26 +110,30 @@ class ProfileTeacherPage extends StatelessWidget {
                       );
                     }).toList(),
                   )),
-              SizedBox(height: 80),
+              SizedBox(height: 20),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: RateTeacherButton(onPressed: () {
-        AppRoutes.goToRateTeacherPage(context, idTeacher);
-      }),
+      bottomNavigationBar: SafeArea(
+        child: RateTeacherButton(
+          onPressed: () {
+            AppRoutes.goToRateTeacherPage(context, idTeacher);
+          },
+        ),
+      ),
     );
   }
 
   Widget RateTeacherButton({required VoidCallback onPressed}) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 4, top: 4),
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 67, 191, 152),
           foregroundColor: Colors.white,
-          minimumSize: Size(220, 50),
+          minimumSize: Size(220, 55),
         ),
         child: const Text(
           'Calificar profesor',
