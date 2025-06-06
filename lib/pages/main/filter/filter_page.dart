@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:programovilfront/pages/main/filter/course_filter.dart';
 import 'package:programovilfront/pages/main/filter/general_filter.dart';
 import 'package:programovilfront/pages/main/filter/university_filter.dart';
 
@@ -11,7 +12,7 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  RxInt currentPage = 0.obs;
+  RxInt currentPage = 2.obs;
   RxInt currentCollege = 1.obs;
 
   @override
@@ -36,7 +37,8 @@ class _FilterPageState extends State<FilterPage> {
         UniversityFilter(
           universityId: currentCollege.value,
           goPage: goToPage,
-        )
+        ),
+        CourseFilter()
       ];
       return pages[currentPage.value];
     });

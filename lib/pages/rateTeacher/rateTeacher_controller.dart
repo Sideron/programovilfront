@@ -10,7 +10,7 @@ import 'package:programovilfront/services/course_service.dart';
 class RateTeacherController extends GetxController {
   final int idTeacher;
   RateTeacherController({required this.idTeacher});
-
+  
   final RateService _rateService = RateService();
   final LabelService _labelService = LabelService();
   final CourseService _courseService = CourseService();
@@ -61,6 +61,16 @@ class RateTeacherController extends GetxController {
       currentQuestionIndex++;
       updateCurrentOptions();
     }
+  }
+
+  void reset() {
+    currentQuestionIndex.value = 0;
+    selectedIndex.value = -1;
+    commentController.clear();
+    if (courseOptions.isNotEmpty) {
+      selectedCourse.value = courseOptions.first;
+    }
+    updateCurrentOptions();
   }
 
   @override
