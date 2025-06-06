@@ -118,5 +118,65 @@
     "name": "Comunicación Efectiva",
     "faculty_id": 5,
     "teachers_amount": 5
+  },
+  {
+    "course_id": 21,
+    "name": "Derecho Constitucional",
+    "faculty_id": 11,
+    "teachers_amount": 7
+  },
+  {
+    "course_id": 22,
+    "name": "Medicina General",
+    "faculty_id": 12,
+    "teachers_amount": 10
+  },
+  {
+    "course_id": 23,
+    "name": "Arquitectura Contemporánea",
+    "faculty_id": 13,
+    "teachers_amount": 4
+  },
+  {
+    "course_id": 24,
+    "name": "Ingeniería Ambiental",
+    "faculty_id": 14,
+    "teachers_amount": 5
+  },
+  {
+    "course_id": 25,
+    "name": "Psicología Social",
+    "faculty_id": 15,
+    "teachers_amount": 4
+  },
+  {
+    "course_id": 26,
+    "name": "Economía Aplicada",
+    "faculty_id": 16,
+    "teachers_amount": 6
+  },
+  {
+    "course_id": 27,
+    "name": "Derecho Civil",
+    "faculty_id": 17,
+    "teachers_amount": 8
+  },
+  {
+    "course_id": 28,
+    "name": "Administración de Empresas",
+    "faculty_id": 18,
+    "teachers_amount": 7
+  },
+  {
+    "course_id": 29,
+    "name": "Derecho Penal",
+    "faculty_id": 19,
+    "teachers_amount": 5
+  },
+  {
+    "course_id": 30,
+    "name": "Ingeniería Civil Estructural",
+    "faculty_id": 20,
+    "teachers_amount": 6
   }
 ]
