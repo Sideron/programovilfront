@@ -2,51 +2,19 @@
   {
     "faculty_id": 1,
     "name": "Facultad de Ingeniería",
-    "college_id": 1
+    "college_id": 1,
+    "teachers_amount": 10
   },
   {
     "faculty_id": 2,
     "name": "Facultad de Ciencias",
-    "college_id": 2
+    "college_id": 2,
+    "teachers_amount": 28
   },
   {
     "faculty_id": 3,
     "name": "Facultad de Humanidades",
-    "college_id": 3
-  },
-  {
-    "faculty_id": 4,
-    "name": "Facultad de Arquitectura",
-    "college_id": 4
-  },
-  {
-    "faculty_id": 5,
-    "name": "Facultad de Derecho",
-    "college_id": 5
-  },
-  {
-    "faculty_id": 6,
-    "name": "Facultad de Medicina",
-    "college_id": 6
-  },
-  {
-    "faculty_id": 7,
-    "name": "Facultad de Psicología",
-    "college_id": 7
-  },
-  {
-    "faculty_id": 8,
-    "name": "Facultad de Economía",
-    "college_id": 8
-  },
-  {
-    "faculty_id": 9,
-    "name": "Facultad de Administración",
-    "college_id": 9
-  },
-  {
-    "faculty_id": 10,
-    "name": "Facultad de Ciencias Sociales",
-    "college_id": 10
+    "college_id": 3,
+    "teachers_amount": 15
   }
 ]
