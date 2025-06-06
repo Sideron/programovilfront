@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:programovilfront/routes/app_routes.dart';
+import 'package:programovilfront/services/teacher_service.dart';
 
 class CourseFilter extends StatefulWidget {
   const CourseFilter({super.key});
@@ -9,7 +12,25 @@ class CourseFilter extends StatefulWidget {
 }
 
 class _CourseFilterState extends State<CourseFilter> {
+  final TeacherService _teacherService = TeacherService();
   List<Map<String, dynamic>> allTeachers = [];
+  Future<List<dynamic>>? allTeachers2;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    allTeachers2 = _teacherService.getAllTeachers();
+    allTeachers2!.then((value) {
+      if (value.first is Map<String, dynamic>) {
+        setState(() {
+          allTeachers = value.cast<Map<String, dynamic>>();
+        });
+        print(jsonEncode(allTeachers));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,7 +40,9 @@ class _CourseFilterState extends State<CourseFilter> {
         children: [
           buildHeader(),
           Align(
-              alignment: Alignment.centerLeft, child: Text('Elige un profesor'))
+              alignment: Alignment.centerLeft,
+              child: Text('Elige un profesor')),
+          Expanded(child: buildTeachers())
         ],
       ),
     ));
@@ -53,14 +76,12 @@ class _CourseFilterState extends State<CourseFilter> {
   }
 
   Widget buildTeachers() {
-    if (allTeachers.isEmpty) {
-      return const Center(child: Text('No hay profesores disponibles.'));
-    }
+    final filteredTeachers = allTeachers;
 
     return ListView.builder(
-      itemCount: allTeachers.length,
+      itemCount: filteredTeachers.length,
       itemBuilder: (context, index) {
-        final t = allTeachers[index];
+        final t = filteredTeachers[index];
         return ListTile(
           onTap: () {
             AppRoutes.goToProfileTeacher(context, t['teacher_id']);
