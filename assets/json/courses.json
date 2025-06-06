@@ -46,5 +46,77 @@
     "name": "Sociología",
     "faculty_id": 3,
     "teachers_amount": 9
+  },
+  {
+    "course_id": 9,
+    "name": "Microeconomía",
+    "faculty_id": 4,
+    "teachers_amount": 4
+  },
+  {
+    "course_id": 10,
+    "name": "Macroeconomía",
+    "faculty_id": 4,
+    "teachers_amount": 3
+  },
+  {
+    "course_id": 11,
+    "name": "Filosofía Moderna",
+    "faculty_id": 5,
+    "teachers_amount": 2
+  },
+  {
+    "course_id": 12,
+    "name": "Historia del Perú",
+    "faculty_id": 5,
+    "teachers_amount": 4
+  },
+  {
+    "course_id": 13,
+    "name": "Inteligencia Artificial",
+    "faculty_id": 1,
+    "teachers_amount": 5
+  },
+  {
+    "course_id": 14,
+    "name": "Estadística Inferencial",
+    "faculty_id": 2,
+    "teachers_amount": 3
+  },
+  {
+    "course_id": 15,
+    "name": "Psicología del Desarrollo",
+    "faculty_id": 3,
+    "teachers_amount": 4
+  },
+  {
+    "course_id": 16,
+    "name": "Contabilidad Financiera",
+    "faculty_id": 4,
+    "teachers_amount": 6
+  },
+  {
+    "course_id": 17,
+    "name": "Literatura Contemporánea",
+    "faculty_id": 5,
+    "teachers_amount": 3
+  },
+  {
+    "course_id": 18,
+    "name": "Lógica Computacional",
+    "faculty_id": 1,
+    "teachers_amount": 4
+  },
+  {
+    "course_id": 19,
+    "name": "Biología Celular",
+    "faculty_id": 2,
+    "teachers_amount": 5
+  },
+  {
+    "course_id": 20,
+    "name": "Comunicación Efectiva",
+    "faculty_id": 5,
+    "teachers_amount": 5
   }
 ]

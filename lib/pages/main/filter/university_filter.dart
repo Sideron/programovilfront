@@ -65,17 +65,19 @@ class _UniversityFilterState extends State<UniversityFilter> {
       //print(jsonEncode(_universityInfo));
     });
     allTeachers2 = _teacherService.getTeachersInCollege(_universityId);
-    allCourses2 = _courseService.loadCoursesFromJsonAsMap();
-    allCourses2!.then((value) {
-      if (value.first is Map<String, dynamic>) {
-        setState(() {
-          allCourses = value.cast<Map<String, dynamic>>();
-          allCourses = allCourses.map((x) {
-            return {...x, 'color': getRandomColor()};
-          }).toList();
-        });
-      }
-    });
+   _courseService.getCoursesByCollegeId(_universityId).then((courses) {
+  setState(() {
+    allCourses = courses.map((course) {
+      return {
+        'course_id': course.courseId,
+        'name': course.name,
+        'teachers_amount': course.teachersAmount,
+        'color': getRandomColor()
+      };
+    }).toList();
+  });
+});
+
 
     allTeachers2!.then((value) {
       if (value.first is Map<String, dynamic>) {

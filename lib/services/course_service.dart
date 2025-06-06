@@ -29,7 +29,7 @@ class CourseService {
 
   Future<List<Faculty>> loadFacultiesFromJson() async {
     final String response =
-        await rootBundle.loadString('assets/json/faculties.json');
+        await rootBundle.loadString('assets/json/faculty.json');
     final List<dynamic> data = json.decode(response);
     return data.map((e) => Faculty.fromJson(e)).toList();
   }
