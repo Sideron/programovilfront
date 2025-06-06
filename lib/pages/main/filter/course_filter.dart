@@ -5,7 +5,14 @@ import 'package:programovilfront/routes/app_routes.dart';
 import 'package:programovilfront/services/teacher_service.dart';
 
 class CourseFilter extends StatefulWidget {
-  const CourseFilter({super.key});
+  final void Function(int num) goPage;
+  final int universityId;
+  final int course_Id;
+  const CourseFilter(
+      {super.key,
+      required this.goPage,
+      required this.universityId,
+      required this.course_Id});
 
   @override
   State<CourseFilter> createState() => _CourseFilterState();
@@ -41,7 +48,10 @@ class _CourseFilterState extends State<CourseFilter> {
           buildHeader(),
           Align(
               alignment: Alignment.centerLeft,
-              child: Text('Elige un profesor')),
+              child: Text(
+                'Elige un profesor',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w300),
+              )),
           Expanded(child: buildTeachers())
         ],
       ),
@@ -51,6 +61,13 @@ class _CourseFilterState extends State<CourseFilter> {
   Widget buildHeader() {
     return Row(
       children: [
+        TextButton.icon(
+          onPressed: () {
+            widget.goPage(widget.universityId);
+          },
+          icon: Icon(Icons.arrow_back, size: 35),
+          label: SizedBox(),
+        ),
         Expanded(
           flex: 2,
           child: CircleAvatar(

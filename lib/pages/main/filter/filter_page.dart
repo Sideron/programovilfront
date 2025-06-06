@@ -12,8 +12,9 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  RxInt currentPage = 2.obs;
+  RxInt currentPage = 0.obs;
   RxInt currentCollege = 1.obs;
+  RxInt currentCourse = 1.obs;
 
   @override
   void initState() {
@@ -29,6 +30,11 @@ class _FilterPageState extends State<FilterPage> {
     currentPage.value = 1;
   }
 
+  void goCourseFilter(int courseId) {
+    currentCourse.value = courseId;
+    currentPage.value = 2;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -37,8 +43,13 @@ class _FilterPageState extends State<FilterPage> {
         UniversityFilter(
           universityId: currentCollege.value,
           goPage: goToPage,
+          goCourse: goCourseFilter,
         ),
-        CourseFilter()
+        CourseFilter(
+          goPage: goCollegeFilter,
+          universityId: currentCollege.value,
+          course_Id: currentCourse.value,
+        )
       ];
       return pages[currentPage.value];
     });

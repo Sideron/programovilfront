@@ -11,8 +11,12 @@ import 'package:programovilfront/services/teacher_service.dart';
 class UniversityFilter extends StatefulWidget {
   final int universityId;
   final void Function(int num) goPage;
+  final void Function(int num) goCourse;
   const UniversityFilter(
-      {Key? key, required this.universityId, required this.goPage})
+      {Key? key,
+      required this.universityId,
+      required this.goPage,
+      required this.goCourse})
       : super(key: key);
 
   @override
@@ -264,7 +268,9 @@ class _UniversityFilterState extends State<UniversityFilter> {
       itemBuilder: (context, index) {
         final c = filteredCourses[index];
         return ListTile(
-          onTap: () {},
+          onTap: () {
+            widget.goCourse(c['course_id']);
+          },
           leading: CircleAvatar(backgroundColor: c['color']),
           title: Text(c['name']),
           subtitle: Text(c['teachers_amount'].toString() + " profesores"),
