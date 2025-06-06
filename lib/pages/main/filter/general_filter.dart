@@ -39,7 +39,7 @@ class _GeneralFilterState extends State<GeneralFilter> {
         setState(() {
           allColleges = value.cast<Map<String, dynamic>>();
         });
-        print(jsonEncode(allColleges));
+        //print(jsonEncode(allColleges));
       }
     });
 
@@ -48,7 +48,7 @@ class _GeneralFilterState extends State<GeneralFilter> {
         setState(() {
           allTeachers = value.cast<Map<String, dynamic>>();
         });
-        print(jsonEncode(allTeachers));
+        //print(jsonEncode(allTeachers));
       }
     });
   }
@@ -196,7 +196,7 @@ class _GeneralFilterState extends State<GeneralFilter> {
         final c = filteredColleges[index];
         return ListTile(
           onTap: () {
-            goPage(1);
+            goPage(c['college_id']);
           },
           leading: CircleAvatar(
             backgroundImage:

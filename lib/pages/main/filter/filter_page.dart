@@ -12,28 +12,33 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   RxInt currentPage = 0.obs;
-  late List pages;
+  RxInt currentCollege = 1.obs;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void goToPage(int pageIndex) {
     currentPage.value = pageIndex;
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    pages = [
-      GeneralFilter(
-        goPage: goToPage,
-      ),
-      UniversityFilter(
-        universityId: 2,
-      )
-    ];
+  void goCollegeFilter(int collegeId) {
+    currentCollege.value = collegeId;
+    currentPage.value = 1;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => pages[currentPage.value]);
+    return Obx(() {
+      final pages = [
+        GeneralFilter(goPage: goCollegeFilter),
+        UniversityFilter(
+          universityId: currentCollege.value,
+          goPage: goToPage,
+        )
+      ];
+      return pages[currentPage.value];
+    });
   }
 }

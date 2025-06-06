@@ -47,5 +47,96 @@
     "image_url": "assets/images/profileDefault.png",
     "college_id": 3,
     "ratings": 12
+  },
+  {
+    "teacher_id": 8,
+    "name": "Fiorella Capcha",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 4,
+    "ratings": 12
+  },
+  {
+    "teacher_id": 9,
+    "name": "Ricardo López",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 6,
+    "ratings": 10
+  },
+  {
+    "teacher_id": 10,
+    "name": "Valeria Ríos",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 4,
+    "ratings": 14
+  },
+  {
+    "teacher_id": 11,
+    "name": "Pedro Jiménez",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 5,
+    "ratings": 9
+  },
+  {
+    "teacher_id": 12,
+    "name": "Camila Ortega",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 7,
+    "ratings": 17
+  },
+  {
+    "teacher_id": 13,
+    "name": "Lucía Navarro",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 6,
+    "ratings": 18
+  },
+  {
+    "teacher_id": 14,
+    "name": "Andrés Palacios",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 8,
+    "ratings": 7
+  },
+  {
+    "teacher_id": 15,
+    "name": "Diana Ramírez",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 7,
+    "ratings": 21
+  },
+  {
+    "teacher_id": 16,
+    "name": "Hugo Morales",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 9,
+    "ratings": 10
+  },
+  {
+    "teacher_id": 17,
+    "name": "Isabel Vega",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 10,
+    "ratings": 13
+  },
+  {
+    "teacher_id": 18,
+    "name": "Samuel Aguirre",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 7,
+    "ratings": 16
+  },
+  {
+    "teacher_id": 19,
+    "name": "Patricia Salas",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 9,
+    "ratings": 11
+  },
+  {
+    "teacher_id": 20,
+    "name": "Diego León",
+    "image_url": "assets/images/profileDefault.png",
+    "college_id": 8,
+    "ratings": 14
   }
 ]

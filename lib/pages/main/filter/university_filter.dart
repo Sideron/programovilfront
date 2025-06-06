@@ -10,7 +10,9 @@ import 'package:programovilfront/services/teacher_service.dart';
 
 class UniversityFilter extends StatefulWidget {
   final int universityId;
-  const UniversityFilter({Key? key, required this.universityId})
+  final void Function(int num) goPage;
+  const UniversityFilter(
+      {Key? key, required this.universityId, required this.goPage})
       : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class UniversityFilter extends StatefulWidget {
 
 class _UniversityFilterState extends State<UniversityFilter> {
   late final int _universityId;
-  late final College? _universityInfo;
+  College? _universityInfo;
   bool isLoading = true;
   final CollegeService _collegeService = CollegeService();
   final TeacherService _teacherService = TeacherService();
@@ -56,7 +58,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
         _universityInfo = value;
         isLoading = false;
       });
-      print(jsonEncode(_universityInfo));
+      //print(jsonEncode(_universityInfo));
     });
     allTeachers2 = _teacherService.getTeachersInCollege(_universityId);
     allCourses2 = _courseService.loadCoursesFromJsonAsMap();
@@ -100,9 +102,20 @@ class _UniversityFilterState extends State<UniversityFilter> {
 
   Widget buildHeader() {
     if (isLoading) {
-      return const Padding(
-        padding: EdgeInsets.all(16),
-        child: CircularProgressIndicator(),
+      return Row(
+        children: [
+          TextButton.icon(
+            onPressed: () {
+              widget.goPage(0);
+            },
+            icon: Icon(Icons.arrow_back, size: 35),
+            label: SizedBox(),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: CircularProgressIndicator(),
+          ),
+        ],
       );
     }
     return Padding(
@@ -113,7 +126,9 @@ class _UniversityFilterState extends State<UniversityFilter> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  widget.goPage(0);
+                },
                 icon: Icon(Icons.arrow_back, size: 35),
                 label: SizedBox(),
               ),
@@ -203,9 +218,14 @@ class _UniversityFilterState extends State<UniversityFilter> {
   }
 
   Widget buildTeachers() {
+    if (allTeachers == null || allTeachers.isEmpty) {
+      return const Center(child: Text('No hay profesores disponibles.'));
+    }
     final filteredTeachers = allTeachers
         .where((t) => t['name'].toLowerCase().contains(searchText))
         .toList();
+
+    print(filteredTeachers);
 
     return ListView.builder(
       itemCount: filteredTeachers.length,
