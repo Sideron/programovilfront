@@ -1,32 +1,38 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:programovilfront/models/courses.dart';
 import 'package:programovilfront/routes/app_routes.dart';
+import 'package:programovilfront/services/course_service.dart';
 import 'package:programovilfront/services/teacher_service.dart';
 
 class CourseFilter extends StatefulWidget {
   final void Function(int num) goPage;
   final int universityId;
-  final int course_Id;
+  final int courseId;
   const CourseFilter(
       {super.key,
       required this.goPage,
       required this.universityId,
-      required this.course_Id});
+      required this.courseId});
 
   @override
   State<CourseFilter> createState() => _CourseFilterState();
 }
 
 class _CourseFilterState extends State<CourseFilter> {
+  final CourseService _courseService = CourseService();
   final TeacherService _teacherService = TeacherService();
   List<Map<String, dynamic>> allTeachers = [];
   Future<List<dynamic>>? allTeachers2;
+  Course? courseInfo;
+  bool isLoading = true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     allTeachers2 = _teacherService.getAllTeachers();
     allTeachers2!.then((value) {
       if (value.first is Map<String, dynamic>) {
@@ -35,6 +41,13 @@ class _CourseFilterState extends State<CourseFilter> {
         });
         print(jsonEncode(allTeachers));
       }
+    });
+    Future<Course> courseTemp = _courseService.getCourseId(widget.courseId);
+    courseTemp.then((value) {
+      setState(() {
+        courseInfo = value;
+        isLoading = false;
+      });
     });
   }
 
@@ -59,6 +72,23 @@ class _CourseFilterState extends State<CourseFilter> {
   }
 
   Widget buildHeader() {
+    if (isLoading) {
+      return Row(
+        children: [
+          TextButton.icon(
+            onPressed: () {
+              widget.goPage(0);
+            },
+            icon: Icon(Icons.arrow_back, size: 35),
+            label: SizedBox(),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: CircularProgressIndicator(),
+          ),
+        ],
+      );
+    }
     return Row(
       children: [
         TextButton.icon(
@@ -79,8 +109,8 @@ class _CourseFilterState extends State<CourseFilter> {
           flex: 6,
           child: Align(
             alignment: Alignment.centerLeft,
-            child: const Text(
-              "Prog",
+            child: Text(
+              courseInfo!.name,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 21,

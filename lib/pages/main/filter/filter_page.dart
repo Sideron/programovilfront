@@ -48,7 +48,7 @@ class _FilterPageState extends State<FilterPage> {
         CourseFilter(
           goPage: goCollegeFilter,
           universityId: currentCollege.value,
-          course_Id: currentCourse.value,
+          courseId: currentCourse.value,
         )
       ];
       return pages[currentPage.value];
