@@ -125,20 +125,27 @@ class _UniversityFilterState extends State<UniversityFilter> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextButton.icon(
-                onPressed: () {
-                  widget.goPage(0);
-                },
-                icon: Icon(Icons.arrow_back, size: 35),
-                label: SizedBox(),
-              ),
               Row(
                 children: [
-                  Image.asset('assets/images/logo.png', height: 40),
+                  TextButton.icon(
+                    onPressed: () {
+                      widget.goPage(0);
+                    },
+                    icon: Icon(Icons.arrow_back, size: 35),
+                    label: SizedBox(),
+                  ),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(_universityInfo!.imageUrl),
+                    radius: 24,
+                  ),
                   const SizedBox(width: 8),
-                  Text(
-                    _universityInfo!.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  Expanded(
+                    child: Text(
+                      _universityInfo!.name,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
                   ),
                 ],
               ),
