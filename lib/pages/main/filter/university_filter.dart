@@ -65,19 +65,18 @@ class _UniversityFilterState extends State<UniversityFilter> {
       //print(jsonEncode(_universityInfo));
     });
     allTeachers2 = _teacherService.getTeachersInCollege(_universityId);
-   _courseService.getCoursesByCollegeId(_universityId).then((courses) {
-  setState(() {
-    allCourses = courses.map((course) {
-      return {
-        'course_id': course.courseId,
-        'name': course.name,
-        'teachers_amount': course.teachersAmount,
-        'color': getRandomColor()
-      };
-    }).toList();
-  });
-});
-
+    _courseService.getCoursesByCollegeId(_universityId).then((courses) {
+      setState(() {
+        allCourses = courses.map((course) {
+          return {
+            'course_id': course.courseId,
+            'name': course.name,
+            'teachers_amount': course.teachersAmount,
+            'color': getRandomColor()
+          };
+        }).toList();
+      });
+    });
 
     allTeachers2!.then((value) {
       if (value.first is Map<String, dynamic>) {
@@ -270,8 +269,28 @@ class _UniversityFilterState extends State<UniversityFilter> {
       itemBuilder: (context, index) {
         final c = filteredCourses[index];
         return ListTile(
-          onTap: () {
-            widget.goCourse(c['course_id']);
+          onTap: () async {
+            final courseId = c['course_id'];
+            // Aquí llamamos al servicio para obtener profesores de ese curso
+            final filteredTeachers =
+                await _teacherService.getTeachersByCourseId(courseId);
+
+            setState(() {
+              allTeachers =
+                  filteredTeachers.map<Map<String, dynamic>>((teacher) {
+                // Ajusta según la estructura del profesor que devuelve el servicio
+                return {
+                  'teacher_id': teacher.teacherId,
+                  'name': teacher.name,
+                  'image_url': teacher.imageUrl,
+                  'ratings': teacher.ratings,
+                };
+              }).toList();
+
+              selectedFilter = 0; // Cambiamos a ver profesores
+              searchController.clear();
+              searchText = '';
+            });
           },
           leading: CircleAvatar(backgroundColor: c['color']),
           title: Text(c['name']),

@@ -37,7 +37,7 @@ class TeacherService {
 
   //  profesores por ID de curso
   Future<List<Teacher>> getTeachersByCourseId(int courseId) async {
-    final teacherCoursesJson = await _loadJsonList('assets/json/teacher_courses.json');
+    final teacherCoursesJson = await _loadJsonList('assets/json/teachers_courses.json');
     final teacherCourses = teacherCoursesJson
         .map((json) => TeacherCourse.fromJson(json))
         .toList();

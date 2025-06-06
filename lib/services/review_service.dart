@@ -114,6 +114,7 @@ class ReviewService {
             teacherId: 0,
             name: 'Profesor desconocido',
             imageUrl: '',
+            ratings: 0,
           );
       user = User(
         userId: teacher.teacherId,
