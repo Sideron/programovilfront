@@ -40,9 +40,7 @@ class ProfileTeacherController extends GetxController {
         .toList();
 
     colleges.assignAll(filtered);
-    if (colleges.isNotEmpty) {
-      selectCollege.value = colleges.first;
-    }
+   
   }
 
   void _loadReviews() async {
