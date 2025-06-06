@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import '../models/teachers.dart';
 import '../models/teachers_colleges.dart';
+import '../models/teachers_courses.dart';
 
 class TeacherService {
   Future<Teacher> getTeacherById(int id) async {
@@ -33,4 +34,27 @@ class TeacherService {
     final jsonStr = await rootBundle.loadString(path);
     return json.decode(jsonStr);
   }
+
+  //  profesores por ID de curso
+  Future<List<Teacher>> getTeachersByCourseId(int courseId) async {
+    final teacherCoursesJson = await _loadJsonList('assets/json/teacher_courses.json');
+    final teacherCourses = teacherCoursesJson
+        .map((json) => TeacherCourse.fromJson(json))
+        .toList();
+
+    final teacherIds = teacherCourses
+        .where((tc) => tc.courseId == courseId)
+        .map((tc) => tc.teacherId)
+        .toSet();
+
+    final allTeachersJson = await _loadJsonList('assets/json/teachers.json');
+    final allTeachers = allTeachersJson
+        .map((json) => Teacher.fromJson(json))
+        .toList();
+
+    return allTeachers
+        .where((teacher) => teacherIds.contains(teacher.teacherId))
+        .toList();
+  }
+
 }
