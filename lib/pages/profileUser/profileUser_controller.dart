@@ -26,29 +26,15 @@ class ProfileUserController extends GetxController {
   }
 
   Future<void> loadUserProfile() async {
-    final usersJson = await rootBundle.loadString('assets/json/users.json');
-    final usersData = json.decode(usersJson) as List<dynamic>;
-    final userMap = {
-      for (var u in usersData) u['user_id']: User.fromJson(u),
-    };
+    final result = await reviewService.getReviewsByUser();
 
-    final user = userMap[loggedUserId];
+    final user = result.user;
+    name.value = user.username;
+    email.value = user.email;
+    image.value = user.imageUrl;
+   
+    college.value = result.collegeName ?? 'Sin universidad';
 
-    if (user != null) {
-      name.value = user.username;
-      email.value = user.email;
-      image.value = user.imageUrl;
-
-      final colleges = await collegeService.getAllColleges();
-      final collegeName = colleges
-              .firstWhere((c) => c.collegeId == user.collegeId,
-                  orElse: () => College(collegeId: 0, name: '', imageUrl: ''))
-              .name ??
-          '';
-      college.value = collegeName;
-
-      final revs = await reviewService.getReviewsByUser(loggedUserId);
-      reviews.assignAll(revs);
-    }
+    reviews.assignAll(result.reviews);
   }
 }
