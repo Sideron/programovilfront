@@ -14,6 +14,7 @@ class RateTeacherController extends GetxController {
   final RateService _rateService = RateService();
   final LabelService _labelService = LabelService();
   final CourseService _courseService = CourseService();
+  
   RxList<Group> questions = <Group>[].obs;
   RxList<Label> allLabels = <Label>[].obs;
   RxList<Label> currentOptions = <Label>[].obs;

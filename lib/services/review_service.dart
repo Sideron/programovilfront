@@ -6,6 +6,8 @@ import '../models/labels.dart';
 import '../models/review.dart';
 import '../models/teachers.dart';
 import '../models/user.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ReviewResult {
   final List<ReviewDisplay> reviews;
@@ -15,20 +17,60 @@ class ReviewResult {
 
 class ReviewService {
   Future<ReviewResult> getReviewsForTeacher(int teacherId) async {
-    final data = await _loadAllData();
+    final token = dotenv.env['JWT_TOKEN']!;
+    final baseUrl = dotenv.env['API_URL']!;
+    final url = Uri.parse('$baseUrl/api/reviews/$teacherId');
 
-    final teacherReviews =
-        data.reviews.where((r) => r['teacher_id'] == teacherId);
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': '$token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Error al obtener reviews: ${response.statusCode}');
+    }
+
+    final List<dynamic> reviewJsonList = json.decode(response.body);
     final List<ReviewDisplay> reviewList = [];
     final Set<String> labelNames = {};
 
-    for (var reviewJson in teacherReviews) {
-      final display = _buildReviewDisplay(
-        reviewJson,
-        data,
-        useTeacherAsUser: false,
-        collectLabelNames: labelNames,
+    for (var reviewJson in reviewJsonList) {
+      final review = Review(
+          reviewId: 0,
+          userId: 0,
+          teacherId: teacherId,
+          courseId: 0,
+          comment: reviewJson['comment'],
+          date: reviewJson['date']);
+
+      final user = User(
+        username: reviewJson['username'] ?? 'Anónimo',
+        userId: 0,
+        email: '',
+        password: '',
+        collegeId: 0,
+        imageUrl: reviewJson['imageUrl'] ?? '',
       );
+
+      // Si se incluyen etiquetas en el JSON:
+      final List<Label> labels = (reviewJson['labels'] as List?)
+              ?.map((l) => Label.fromJson(l))
+              .toList() ??
+          [];
+
+      labelNames.addAll(labels.map((l) => l.name));
+
+      final display = ReviewDisplay.fromModels(
+        review: review,
+        user: user,
+        emoji: reviewJson['emoji'] ?? '',
+        labels: labels,
+        courseName: reviewJson['courseName'] ?? '',
+      );
+
       reviewList.add(display);
     }
 
