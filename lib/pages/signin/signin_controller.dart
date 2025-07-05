@@ -29,7 +29,8 @@ class SigninController extends GetxController {
       _setErrorMessage('Las contraseñas no coinciden');
       return;
     }
-    Navigator.pushNamed(context, AppRoutes.main);
+
+    Navigator.pushNamed(context, AppRoutes.login);
   }
 
   void goLogin(BuildContext context) {
