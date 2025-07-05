@@ -27,14 +27,11 @@ class ProfileUserController extends GetxController {
 
   Future<void> loadUserProfile() async {
     final result = await reviewService.getReviewsByUser();
-
     final user = result.user;
     name.value = user.username;
     email.value = user.email;
     image.value = user.imageUrl;
-   
     college.value = result.collegeName ?? 'Sin universidad';
-
     reviews.assignAll(result.reviews);
   }
 }

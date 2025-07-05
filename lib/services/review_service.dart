@@ -63,7 +63,7 @@ class ReviewService {
         imageUrl: reviewJson['imageUrl'] ?? '',
       );
 
-      // Si se incluyen etiquetas en el JSON:
+     
       final List<Label> labels = (reviewJson['labels'] as List?)
               ?.map((l) => Label.fromJson(l))
               .toList() ??

@@ -14,7 +14,8 @@ class RateTeacherController extends GetxController {
   final RateService _rateService = RateService();
   final LabelService _labelService = LabelService();
   final CourseService _courseService = CourseService();
-  
+  final RxMap<Group, List<Label>> _groupLabelMap = <Group, List<Label>>{}.obs;
+
   RxList<Group> questions = <Group>[].obs;
   RxList<Label> allLabels = <Label>[].obs;
   RxList<Label> currentOptions = <Label>[].obs;
@@ -32,8 +33,11 @@ class RateTeacherController extends GetxController {
   }
 
   Future<void> loadData() async {
-    questions.value = await _rateService.loadGroupsFromJson();
-    allLabels.value = await _labelService.loadLabelsFromJson();
+    final groupLabelMap = await _rateService.loadGroupsWithLabels();
+
+    questions.value = groupLabelMap.keys.toList();
+
+    _groupLabelMap.value = groupLabelMap;
 
     final courses = await _courseService.loadCoursesFromJson();
     courseOptions.value = courses.map((c) => c.name).toList();
@@ -50,9 +54,8 @@ class RateTeacherController extends GetxController {
       return;
     }
 
-    final groupId = currentQuestion.groupId;
-    currentOptions.value =
-        allLabels.where((label) => label.groupId == groupId).toList();
+    final group = currentQuestion;
+    currentOptions.value = _groupLabelMap[group] ?? [];
 
     selectedIndex.value = -1;
     commentController.clear();
