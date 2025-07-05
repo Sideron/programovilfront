@@ -39,4 +39,23 @@ class UserService {
       return false;
     }
   }
+
+  Future<String> validateSignIn(
+      String email, String name, String password, String secondPassword) async {
+    if (name.length < 5) {
+      return 'El nombre debe tener más de 5 letras';
+    }
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email)) {
+      return 'Email invalido';
+    }
+    if (password.length < 8) {
+      return 'Contraseña debe tener como mínimo 8 caracteres.';
+    }
+    if (password != secondPassword) {
+      return 'Las contraseñas no coinciden';
+    }
+    return "";
+  }
 }

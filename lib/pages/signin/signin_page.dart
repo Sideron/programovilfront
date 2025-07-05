@@ -47,6 +47,11 @@ class _SigninPageState extends State<SigninPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         InputBox(
+                            txtControl: control.textName,
+                            hintText: 'Usuario',
+                            icon: Icons.person),
+                        SizedBox(height: 15),
+                        InputBox(
                             txtControl: control.textMail,
                             hintText: 'email@domain.com',
                             icon: Icons.mail_outline),
@@ -103,4 +108,3 @@ class _SigninPageState extends State<SigninPage> {
     );
   }
 }
-
