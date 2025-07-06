@@ -13,6 +13,7 @@ class ProfileTeacherController extends GetxController {
   var colleges = <College>[].obs;
   var selectCollege = Rx<College?>(null);
   late final int teacherSelect;
+
   final _teacherService = TeacherService();
   final _collegeService = CollegeService();
   final _reviewService = ReviewService();
@@ -26,7 +27,7 @@ class ProfileTeacherController extends GetxController {
     _loadReviews();
   }
 
-  void _loadTeacherProfile() async {
+  Future<void> _loadTeacherProfile() async {
     final teacher = await _teacherService.getTeacherById(teacherSelect);
     name.value = teacher.name;
     image.value = teacher.imageUrl;
@@ -40,12 +41,16 @@ class ProfileTeacherController extends GetxController {
         .toList();
 
     colleges.assignAll(filtered);
-   
   }
 
-  void _loadReviews() async {
+  Future<void> _loadReviews() async {
     final result = await _reviewService.getReviewsForTeacher(teacherSelect);
     reviews.assignAll(result.reviews);
     labels.assignAll(result.usedLabelNames);
+  }
+
+  Future<void> reloadProfile() async {
+    await _loadTeacherProfile();
+    await _loadReviews();
   }
 }

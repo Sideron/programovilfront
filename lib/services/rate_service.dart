@@ -24,17 +24,14 @@ class RateService {
 
     final Map<String, dynamic> jsonData = json.decode(response.body);
 
-  
     final List<Group> groups = (jsonData['groups'] as List)
         .map((item) => Group.fromJson(item))
         .toList();
 
-   
     final List<Label> labels = (jsonData['labels'] as List)
         .map((item) => Label.fromJson(item))
         .toList();
 
-   
     final Map<Group, List<Label>> grouped = {};
 
     for (final group in groups) {
@@ -42,5 +39,37 @@ class RateService {
     }
 
     return grouped;
+  }
+
+  Future<void> submitReview({
+    required int teacherId,
+    required int courseId,
+    required String comment,
+    required List<int> labelIds,
+  }) async {
+    final String token = dotenv.env['JWT_TOKEN']!;
+    final String baseUrl = dotenv.env['API_URL']!;
+
+    final Uri url = Uri.parse('$baseUrl/api/reviews');
+
+    final body = {
+      "teacher_id": teacherId,
+      "course_id": courseId,
+      "comment": comment,
+      "label_ids": labelIds,
+    };
+
+    final response = await http.post(
+      url,
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(body),
+    );
+
+    if (response.statusCode != 201) {
+      throw Exception('Error al enviar la evaluación: ${response.body}');
+    }
   }
 }

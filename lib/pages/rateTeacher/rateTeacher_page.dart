@@ -63,9 +63,9 @@ class RateTeacherPage extends StatelessWidget {
                         ),
                       ),
                     const SizedBox(height: 32),
-                    if (isCurso)
+                    if (isCurso && control.courseOptions.isNotEmpty)
                       DropdownButtonFormField<String>(
-                        value: control.selectedCourse.value,
+                        value: control.selectedCourse.value ?? '',
                         items: control.courseOptions
                             .map((course) => DropdownMenuItem(
                                   value: course,
@@ -239,10 +239,33 @@ class RateTeacherPage extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (control.currentQuestionIndex.value ==
                                 control.questions.length - 1) {
-                              Navigator.pop(context);
+                              try {
+                                await control.enviarEvaluacion();
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text('Evaluación enviada con éxito'),
+                                      backgroundColor: Colors.green,
+                                    ),
+                                  );
+                                  Navigator.pop(context, true);
+                                }
+                              } catch (e) {
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(e
+                                          .toString()
+                                          .replaceAll('Exception: ', '')),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              }
                             } else {
                               control.goToNextQuestion();
                             }
@@ -262,9 +285,10 @@ class RateTeacherPage extends StatelessWidget {
                                 ? 'Finalizar'
                                 : 'Siguiente',
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryFixedVariant),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryFixedVariant,
+                            ),
                           ),
                         ),
                       ],
@@ -280,7 +304,7 @@ class RateTeacherPage extends StatelessWidget {
                   icon: const Icon(Icons.close, size: 28),
                   color: Theme.of(context).colorScheme.onPrimaryFixed,
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, false);
                   },
                 ),
               ),

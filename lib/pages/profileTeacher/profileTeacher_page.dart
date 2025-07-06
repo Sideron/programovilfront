@@ -117,8 +117,12 @@ class ProfileTeacherPage extends StatelessWidget {
       ),
       bottomNavigationBar: SafeArea(
         child: RateTeacherButton(
-          onPressed: () {
-            AppRoutes.goToRateTeacherPage(context, idTeacher);
+          onPressed: () async {
+            final result =
+                await AppRoutes.goToRateTeacherPage(context, idTeacher);
+            if (result == true) {
+              await control.reloadProfile();
+            }
           },
         ),
       ),

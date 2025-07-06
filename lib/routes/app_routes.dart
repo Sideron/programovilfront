@@ -38,8 +38,9 @@ class AppRoutes {
     );
   }
 
-  static void goToRateTeacherPage(BuildContext context, int idTeacher) {
-    Navigator.push(
+  static Future<bool?> goToRateTeacherPage(
+      BuildContext context, int idTeacher) {
+    return Navigator.push<bool>(
       context,
       MaterialPageRoute(
         builder: (_) => RateTeacherPage(idTeacher: idTeacher),
