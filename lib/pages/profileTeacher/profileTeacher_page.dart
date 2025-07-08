@@ -79,16 +79,38 @@ class ProfileTeacherPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              Obx(() => Wrap(
-                    spacing: 8,
-                    children: control.labels.map((label) {
-                      return Chip(
-                        label: Text(label),
-                        backgroundColor: Colors.blue[50],
-                        shape: StadiumBorder(),
-                      );
-                    }).toList(),
-                  )),
+              Obx(() => Align(
+  alignment: Alignment.centerRight,
+  child: TextButton.icon(
+    onPressed: () {
+      control.showAllLabels.toggle(); // cambia entre true y false
+    },
+    icon: Icon(
+      control.showAllLabels.value ? Icons.expand_less : Icons.expand_more,
+    ),
+    label: Text(
+      control.showAllLabels.value ? "Ocultar" : "Mostrar todas",
+    ),
+  ),
+)),
+
+              Obx(() {
+  final displayedLabels = control.showAllLabels.value
+      ? control.labels
+      : control.labels.take(6).toList();
+
+  return Wrap(
+    spacing: 8,
+    children: displayedLabels.map((label) {
+      return Chip(
+        label: Text('${label.name} (${label.usageCount ?? 0})'),
+        backgroundColor: Colors.blue[50],
+        shape: StadiumBorder(),
+      );
+    }).toList(),
+  );
+}),
+
               SizedBox(height: 8),
               Divider(
                 color: Theme.of(context).colorScheme.primary,

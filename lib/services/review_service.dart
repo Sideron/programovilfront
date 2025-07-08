@@ -150,4 +150,26 @@ class ReviewService {
       collegeName: collegeName,
     );
   }
+
+
+Future<List<Label>> getLabelsByTeacher(int teacherId) async {
+  final url = Uri.parse('$_baseUrl/api/reviews/labels/$teacherId');
+
+  final response = await http.get(
+    url,
+    headers: {
+      'Authorization': 'Bearer $_token',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    throw Exception('Error al obtener labels del profesor: ${response.body}');
+  }
+
+  final List<dynamic> jsonData = json.decode(response.body);
+
+  return jsonData.map((json) => Label.fromJson(json)).toList();
+}
+
 }

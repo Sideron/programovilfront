@@ -3,12 +3,14 @@ class Label {
   final String name;
   final String imageUrl;
   final int groupId;
+  final int? usageCount;
 
   Label({
     required this.labelId,
     required this.name,
     required this.imageUrl,
     required this.groupId,
+    this.usageCount,
   });
 
   factory Label.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class Label {
       name: json['name'],
       imageUrl: json['image_url'] ?? '',
       groupId: json['group_id'],
+      usageCount: json['usage_count'],
     );
   }
 

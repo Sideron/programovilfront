@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:programovilfront/models/labels.dart';
 import '../../models/colleges.dart';
 import '../../models/review_display.dart';
 import '../../services/college_service.dart';
@@ -8,10 +9,12 @@ import '../../services/teacher_service.dart';
 class ProfileTeacherController extends GetxController {
   var name = ''.obs;
   var image = ''.obs;
-  var labels = <String>[].obs;
+  var labels = <Label>[].obs;
   var reviews = <ReviewDisplay>[].obs;
   var colleges = <College>[].obs;
   var selectCollege = Rx<College?>(null);
+  var showAllLabels = true.obs;
+
   late final int teacherSelect;
 
   final _teacherService = TeacherService();
@@ -46,7 +49,9 @@ class ProfileTeacherController extends GetxController {
   Future<void> _loadReviews() async {
     final result = await _reviewService.getReviewsForTeacher(teacherSelect);
     reviews.assignAll(result.reviews);
-    labels.assignAll(result.usedLabelNames);
+
+    final labelList = await _reviewService.getLabelsByTeacher(teacherSelect);
+    labels.assignAll(labelList);
   }
 
   Future<void> reloadProfile() async {
