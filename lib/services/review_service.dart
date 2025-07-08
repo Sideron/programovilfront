@@ -1,13 +1,11 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
-import '../models/courses.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import '../models/review_display.dart';
 import '../models/labels.dart';
 import '../models/review.dart';
-import '../models/teachers.dart';
 import '../models/user.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ReviewResult {
   final List<ReviewDisplay> reviews;
@@ -19,20 +17,24 @@ class UserProfileResult {
   final User user;
   final List<ReviewDisplay> reviews;
   final String? collegeName;
-  UserProfileResult(
-      {required this.user, required this.reviews, required this.collegeName});
+  UserProfileResult({
+    required this.user,
+    required this.reviews,
+    required this.collegeName,
+  });
 }
 
 class ReviewService {
+  final String _token = dotenv.env['JWT_TOKEN']!;
+  final String _baseUrl = dotenv.env['API_URL']!;
+
   Future<ReviewResult> getReviewsForTeacher(int teacherId) async {
-    final token = dotenv.env['JWT_TOKEN']!;
-    final baseUrl = dotenv.env['API_URL']!;
-    final url = Uri.parse('$baseUrl/api/reviews/$teacherId');
+    final url = Uri.parse('$_baseUrl/api/reviews/$teacherId');
 
     final response = await http.get(
       url,
       headers: {
-        'Authorization': '$token',
+        'Authorization': 'Bearer $_token',
         'Content-Type': 'application/json',
       },
     );
@@ -47,12 +49,13 @@ class ReviewService {
 
     for (var reviewJson in reviewJsonList) {
       final review = Review(
-          reviewId: 0,
-          userId: 0,
-          teacherId: teacherId,
-          courseId: 0,
-          comment: reviewJson['comment'],
-          date: reviewJson['date']);
+        reviewId: 0,
+        userId: 0,
+        teacherId: teacherId,
+        courseId: 0,
+        comment: reviewJson['comment'],
+        date: reviewJson['date'],
+      );
 
       final user = User(
         username: reviewJson['username'] ?? 'Anónimo',
@@ -63,8 +66,7 @@ class ReviewService {
         imageUrl: reviewJson['imageUrl'] ?? '',
       );
 
-     
-      final List<Label> labels = (reviewJson['labels'] as List?)
+      final labels = (reviewJson['labels'] as List?)
               ?.map((l) => Label.fromJson(l))
               .toList() ??
           [];
@@ -89,21 +91,18 @@ class ReviewService {
   }
 
   Future<UserProfileResult> getReviewsByUser() async {
-    final token = dotenv.env['JWT_TOKEN']!;
-    final baseUrl = dotenv.env['API_URL']!;
-    final url = Uri.parse('$baseUrl/api/users/perfil');
+    final url = Uri.parse('$_baseUrl/api/users/perfil');
 
     final response = await http.get(
       url,
       headers: {
-        'Authorization': token,
+        'Authorization': 'Bearer $_token',
         'Content-Type': 'application/json',
       },
     );
 
     if (response.statusCode != 200) {
-      throw Exception(
-          'Error al obtener el perfil del usuario: ${response.statusCode}');
+      throw Exception('Error al obtener el perfil del usuario: ${response.statusCode}');
     }
 
     final jsonData = json.decode(response.body);
@@ -121,9 +120,7 @@ class ReviewService {
 
     final collegeName = userData['collegeName'];
 
-    final List<ReviewDisplay> reviewList = [];
-
-    for (var reviewJson in reviewsJson) {
+    final reviewList = (reviewsJson as List).map((reviewJson) {
       final review = Review(
         reviewId: 0,
         userId: user.userId,
@@ -133,23 +130,24 @@ class ReviewService {
         date: reviewJson['date'],
       );
 
-      final List<Label> labels = (reviewJson['labels'] as List?)
+      final labels = (reviewJson['labels'] as List?)
               ?.map((l) => Label.fromJson(l))
               .toList() ??
           [];
 
-      final display = ReviewDisplay.fromModels(
+      return ReviewDisplay.fromModels(
         review: review,
         user: user,
         emoji: reviewJson['emoji'] ?? '',
         labels: labels,
         courseName: reviewJson['courseName'] ?? '',
       );
-
-      reviewList.add(display);
-    }
+    }).toList();
 
     return UserProfileResult(
-        user: user, reviews: reviewList, collegeName: collegeName);
+      user: user,
+      reviews: reviewList,
+      collegeName: collegeName,
+    );
   }
 }

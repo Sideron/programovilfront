@@ -1,42 +1,53 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
-import 'package:programovilfront/models/courses.dart';
-import 'package:programovilfront/models/faculty.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'package:programovilfront/models/courses.dart';
+import 'package:programovilfront/models/faculty.dart';
 
 class CourseService {
-  Future<Course> getCourseId(int id) async {
-    final jsonStr = await rootBundle.loadString('assets/json/courses.json');
-    List<dynamic> data = json.decode(jsonStr);
-    Course myCourse = data
-        .map((json) => Course.fromJson(json))
-        .where((x) => x.courseId == id)
-        .toList()
-        .first;
-    return myCourse;
+  final String _token;
+  final String _baseUrl;
+
+  CourseService()
+      : _token = dotenv.env['JWT_TOKEN'] ?? '',
+        _baseUrl = dotenv.env['API_URL'] ?? '' {
+    if (_token.isEmpty || _baseUrl.isEmpty) {
+      throw Exception('JWT_TOKEN o API_URL no está configurado en el archivo .env');
+    }
   }
 
+  /// Cargar un curso por ID desde archivo local.
+  Future<Course> getCourseId(int id) async {
+    final jsonStr = await rootBundle.loadString('assets/json/courses.json');
+    final data = json.decode(jsonStr) as List<dynamic>;
+    return data
+        .map((json) => Course.fromJson(json))
+        .firstWhere((course) => course.courseId == id);
+  }
+
+  /// Cargar todos los cursos como `Map`.
   Future<List<dynamic>> loadCoursesFromJsonAsMap() async {
     final jsonStr = await rootBundle.loadString('assets/json/courses.json');
     return json.decode(jsonStr);
   }
 
+  /// Cargar todos los cursos como `Course`.
   Future<List<Course>> loadCoursesFromJson() async {
-    final String response =
-        await rootBundle.loadString('assets/json/courses.json');
-    final List<dynamic> data = json.decode(response);
+    final jsonStr = await rootBundle.loadString('assets/json/courses.json');
+    final data = json.decode(jsonStr) as List<dynamic>;
     return data.map((e) => Course.fromJson(e)).toList();
   }
 
+  /// Cargar todas las facultades desde archivo local.
   Future<List<Faculty>> loadFacultiesFromJson() async {
-    final String response =
-        await rootBundle.loadString('assets/json/faculty.json');
-    final List<dynamic> data = json.decode(response);
+    final jsonStr = await rootBundle.loadString('assets/json/faculty.json');
+    final data = json.decode(jsonStr) as List<dynamic>;
     return data.map((e) => Faculty.fromJson(e)).toList();
   }
 
+  /// Obtener cursos de una universidad a partir de su ID.
   Future<List<Course>> getCoursesByCollegeId(int collegeId) async {
     final faculties = await loadFacultiesFromJson();
     final facultyIds = faculties
@@ -48,37 +59,35 @@ class CourseService {
     return courses.where((c) => facultyIds.contains(c.facultyId)).toList();
   }
 
-
+  /// Obtener cursos por ID de profesor usando API.
   Future<List<Course>> getCoursesByTeacher(int teacherId) async {
-    final String token = dotenv.env['JWT_TOKEN']!;
-    final String baseUrl = dotenv.env['API_URL']!;
+    final url = Uri.parse('$_baseUrl/api/courses/profesor/$teacherId');
 
-    final url = Uri.parse('$baseUrl/api/courses/profesor/$teacherId');
-    
     final response = await http.get(
       url,
       headers: {
-        'Authorization': token,
+        'Authorization': 'Bearer $_token',
         'Content-Type': 'application/json',
       },
     );
 
     if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body);
-      return data.map((item) => Course.fromJson(item)).toList();
+      final data = json.decode(response.body) as List<dynamic>;
+      return data.map((e) => Course.fromJson(e)).toList();
     } else {
       throw Exception('Error al obtener cursos del profesor');
     }
   }
 
+  /// Obtener el ID de un curso por su nombre (insensible a mayúsculas).
   Future<int> getCourseIdByName(String courseName) async {
-  final courses = await loadCoursesFromJson(); 
+    final courses = await loadCoursesFromJson();
 
-  final course = courses.firstWhere(
-    (c) => c.name.toLowerCase() == courseName.toLowerCase(),
-    orElse: () => throw Exception('No se encontró el curso con nombre "$courseName"'),
-  );
+    final course = courses.firstWhere(
+      (c) => c.name.toLowerCase() == courseName.toLowerCase(),
+      orElse: () => throw Exception('No se encontró el curso con nombre "$courseName"'),
+    );
 
-  return course.courseId;
-}
+    return course.courseId;
+  }
 }

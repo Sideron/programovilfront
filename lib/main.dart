@@ -4,9 +4,14 @@ import 'package:programovilfront/routes/app_routes.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-   await dotenv.load(fileName: ".env");
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+
+  print("TOKEN CARGADO: ${dotenv.env['JWT_TOKEN']}");
+
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
