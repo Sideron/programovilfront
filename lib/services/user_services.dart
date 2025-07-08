@@ -42,6 +42,10 @@ class UserService {
 
   Future<String> validateSignIn(
       String email, String name, String password, String secondPassword) async {
+    final String? baseUrl = dotenv.env['API_URL'];
+    if (baseUrl == null) {
+      throw Exception('BASE_URL no configurado en el .env');
+    }
     if (name.length < 5) {
       return 'El nombre debe tener más de 5 letras';
     }
@@ -56,6 +60,33 @@ class UserService {
     if (password != secondPassword) {
       return 'Las contraseñas no coinciden';
     }
-    return "";
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/users/register'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "username": name,
+          "email": email,
+          "password": password,
+        }),
+      );
+
+      if (response.statusCode >= 200 && response.statusCode < 400) {
+        final data = jsonDecode(response.body);
+        if (data['success'] == true || data['message'] == 'User created') {
+          return "";
+        } else {
+          return data['message'] ?? 'Error desconocido al registrar';
+        }
+      } else {
+        final data = jsonDecode(response.body);
+        return data['message'] ??
+            'Error en el registro: ${response.statusCode}';
+      }
+    } catch (e) {
+      return 'Error de conexión: $e';
+    }
   }
 }
