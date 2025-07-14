@@ -2,19 +2,18 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:programovilfront/config/token_manager.dart';
 
 import 'package:programovilfront/models/courses.dart';
 import 'package:programovilfront/models/faculty.dart';
 
 class CourseService {
-  final String _token;
-  final String _baseUrl;
+  final String _baseUrl = dotenv.env['API_URL'] ?? '';
+  final TokenManager _tokenManager = TokenManager();
 
-  CourseService()
-      : _token = dotenv.env['JWT_TOKEN'] ?? '',
-        _baseUrl = dotenv.env['API_URL'] ?? '' {
-    if (_token.isEmpty || _baseUrl.isEmpty) {
-      throw Exception('JWT_TOKEN o API_URL no está configurado en el archivo .env');
+  CourseService() {
+    if (_baseUrl.isEmpty) {
+      throw Exception('API_URL no está configurado en el archivo .env');
     }
   }
 
@@ -62,11 +61,16 @@ class CourseService {
   /// Obtener cursos por ID de profesor usando API.
   Future<List<Course>> getCoursesByTeacher(int teacherId) async {
     final url = Uri.parse('$_baseUrl/api/courses/profesor/$teacherId');
+    final token = await _tokenManager.getToken();
+
+    if (token == null || token.isEmpty) {
+      throw Exception('Token JWT no encontrado. Debes iniciar sesión.');
+    }
 
     final response = await http.get(
       url,
       headers: {
-        'Authorization': 'Bearer $_token',
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );
@@ -85,7 +89,8 @@ class CourseService {
 
     final course = courses.firstWhere(
       (c) => c.name.toLowerCase() == courseName.toLowerCase(),
-      orElse: () => throw Exception('No se encontró el curso con nombre "$courseName"'),
+      orElse: () =>
+          throw Exception('No se encontró el curso con nombre "$courseName"'),
     );
 
     return course.courseId;
