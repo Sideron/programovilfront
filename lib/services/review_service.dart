@@ -1,11 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:programovilfront/config/token_manager.dart';
 
 import '../models/review_display.dart';
 import '../models/labels.dart';
 import '../models/review.dart';
 import '../models/user.dart';
+
+final tokenManager = TokenManager();
+
+Future<String?> _getToken() async {
+  return await tokenManager.getToken();
+}
 
 class ReviewResult {
   final List<ReviewDisplay> reviews;
@@ -25,16 +32,16 @@ class UserProfileResult {
 }
 
 class ReviewService {
-  final String _token = dotenv.env['JWT_TOKEN']!;
   final String _baseUrl = dotenv.env['API_URL']!;
 
   Future<ReviewResult> getReviewsForTeacher(int teacherId) async {
     final url = Uri.parse('$_baseUrl/api/reviews/$teacherId');
+    final token = await _getToken();
 
     final response = await http.get(
       url,
       headers: {
-        'Authorization': 'Bearer $_token',
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );
@@ -92,17 +99,19 @@ class ReviewService {
 
   Future<UserProfileResult> getReviewsByUser() async {
     final url = Uri.parse('$_baseUrl/api/users/perfil');
+    final token = await _getToken();
 
     final response = await http.get(
       url,
       headers: {
-        'Authorization': 'Bearer $_token',
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Error al obtener el perfil del usuario: ${response.statusCode}');
+      throw Exception(
+          'Error al obtener el perfil del usuario: ${response.statusCode}');
     }
 
     final jsonData = json.decode(response.body);
@@ -151,25 +160,24 @@ class ReviewService {
     );
   }
 
+  Future<List<Label>> getLabelsByTeacher(int teacherId) async {
+    final url = Uri.parse('$_baseUrl/api/reviews/labels/$teacherId');
+    final token = await _getToken();
 
-Future<List<Label>> getLabelsByTeacher(int teacherId) async {
-  final url = Uri.parse('$_baseUrl/api/reviews/labels/$teacherId');
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
 
-  final response = await http.get(
-    url,
-    headers: {
-      'Authorization': 'Bearer $_token',
-      'Content-Type': 'application/json',
-    },
-  );
+    if (response.statusCode != 200) {
+      throw Exception('Error al obtener labels del profesor: ${response.body}');
+    }
 
-  if (response.statusCode != 200) {
-    throw Exception('Error al obtener labels del profesor: ${response.body}');
+    final List<dynamic> jsonData = json.decode(response.body);
+
+    return jsonData.map((json) => Label.fromJson(json)).toList();
   }
-
-  final List<dynamic> jsonData = json.decode(response.body);
-
-  return jsonData.map((json) => Label.fromJson(json)).toList();
-}
-
 }

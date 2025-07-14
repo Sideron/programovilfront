@@ -1,9 +1,10 @@
 import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:programovilfront/config/token_manager.dart';
 
 class UserService {
+  final tokenManager = TokenManager();
   Future<bool> login(String email, String password) async {
     final String? baseUrl = dotenv.env['API_URL'];
     if (baseUrl == null) {
@@ -28,6 +29,9 @@ class UserService {
 
       if (response.statusCode == 200) {
         // Puedes retornar true, guardar token o manejar como desees
+
+        final decoded = json.decode(response.body);
+        await tokenManager.saveToken(decoded['token']);
         print('Login exitoso: ${response.body}');
         return true;
       } else {
