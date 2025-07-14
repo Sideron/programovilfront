@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:programovilfront/routes/app_routes.dart';
 import 'rateTeacher_controller.dart';
 
 class RateTeacherPage extends StatelessWidget {

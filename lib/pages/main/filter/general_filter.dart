@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:programovilfront/routes/app_routes.dart';
 import 'package:programovilfront/services/college_service.dart';

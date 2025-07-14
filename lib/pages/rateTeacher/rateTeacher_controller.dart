@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:programovilfront/models/group.dart';
 import 'package:programovilfront/models/labels.dart';
 import 'package:programovilfront/models/courses.dart';
-import 'package:programovilfront/services/label_service.dart';
 import 'package:programovilfront/services/rate_service.dart';
 import 'package:programovilfront/services/course_service.dart';
 

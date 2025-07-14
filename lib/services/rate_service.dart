@@ -1,14 +1,21 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:programovilfront/config/token_manager.dart';
 import 'package:programovilfront/models/group.dart';
 import 'package:programovilfront/models/labels.dart';
 
 class RateService {
-  final String token = dotenv.env['JWT_TOKEN']!;
+  final tokenManager = TokenManager();
+
+  Future<String?> _getToken() async {
+    return await tokenManager.getToken();
+  }
+
   final String baseUrl = dotenv.env['API_URL']!;
 
   Future<Map<Group, List<Label>>> loadGroupsWithLabels() async {
+    final token = await _getToken();
     final Uri url = Uri.parse('$baseUrl/api/rate');
 
     final response = await http.get(
@@ -48,6 +55,7 @@ class RateService {
     required String comment,
     required List<int> labelIds,
   }) async {
+    final token = await _getToken();
     final Uri url = Uri.parse('$baseUrl/api/reviews');
 
     final Map<String, dynamic> body = {
