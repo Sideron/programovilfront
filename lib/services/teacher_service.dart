@@ -46,9 +46,25 @@ class TeacherService {
         .toSet();
   }
 
-  Future<List<dynamic>> getTeachersInCollege(int collegeId) async {
-    final data = await _loadJsonList('assets/json/teachers.json');
-    return data.where((x) => x['college_id'] == collegeId).toList();
+  Future<List<Teacher>> getTeachersInCollege(int collegeId) async {
+    final url = Uri.parse('$_baseUrl/api/teachers/college/$collegeId');
+    final token = await _getToken();
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonList = json.decode(response.body);
+      return jsonList.map((json) => Teacher.fromJson(json)).toList();
+    } else {
+      throw Exception(
+          'Error al obtener el profesor. Código: ${response.statusCode}');
+    }
   }
 
   Future<List<Teacher>> getAllTeachers() async {

@@ -5,11 +5,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:programovilfront/config/token_manager.dart';
 
 import 'package:programovilfront/models/courses.dart';
-import 'package:programovilfront/models/faculty.dart';
 
 class CourseService {
   final String _baseUrl = dotenv.env['API_URL'] ?? '';
   final TokenManager _tokenManager = TokenManager();
+  Future<String?> _getToken() async {
+    return await _tokenManager.getToken();
+  }
 
   CourseService() {
     if (_baseUrl.isEmpty) {
@@ -39,23 +41,26 @@ class CourseService {
     return data.map((e) => Course.fromJson(e)).toList();
   }
 
-  /// Cargar todas las facultades desde archivo local.
-  Future<List<Faculty>> loadFacultiesFromJson() async {
-    final jsonStr = await rootBundle.loadString('assets/json/faculty.json');
-    final data = json.decode(jsonStr) as List<dynamic>;
-    return data.map((e) => Faculty.fromJson(e)).toList();
-  }
-
   /// Obtener cursos de una universidad a partir de su ID.
   Future<List<Course>> getCoursesByCollegeId(int collegeId) async {
-    final faculties = await loadFacultiesFromJson();
-    final facultyIds = faculties
-        .where((f) => f.collegeId == collegeId)
-        .map((f) => f.facultyId)
-        .toSet();
+    final url = Uri.parse('$_baseUrl/api/courses/college/$collegeId');
+    final token = await _getToken();
 
-    final courses = await loadCoursesFromJson();
-    return courses.where((c) => facultyIds.contains(c.facultyId)).toList();
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonList = json.decode(response.body);
+      return jsonList.map((json) => Course.fromJson(json)).toList();
+    } else {
+      throw Exception(
+          'Error al obtener el profesor. Código: ${response.statusCode}');
+    }
   }
 
   /// Obtener cursos por ID de profesor usando API.

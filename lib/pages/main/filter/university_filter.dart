@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:programovilfront/models/colleges.dart';
+import 'package:programovilfront/models/teachers.dart';
 import 'package:programovilfront/routes/app_routes.dart';
 import 'package:programovilfront/services/college_service.dart';
 import 'package:programovilfront/services/course_service.dart';
@@ -43,12 +44,9 @@ class _UniversityFilterState extends State<UniversityFilter> {
     return HSVColor.fromAHSV(1.0, hue, saturation, brightness).toColor();
   }
 
-  List<Map<String, dynamic>> allTeachers = [];
+  List<Teacher> allTeachers = [];
 
   List<Map<String, dynamic>> allCourses = [];
-
-  Future<List<dynamic>>? allTeachers2;
-  Future<List<dynamic>>? allCourses2;
 
   @override
   void initState() {
@@ -63,7 +61,13 @@ class _UniversityFilterState extends State<UniversityFilter> {
       });
       //print(jsonEncode(_universityInfo));
     });
-    allTeachers2 = _teacherService.getTeachersInCollege(_universityId);
+    _teacherService.getTeachersInCollege(_universityId).then((teachers) {
+      setState(() {
+        allTeachers = teachers.map((teacher) {
+          return teacher;
+        }).toList();
+      });
+    });
     _courseService.getCoursesByCollegeId(_universityId).then((courses) {
       setState(() {
         allCourses = courses.map((course) {
@@ -75,14 +79,6 @@ class _UniversityFilterState extends State<UniversityFilter> {
           };
         }).toList();
       });
-    });
-
-    allTeachers2!.then((value) {
-      if (value.first is Map<String, dynamic>) {
-        setState(() {
-          allTeachers = value.cast<Map<String, dynamic>>();
-        });
-      }
     });
   }
 
@@ -233,7 +229,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
       return const Center(child: Text('No hay profesores disponibles.'));
     }
     final filteredTeachers = allTeachers
-        .where((t) => t['name'].toLowerCase().contains(searchText))
+        .where((t) => t.name.toLowerCase().contains(searchText))
         .toList();
 
     print(filteredTeachers);
@@ -244,15 +240,15 @@ class _UniversityFilterState extends State<UniversityFilter> {
         final t = filteredTeachers[index];
         return ListTile(
           onTap: () {
-            AppRoutes.goToProfileTeacher(context, t['teacher_id']);
+            AppRoutes.goToProfileTeacher(context, t.teacherId);
           },
           leading: CircleAvatar(
             backgroundImage:
-                AssetImage(t['image_url'] ?? 'assets/images/profile.png'),
+                AssetImage(t.imageUrl ?? 'assets/images/profile.png'),
             radius: 24,
           ),
-          title: Text(t['name']),
-          subtitle: Text(t['ratings'].toString() + " calificaciones"),
+          title: Text(t.name),
+          subtitle: Text(t.ratings.toString() + " calificaciones"),
         );
       },
     );
