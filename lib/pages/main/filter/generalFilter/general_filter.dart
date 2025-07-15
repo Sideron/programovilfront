@@ -1,75 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:programovilfront/pages/main/filter/generalFilter/general_filter_controller.dart';
 import 'package:programovilfront/routes/app_routes.dart';
-import 'package:programovilfront/services/college_service.dart';
-import 'package:programovilfront/services/teacher_service.dart';
 
-class GeneralFilter extends StatefulWidget {
+class GeneralFilter extends StatelessWidget {
   final void Function(int num) goPage;
-  const GeneralFilter({super.key, required this.goPage});
+  final GeneralFilterController controller;
 
-  @override
-  State<GeneralFilter> createState() => _GeneralFilterState();
-}
-
-class _GeneralFilterState extends State<GeneralFilter> {
-  late void Function(int num) goPage;
-
-  int selectedFilter = 0; // 0 = Profesores, 1 = Cursos
-  final TextEditingController searchController = TextEditingController();
-  String searchText = '';
-
-  final TeacherService _teacherService = TeacherService();
-  final CollegeService _collegeService = CollegeService();
-
-  List<Map<String, dynamic>> allTeachers = [];
-
-  List<Map<String, dynamic>> allColleges = [];
-
-  Future<List<dynamic>>? allTeachers2;
-  Future<List<dynamic>>? allColleges2;
-
-  @override
-  void initState() async {
-    super.initState();
-    goPage = widget.goPage;
-    allTeachers2 = _teacherService.getAllTeachers();
-    allColleges2 = _collegeService.loadCollegessFromJsonAsMap();
-    allColleges2!.then((value) {
-      print(value);
-      if (value.first is Map<String, dynamic>) {
-        setState(() {
-          allColleges = value.cast<Map<String, dynamic>>();
-        });
-        //print(jsonEncode(allColleges));
-      }
-    });
-
-    allTeachers2!.then((value) {
-      if (value.first is Map<String, dynamic>) {
-        setState(() {
-          allTeachers = value.cast<Map<String, dynamic>>();
-        });
-        //print(jsonEncode(allTeachers));
-      }
-    });
-  }
+  const GeneralFilter({
+    super.key,
+    required this.goPage,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          buildHeader(),
-          buildFilters(),
-          Expanded(
-            child: selectedFilter == 1
-                ? buildTeachers()
-                : buildColleges((int n) {
-                    goPage(n);
-                  }),
-          ),
-        ],
-      ),
+      child: Obx(() {
+        return Column(
+          children: [
+            buildHeader(),
+            buildFilters(),
+            controller.isLoading.value
+                ? const Expanded(
+                    child: Center(child: CircularProgressIndicator()))
+                : Expanded(
+                    child: controller.selectedFilter.value == 1
+                        ? buildTeachers()
+                        : buildColleges(goPage),
+                  ),
+          ],
+        );
+      }),
     );
   }
 
@@ -78,10 +40,10 @@ class _GeneralFilterState extends State<GeneralFilter> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
-            child: const Text(
-              "¡Tu opinion es importante!",
+            child: Text(
+              "¡Tu opinión es importante!",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 21,
@@ -101,14 +63,11 @@ class _GeneralFilterState extends State<GeneralFilter> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
-                    controller: searchController,
-                    onChanged: (value) {
-                      setState(() {
-                        searchText = value.toLowerCase();
-                      });
-                    },
+                    controller: controller.searchController,
+                    onChanged: (value) =>
+                        controller.updateSearchText(value.toLowerCase()),
                     decoration: InputDecoration(
-                      hintText: selectedFilter == 0
+                      hintText: controller.selectedFilter.value == 0
                           ? 'Buscar universidad'
                           : 'Buscar profesor',
                       border: InputBorder.none,
@@ -127,26 +86,20 @@ class _GeneralFilterState extends State<GeneralFilter> {
   Widget buildFilters() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-      child: Row(
-        children: [
-          buildFilterButton("Universidades", 0),
-          const SizedBox(width: 12),
-          buildFilterButton("Profesores", 1),
-        ],
-      ),
+      child: Obx(() => Row(
+            children: [
+              buildFilterButton("Universidades", 0),
+              const SizedBox(width: 12),
+              buildFilterButton("Profesores", 1),
+            ],
+          )),
     );
   }
 
   Widget buildFilterButton(String text, int index) {
-    bool isSelected = selectedFilter == index;
+    final isSelected = controller.selectedFilter.value == index;
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedFilter = index;
-          searchController.clear();
-          searchText = '';
-        });
-      },
+      onTap: () => controller.updateFilter(index),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
@@ -162,52 +115,52 @@ class _GeneralFilterState extends State<GeneralFilter> {
   }
 
   Widget buildTeachers() {
-    final filteredTeachers = allTeachers
-        .where((t) => t['name'].toLowerCase().contains(searchText))
+    final search = controller.searchText.value;
+    final teachers = controller.allTeachers
+        .where((t) => t.name.toLowerCase().contains(search))
         .toList();
 
     return ListView.builder(
-      itemCount: filteredTeachers.length,
+      itemCount: teachers.length,
       itemBuilder: (context, index) {
-        final t = filteredTeachers[index];
+        final t = teachers[index];
         return ListTile(
           onTap: () {
-            AppRoutes.goToProfileTeacher(context, t['teacher_id']);
+            AppRoutes.goToProfileTeacher(context, t.teacherId);
           },
           leading: CircleAvatar(
             backgroundImage:
-                AssetImage(t['image_url'] ?? 'assets/images/profile.png'),
+                AssetImage(t.imageUrl ?? 'assets/images/profile.png'),
             radius: 24,
           ),
-          title: Text(t['name']),
-          subtitle: Text(t['ratings'].toString() + " calificaciones"),
+          title: Text(t.name),
+          subtitle: Text("${t.ratings} calificaciones"),
         );
       },
     );
   }
 
   Widget buildColleges(void Function(int num) goPage) {
-    final filteredColleges = allColleges
-        .where((c) => c['name'].toLowerCase().contains(searchText))
+    final search = controller.searchText.value;
+    final colleges = controller.allColleges
+        .where((c) => c.name.toLowerCase().contains(search))
         .toList();
 
     return ListView.builder(
-      itemCount: filteredColleges.length,
+      itemCount: colleges.length,
       itemBuilder: (context, index) {
-        final c = filteredColleges[index];
+        final c = colleges[index];
         return ListTile(
-          onTap: () {
-            goPage(c['college_id']);
-          },
+          onTap: () => goPage(c.collegeId),
           leading: CircleAvatar(
-            backgroundImage:
-                c['image_url'] != null && c['image_url'].startsWith('http')
-                    ? NetworkImage(c['image_url'])
-                    : AssetImage('assets/images/profile.png') as ImageProvider,
+            backgroundImage: c.imageUrl != null && c.imageUrl.startsWith('http')
+                ? NetworkImage(c.imageUrl)
+                : const AssetImage('assets/images/profile.png')
+                    as ImageProvider,
             radius: 24,
           ),
-          title: Text(c['name']),
-          subtitle: Text(c['teachers_amount'].toString() + " profesores"),
+          title: Text(c.name),
+          subtitle: Text("${200} profesores"),
         );
       },
     );

@@ -51,7 +51,7 @@ class TeacherService {
     return data.where((x) => x['college_id'] == collegeId).toList();
   }
 
-  Future<List<dynamic>> getAllTeachers() async {
+  Future<List<Teacher>> getAllTeachers() async {
     final url = Uri.parse('$_baseUrl/api/teachers');
     final token = await _getToken();
 

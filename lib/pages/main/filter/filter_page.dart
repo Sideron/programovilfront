@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/pages/main/filter/course_filter.dart';
 import 'package:programovilfront/pages/main/filter/generalFilter/general_filter.dart';
+import 'package:programovilfront/pages/main/filter/generalFilter/general_filter_controller.dart';
 import 'package:programovilfront/pages/main/filter/university_filter.dart';
 
 class FilterPage extends StatefulWidget {
@@ -16,9 +17,14 @@ class _FilterPageState extends State<FilterPage> {
   RxInt currentCollege = 1.obs;
   RxInt currentCourse = 1.obs;
 
+  late GeneralFilterController generalFilterController;
+
   @override
   void initState() {
     super.initState();
+    generalFilterController = Get.put(
+      GeneralFilterController(),
+    );
   }
 
   void goToPage(int pageIndex) {
@@ -39,7 +45,10 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     return Obx(() {
       final pages = [
-        GeneralFilter(goPage: goCollegeFilter),
+        GeneralFilter(
+          goPage: goCollegeFilter,
+          controller: generalFilterController,
+        ),
         UniversityFilter(
           universityId: currentCollege.value,
           goPage: goToPage,
