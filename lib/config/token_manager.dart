@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class TokenManager {
   static const _jwtKey = 'jwt_token';
@@ -14,7 +15,14 @@ class TokenManager {
 
   /// Obtiene el token guardado, o null si no existe
   Future<String?> getToken() async {
-    return await _storage.read(key: _jwtKey);
+    final token = await _storage.read(key: _jwtKey);
+    if (token != null && !_isTokenExpired(token)) {
+      return token;
+    }
+
+    // Token expirado o inválido → eliminarlo
+    await deleteToken();
+    return null;
   }
 
   /// Elimina el token (logout)
@@ -23,8 +31,12 @@ class TokenManager {
   }
 
   /// Verifica si hay un token guardado (útil para decidir si mostrar login o home)
-  Future<bool> hasToken() async {
-    final token = await getToken();
-    return token != null && token.isNotEmpty;
+  Future<bool> hasValidToken() async {
+    final token = await _storage.read(key: _jwtKey);
+    return token != null && !_isTokenExpired(token);
+  }
+
+  bool _isTokenExpired(String token) {
+    return JwtDecoder.isExpired(token);
   }
 }

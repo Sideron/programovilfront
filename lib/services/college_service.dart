@@ -15,13 +15,24 @@ class CollegeService {
   final String _baseUrl = dotenv.env['API_URL']!;
 
   Future<College> getCollegeById(int id) async {
-    final jsonStr = await rootBundle.loadString('assets/json/colleges.json');
-    final data = json.decode(jsonStr) as List<dynamic>;
-    return data
-        .map((json) => College.fromJson(json))
-        .toList()
-        .where((x) => x.collegeId == id)
-        .first;
+    final url = Uri.parse('$_baseUrl/api/colleges/$id');
+    final token = await _getToken(); // Asegúrate de tener esta función definida
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final jsonItem = json.decode(response.body);
+      return College.fromJson(jsonItem);
+    } else {
+      throw Exception(
+          'Error al obtener la universidad. Código: ${response.statusCode}');
+    }
   }
 
   Future<List<College>> loadCollegessFromJsonAsMap() async {
