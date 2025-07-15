@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/pages/main/filter/course_filter.dart';
-import 'package:programovilfront/pages/main/filter/general_filter.dart';
+import 'package:programovilfront/pages/main/filter/generalFilter/general_filter.dart';
 import 'package:programovilfront/pages/main/filter/university_filter.dart';
 
 class FilterPage extends StatefulWidget {

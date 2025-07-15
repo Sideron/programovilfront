@@ -70,8 +70,6 @@ flutter:
     - assets/images/teachers/
     - assets/images/users/
     - assets/images/groups/
-    - assets/json/
-    - assets/json/users.json
     - .env
   #   - images/a_dot_ham.jpeg
 

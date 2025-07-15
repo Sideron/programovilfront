@@ -7,11 +7,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
-  print("TOKEN CARGADO: ${dotenv.env['JWT_TOKEN']}");
-
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

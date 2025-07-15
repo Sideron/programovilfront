@@ -13,11 +13,13 @@ class GeneralFilter extends StatefulWidget {
 
 class _GeneralFilterState extends State<GeneralFilter> {
   late void Function(int num) goPage;
-  final TeacherService _teacherService = TeacherService();
-  final CollegeService _collegeService = CollegeService();
+
   int selectedFilter = 0; // 0 = Profesores, 1 = Cursos
   final TextEditingController searchController = TextEditingController();
   String searchText = '';
+
+  final TeacherService _teacherService = TeacherService();
+  final CollegeService _collegeService = CollegeService();
 
   List<Map<String, dynamic>> allTeachers = [];
 
@@ -27,12 +29,13 @@ class _GeneralFilterState extends State<GeneralFilter> {
   Future<List<dynamic>>? allColleges2;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
     goPage = widget.goPage;
     allTeachers2 = _teacherService.getAllTeachers();
     allColleges2 = _collegeService.loadCollegessFromJsonAsMap();
     allColleges2!.then((value) {
+      print(value);
       if (value.first is Map<String, dynamic>) {
         setState(() {
           allColleges = value.cast<Map<String, dynamic>>();

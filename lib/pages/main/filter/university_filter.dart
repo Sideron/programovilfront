@@ -229,7 +229,7 @@ class _UniversityFilterState extends State<UniversityFilter> {
   }
 
   Widget buildTeachers() {
-    if (allTeachers == null || allTeachers.isEmpty) {
+    if (allTeachers.isEmpty) {
       return const Center(child: Text('No hay profesores disponibles.'));
     }
     final filteredTeachers = allTeachers
