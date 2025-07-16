@@ -93,4 +93,50 @@ class UserService {
       return 'Error de conexión: $e';
     }
   }
+
+  Future<bool> editProfile({
+    required String username,
+    required String email,
+    required int collegeId,
+  }) async {
+    final String? baseUrl = dotenv.env['API_URL'];
+    if (baseUrl == null) {
+      throw Exception('BASE_URL no configurado en el .env');
+    }
+
+    final String? token = await tokenManager.getToken();
+    if (token == null) {
+      print('Token no disponible');
+      return false;
+    }
+
+    final url = Uri.parse('$baseUrl/api/users/editar');
+
+    try {
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          'username': username,
+          'email': email,
+          'college_id': collegeId,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print('Perfil actualizado correctamente');
+        return true;
+      } else {
+        print(
+            'Error al actualizar perfil: ${response.statusCode} - ${response.body}');
+        return false;
+      }
+    } catch (e) {
+      print('Excepción al actualizar perfil: $e');
+      return false;
+    }
+  }
 }
