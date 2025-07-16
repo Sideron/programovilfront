@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:programovilfront/models/courses.dart';
+import 'package:programovilfront/models/teachers.dart';
 import 'package:programovilfront/routes/app_routes.dart';
 import 'package:programovilfront/services/course_service.dart';
 import 'package:programovilfront/services/teacher_service.dart';
@@ -23,7 +22,7 @@ class CourseFilter extends StatefulWidget {
 class _CourseFilterState extends State<CourseFilter> {
   final CourseService _courseService = CourseService();
   final TeacherService _teacherService = TeacherService();
-  List<Map<String, dynamic>> allTeachers = [];
+  List<Teacher> allTeachers = [];
   Future<List<dynamic>>? allTeachers2;
   Course? courseInfo;
   bool isLoading = true;
@@ -33,14 +32,10 @@ class _CourseFilterState extends State<CourseFilter> {
     // TODO: implement initState
     super.initState();
 
-    allTeachers2 = _teacherService.getAllTeachers();
-    allTeachers2!.then((value) {
-      if (value.first is Map<String, dynamic>) {
-        setState(() {
-          allTeachers = value.cast<Map<String, dynamic>>();
-        });
-        print(jsonEncode(allTeachers));
-      }
+    _teacherService.getTeachersByCourseId(widget.courseId).then((teachers) {
+      setState(() {
+        allTeachers = teachers;
+      });
     });
     Future<Course> courseTemp = _courseService.getCourseId(widget.courseId);
     courseTemp.then((value) {
@@ -131,15 +126,15 @@ class _CourseFilterState extends State<CourseFilter> {
         final t = filteredTeachers[index];
         return ListTile(
           onTap: () {
-            AppRoutes.goToProfileTeacher(context, t['teacher_id']);
+            AppRoutes.goToProfileTeacher(context, t.teacherId);
           },
           leading: CircleAvatar(
             backgroundImage:
-                AssetImage(t['image_url'] ?? 'assets/images/profile.png'),
+                AssetImage(t.imageUrl ?? 'assets/images/profile.png'),
             radius: 24,
           ),
-          title: Text(t['name']),
-          subtitle: Text(t['ratings'].toString() + " calificaciones"),
+          title: Text(t.name),
+          subtitle: Text(t.ratings.toString() + " calificaciones"),
         );
       },
     );

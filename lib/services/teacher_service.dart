@@ -95,22 +95,24 @@ class TeacherService {
 
   //  profesores por ID de curso
   Future<List<Teacher>> getTeachersByCourseId(int courseId) async {
-    final teacherCoursesJson =
-        await _loadJsonList('assets/json/teachers_courses.json');
-    final teacherCourses =
-        teacherCoursesJson.map((json) => TeacherCourse.fromJson(json)).toList();
+    final url = Uri.parse('$_baseUrl/api/teachers/course/$courseId');
+    final token =
+        await _getToken(); // Asegúrate de tener este método implementado
 
-    final teacherIds = teacherCourses
-        .where((tc) => tc.courseId == courseId)
-        .map((tc) => tc.teacherId)
-        .toSet();
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
 
-    final allTeachersJson = await _loadJsonList('assets/json/teachers.json');
-    final allTeachers =
-        allTeachersJson.map((json) => Teacher.fromJson(json)).toList();
-
-    return allTeachers
-        .where((teacher) => teacherIds.contains(teacher.teacherId))
-        .toList();
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = json.decode(response.body);
+      return jsonData.map((json) => Teacher.fromJson(json)).toList();
+    } else {
+      throw Exception(
+          'Error al obtener los profesores del curso. Código: ${response.statusCode}');
+    }
   }
 }

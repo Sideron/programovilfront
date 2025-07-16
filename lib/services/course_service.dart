@@ -21,11 +21,24 @@ class CourseService {
 
   /// Cargar un curso por ID desde archivo local.
   Future<Course> getCourseId(int id) async {
-    final jsonStr = await rootBundle.loadString('assets/json/courses.json');
-    final data = json.decode(jsonStr) as List<dynamic>;
-    return data
-        .map((json) => Course.fromJson(json))
-        .firstWhere((course) => course.courseId == id);
+    final url = Uri.parse('$_baseUrl/api/courses/$id');
+    final token = await _getToken(); // Asegúrate de tener este método definido
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      return Course.fromJson(jsonData);
+    } else {
+      throw Exception(
+          'Error al obtener el curso. Código: ${response.statusCode}');
+    }
   }
 
   /// Cargar todos los cursos como `Map`.
