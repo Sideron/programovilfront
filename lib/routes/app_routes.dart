@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:programovilfront/pages/editProfile/edit_profile_page.dart';
 import 'package:programovilfront/pages/login/login_page.dart';
 import 'package:programovilfront/pages/main/main_page.dart';
 import 'package:programovilfront/pages/rateTeacher/rateTeacher_page.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
   static const String profileTeacher = '/profileTeacher';
   static const String profileUser = '/profileUser';
   static const String rateTeacher = '/rateTeacher';
+  static const String editProfile = '/editprofile';
 
   static Widget mainPage = Splashscreen();
 
@@ -23,10 +25,8 @@ class AppRoutes {
       AppRoutes.login: (context) => LoginPage(),
       AppRoutes.signin: (context) => SigninPage(),
       AppRoutes.main: (context) => MainPage(),
-      /* AppRoutes.profileTeacher: (context) => ProfileTeacherPage(
-            idTeacher: 1,
-          ), */
-      AppRoutes.profileUser: (context) => ProfileUserPage()
+      AppRoutes.profileUser: (context) => ProfileUserPage(),
+      AppRoutes.editProfile: (context) => EditProfilePage()
     };
   }
 

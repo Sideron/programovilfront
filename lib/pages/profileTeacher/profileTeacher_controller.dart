@@ -10,7 +10,7 @@ class ProfileTeacherController extends GetxController {
   var labels = <Label>[].obs;
   var reviews = <ReviewDisplay>[].obs;
   var colleges = <dynamic>[].obs;
-  var selectCollege = Rx<dynamic?>(null);
+  var selectCollege = Rx<dynamic>(null);
   var showAllLabels = true.obs;
 
   late final int teacherSelect;

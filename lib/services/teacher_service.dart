@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:programovilfront/config/token_manager.dart';
 import '../models/teachers.dart';
@@ -75,11 +74,6 @@ class TeacherService {
       throw Exception(
           'Error al obtener el profesor. Código: ${response.statusCode}');
     }
-  }
-
-  Future<List<dynamic>> _loadJsonList(String path) async {
-    final jsonStr = await rootBundle.loadString(path);
-    return json.decode(jsonStr);
   }
 
   //  profesores por ID de curso

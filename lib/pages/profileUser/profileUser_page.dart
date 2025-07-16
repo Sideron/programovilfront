@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:programovilfront/pages/profileUser/profileUser_controller.dart';
+import 'package:programovilfront/routes/app_routes.dart';
 import '../../components/review_item/review_item.dart';
 
 class ProfileUserPage extends StatelessWidget {
@@ -50,7 +51,7 @@ class ProfileUserPage extends StatelessWidget {
                               )),
                           SizedBox(height: 16),
                           EditProfileButton(onPressed: () {
-                            print("Presionaste 'Editar'");
+                            Navigator.pushNamed(context, AppRoutes.editProfile);
                           }),
                         ]),
                   ),

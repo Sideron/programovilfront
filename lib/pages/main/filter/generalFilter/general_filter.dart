@@ -153,7 +153,7 @@ class GeneralFilter extends StatelessWidget {
         return ListTile(
           onTap: () => goPage(c.collegeId),
           leading: CircleAvatar(
-            backgroundImage: c.imageUrl != null && c.imageUrl.startsWith('http')
+            backgroundImage: c.imageUrl.startsWith('http')
                 ? NetworkImage(c.imageUrl)
                 : const AssetImage('assets/images/profile.png')
                     as ImageProvider,
