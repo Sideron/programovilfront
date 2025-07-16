@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:programovilfront/config/token_manager.dart';
 import '../models/teachers.dart';
-import '../models/teachers_colleges.dart';
-import '../models/teachers_courses.dart';
 import 'package:http/http.dart' as http;
 
 class TeacherService {
@@ -35,15 +33,6 @@ class TeacherService {
       throw Exception(
           'Error al obtener el profesor. Código: ${response.statusCode}');
     }
-  }
-
-  Future<Set<int>> getTeacherCollegeIds(int teacherId) async {
-    final data = await _loadJsonList('assets/json/teachers_colleges.json');
-    return data
-        .map((json) => TeacherCollege.fromJson(json))
-        .where((tc) => tc.teacherId == teacherId)
-        .map((tc) => tc.collegeId)
-        .toSet();
   }
 
   Future<List<Teacher>> getTeachersInCollege(int collegeId) async {

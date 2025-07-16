@@ -41,19 +41,6 @@ class CourseService {
     }
   }
 
-  /// Cargar todos los cursos como `Map`.
-  Future<List<dynamic>> loadCoursesFromJsonAsMap() async {
-    final jsonStr = await rootBundle.loadString('assets/json/courses.json');
-    return json.decode(jsonStr);
-  }
-
-  /// Cargar todos los cursos como `Course`.
-  Future<List<Course>> loadCoursesFromJson() async {
-    final jsonStr = await rootBundle.loadString('assets/json/courses.json');
-    final data = json.decode(jsonStr) as List<dynamic>;
-    return data.map((e) => Course.fromJson(e)).toList();
-  }
-
   /// Obtener cursos de una universidad a partir de su ID.
   Future<List<Course>> getCoursesByCollegeId(int collegeId) async {
     final url = Uri.parse('$_baseUrl/api/courses/college/$collegeId');
@@ -99,18 +86,5 @@ class CourseService {
     } else {
       throw Exception('Error al obtener cursos del profesor');
     }
-  }
-
-  /// Obtener el ID de un curso por su nombre (insensible a mayúsculas).
-  Future<int> getCourseIdByName(String courseName) async {
-    final courses = await loadCoursesFromJson();
-
-    final course = courses.firstWhere(
-      (c) => c.name.toLowerCase() == courseName.toLowerCase(),
-      orElse: () =>
-          throw Exception('No se encontró el curso con nombre "$courseName"'),
-    );
-
-    return course.courseId;
   }
 }

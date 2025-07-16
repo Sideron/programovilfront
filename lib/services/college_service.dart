@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:programovilfront/config/token_manager.dart';
@@ -54,11 +55,5 @@ class CollegeService {
       throw Exception(
           'Error al obtener unniversidades. Código: ${response.statusCode}');
     }
-  }
-
-  Future<List<College>> getAllColleges() async {
-    final jsonStr = await rootBundle.loadString('assets/json/colleges.json');
-    final data = json.decode(jsonStr) as List<dynamic>;
-    return data.map((json) => College.fromJson(json)).toList();
   }
 }
