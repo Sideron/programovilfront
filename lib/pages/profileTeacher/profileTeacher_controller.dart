@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:programovilfront/models/labels.dart';
-import '../../models/colleges.dart';
 import '../../models/review_display.dart';
-import '../../services/college_service.dart';
 import '../../services/review_service.dart';
 import '../../services/teacher_service.dart';
 
@@ -11,14 +9,13 @@ class ProfileTeacherController extends GetxController {
   var image = ''.obs;
   var labels = <Label>[].obs;
   var reviews = <ReviewDisplay>[].obs;
-  var colleges = <College>[].obs;
-  var selectCollege = Rx<College?>(null);
+  var colleges = <dynamic>[].obs;
+  var selectCollege = Rx<dynamic?>(null);
   var showAllLabels = true.obs;
 
   late final int teacherSelect;
 
   final _teacherService = TeacherService();
-  final _collegeService = CollegeService();
   final _reviewService = ReviewService();
 
   ProfileTeacherController(this.teacherSelect);
@@ -31,17 +28,19 @@ class ProfileTeacherController extends GetxController {
   }
 
   Future<void> _loadTeacherProfile() async {
-    final teacher = await _teacherService.getTeacherById(teacherSelect);
-    name.value = teacher.name;
-    image.value = teacher.imageUrl;
+    final fetchInfo = await _teacherService.getTeacherById(teacherSelect);
+    final teacher = fetchInfo['teacher'];
+    name.value = teacher['name'];
+    image.value = teacher['image_url'];
 
-    final allColleges = await _collegeService.getAllColleges();
+    /*final allColleges = await _collegeService.getAllColleges();
     final teacherCollegeIds =
-        await _teacherService.getTeacherCollegeIds(teacher.teacherId);
+        await _teacherService.getTeacherCollegeIds(teacher.teacherId);*/
 
-    final filtered = allColleges
+    /*final filtered = allColleges
         .where((c) => teacherCollegeIds.contains(c.collegeId))
-        .toList();
+        .toList();*/
+    final filtered = fetchInfo['colleges'];
 
     colleges.assignAll(filtered);
   }

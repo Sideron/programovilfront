@@ -61,7 +61,7 @@ class ProfileTeacherPage extends StatelessWidget {
                     spacing: 8,
                     children: control.colleges.map((college) {
                       return ChoiceChip(
-                        label: Text(college.name),
+                        label: Text(college['name']),
                         selected: control.selectCollege.value == college,
                         onSelected: (_) =>
                             control.selectCollege.value = college,
@@ -80,37 +80,40 @@ class ProfileTeacherPage extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Obx(() => Align(
-  alignment: Alignment.centerRight,
-  child: TextButton.icon(
-    onPressed: () {
-      control.showAllLabels.toggle(); // cambia entre true y false
-    },
-    icon: Icon(
-      control.showAllLabels.value ? Icons.expand_less : Icons.expand_more,
-    ),
-    label: Text(
-      control.showAllLabels.value ? "Ocultar" : "Mostrar todas",
-    ),
-  ),
-)),
-
+                    alignment: Alignment.centerRight,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        control.showAllLabels
+                            .toggle(); // cambia entre true y false
+                      },
+                      icon: Icon(
+                        control.showAllLabels.value
+                            ? Icons.expand_less
+                            : Icons.expand_more,
+                      ),
+                      label: Text(
+                        control.showAllLabels.value
+                            ? "Ocultar"
+                            : "Mostrar todas",
+                      ),
+                    ),
+                  )),
               Obx(() {
-  final displayedLabels = control.showAllLabels.value
-      ? control.labels
-      : control.labels.take(6).toList();
+                final displayedLabels = control.showAllLabels.value
+                    ? control.labels
+                    : control.labels.take(6).toList();
 
-  return Wrap(
-    spacing: 8,
-    children: displayedLabels.map((label) {
-      return Chip(
-        label: Text('${label.name} (${label.usageCount ?? 0})'),
-        backgroundColor: Colors.blue[50],
-        shape: StadiumBorder(),
-      );
-    }).toList(),
-  );
-}),
-
+                return Wrap(
+                  spacing: 8,
+                  children: displayedLabels.map((label) {
+                    return Chip(
+                      label: Text('${label.name} (${label.usageCount ?? 0})'),
+                      backgroundColor: Colors.blue[50],
+                      shape: StadiumBorder(),
+                    );
+                  }).toList(),
+                );
+              }),
               SizedBox(height: 8),
               Divider(
                 color: Theme.of(context).colorScheme.primary,

@@ -2,7 +2,7 @@ class Teacher {
   final int teacherId;
   final String name;
   final String imageUrl;
-  final double ratings;  
+  final double ratings;
 
   Teacher({
     required this.teacherId,
@@ -17,7 +17,9 @@ class Teacher {
       name: json['name'],
       imageUrl: json['image_url'] ?? '',
       ratings: (json['ratings'] != null)
-          ? (json['ratings'] is int ? (json['ratings'] as int).toDouble() : json['ratings'])
+          ? (json['ratings'] is int
+              ? (json['ratings'] as int).toDouble()
+              : json['ratings'])
           : 0.0, // valor por defecto si no existe ratings
     );
   }

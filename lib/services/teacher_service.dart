@@ -16,7 +16,7 @@ class TeacherService {
 
   final String _baseUrl = dotenv.env['API_URL']!;
 
-  Future<Teacher> getTeacherById(int id) async {
+  Future<dynamic> getTeacherById(int id) async {
     final url = Uri.parse('$_baseUrl/api/teachers/$id');
     final token = await _getToken();
 
@@ -30,7 +30,7 @@ class TeacherService {
 
     if (response.statusCode == 200) {
       final jsonItem = json.decode(response.body);
-      return Teacher.fromJson(jsonItem);
+      return jsonItem;
     } else {
       throw Exception(
           'Error al obtener el profesor. Código: ${response.statusCode}');
