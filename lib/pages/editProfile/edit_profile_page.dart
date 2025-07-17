@@ -6,11 +6,16 @@ import 'package:programovilfront/pages/editProfile/edit_profile_controller.dart'
 import 'package:get/get.dart';
 
 class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({super.key});
+  final String nombre;
+  final String correo;
+
+  const EditProfilePage(
+      {super.key, required this.nombre, required this.correo});
 
   @override
   Widget build(BuildContext context) {
-    final EditProfileController _controller = Get.put(EditProfileController());
+    final EditProfileController _controller = Get.put(
+        EditProfileController(nombreInicial: nombre, correoInicial: correo));
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Perfil')),
       body: Padding(

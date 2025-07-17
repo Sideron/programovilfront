@@ -5,6 +5,11 @@ import 'package:programovilfront/services/college_service.dart';
 import 'package:programovilfront/services/user_services.dart';
 
 class EditProfileController extends GetxController {
+  final String nombreInicial;
+  final String correoInicial;
+
+  EditProfileController(
+      {required this.nombreInicial, required this.correoInicial});
   final _userService = UserService();
   final CollegeService _collegeService = CollegeService();
   final formKey = GlobalKey<FormState>();
@@ -74,6 +79,8 @@ class EditProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    nombreController.text = nombreInicial;
+    correoController.text = correoInicial;
     cargarUniversidades();
   }
 

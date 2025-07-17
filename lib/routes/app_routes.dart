@@ -15,7 +15,6 @@ class AppRoutes {
   static const String profileTeacher = '/profileTeacher';
   static const String profileUser = '/profileUser';
   static const String rateTeacher = '/rateTeacher';
-  static const String editProfile = '/editprofile';
 
   static Widget mainPage = Splashscreen();
 
@@ -26,7 +25,6 @@ class AppRoutes {
       AppRoutes.signin: (context) => SigninPage(),
       AppRoutes.main: (context) => MainPage(),
       AppRoutes.profileUser: (context) => ProfileUserPage(),
-      AppRoutes.editProfile: (context) => EditProfilePage()
     };
   }
 
@@ -45,6 +43,16 @@ class AppRoutes {
       context,
       MaterialPageRoute(
         builder: (_) => RateTeacherPage(idTeacher: idTeacher),
+      ),
+    );
+  }
+
+  static Future<bool?> goToEditProfilePage(
+      BuildContext context, String nombre, String correo) {
+    return Navigator.push<bool>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => EditProfilePage(nombre: nombre, correo: correo),
       ),
     );
   }

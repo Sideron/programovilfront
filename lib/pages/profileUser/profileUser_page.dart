@@ -11,7 +11,7 @@ class ProfileUserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 34),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +51,8 @@ class ProfileUserPage extends StatelessWidget {
                               )),
                           SizedBox(height: 16),
                           EditProfileButton(onPressed: () {
-                            Navigator.pushNamed(context, AppRoutes.editProfile)
+                            AppRoutes.goToEditProfilePage(context,
+                                    control.name.value, control.email.value)
                                 .then((_) {
                               control
                                   .loadUserProfile(); // <-- Recarga los datos al volver
@@ -74,13 +75,22 @@ class ProfileUserPage extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondaryContainer,
                 ),
               ),
-              Obx(() => Column(
-                    children: control.reviews.map((rev) {
-                      return ReviewItem(
-                          review: rev, showComment: false, showEmoji: false);
-                    }).toList(),
+              Obx(() => Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.all(0),
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemCount: control.reviews.length,
+                      itemBuilder: (context, index) {
+                        final rev = control.reviews[index];
+                        return ReviewItem(
+                          review: rev,
+                          showComment: false,
+                          showEmoji: false,
+                        );
+                      },
+                    ),
                   )),
-              SizedBox(height: 80),
             ],
           ),
         ),
