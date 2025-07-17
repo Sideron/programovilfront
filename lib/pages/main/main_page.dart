@@ -11,35 +11,32 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int selectedPage = 0;
-
-  //late List pages;
+  Widget currentPage = FilterPage();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    //pages = [FilterPage(), ProfileUserPage()];
   }
 
   void navigateBottomBar(int index) {
     setState(() {
       selectedPage = index;
+      switch (selectedPage) {
+        case 0:
+          currentPage = FilterPage();
+          break;
+        case 1:
+          currentPage = ProfileUserPage();
+          break;
+        default:
+          currentPage = FilterPage();
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget currentPage;
-    switch (selectedPage) {
-      case 0:
-        currentPage = FilterPage();
-        break;
-      case 1:
-        currentPage = ProfileUserPage();
-        break;
-      default:
-        currentPage = FilterPage();
-    }
     return Scaffold(
       body: currentPage,
       bottomNavigationBar: BottomNavigationBar(

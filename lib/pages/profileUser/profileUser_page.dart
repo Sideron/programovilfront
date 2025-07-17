@@ -51,7 +51,11 @@ class ProfileUserPage extends StatelessWidget {
                               )),
                           SizedBox(height: 16),
                           EditProfileButton(onPressed: () {
-                            Navigator.pushNamed(context, AppRoutes.editProfile);
+                            Navigator.pushNamed(context, AppRoutes.editProfile)
+                                .then((_) {
+                              control
+                                  .loadUserProfile(); // <-- Recarga los datos al volver
+                            });
                           }),
                         ]),
                   ),
