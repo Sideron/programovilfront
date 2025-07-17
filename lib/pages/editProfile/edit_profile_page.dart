@@ -42,32 +42,32 @@ class EditProfilePage extends StatelessWidget {
               ),
 
               // Universidad
-              DropdownButtonFormField<College>(
-                decoration: const InputDecoration(labelText: 'Universidad'),
-                value: _controller.universidadSeleccionada.value,
-                items: _controller.universidades.map((uni) {
-                  return DropdownMenuItem(
-                    value: uni,
-                    child: Text(
-                      uni.name.length > 35
-                          ? '${uni.name.substring(0, 35)}...'
-                          : uni.name,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      softWrap: false,
-                    ),
-                  );
-                }).toList(),
-                onChanged: _controller.onUniversidadChanged,
-                validator: (value) =>
-                    value == null ? 'Seleccione una universidad' : null,
-              ),
+              Obx(() => DropdownButtonFormField<College>(
+                    decoration: const InputDecoration(labelText: 'Universidad'),
+                    value: _controller.universidadSeleccionada.value,
+                    items: _controller.universidades.map((uni) {
+                      return DropdownMenuItem(
+                        value: uni,
+                        child: Text(
+                          uni.name.length > 35
+                              ? '${uni.name.substring(0, 35)}...'
+                              : uni.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          softWrap: false,
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: _controller.onUniversidadChanged,
+                    validator: (value) =>
+                        value == null ? 'Seleccione una universidad' : null,
+                  )),
 
               const SizedBox(height: 12),
 
-              _controller.errorMessage.value == ''
+              Obx(() => _controller.errorMessage.value == ''
                   ? Container()
-                  : ErrorMessageBox(_controller.errorMessage.value),
+                  : ErrorMessageBox(_controller.errorMessage.value)),
 
               const SizedBox(height: 12),
 
@@ -77,9 +77,9 @@ class EditProfilePage extends StatelessWidget {
                 child: const Text('Guardar'),
               ),
               const SizedBox(height: 12),
-              _controller.alertMessage.value == ''
+              Obx(() => _controller.alertMessage.value == ''
                   ? Container()
-                  : AlertMessageBox(_controller.alertMessage.value),
+                  : AlertMessageBox(_controller.alertMessage.value)),
             ],
           ),
         ),

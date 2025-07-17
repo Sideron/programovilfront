@@ -12,13 +12,13 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int selectedPage = 0;
 
-  late List pages;
+  //late List pages;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    pages = [FilterPage(), ProfileUserPage()];
+    //pages = [FilterPage(), ProfileUserPage()];
   }
 
   void navigateBottomBar(int index) {
@@ -29,8 +29,19 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget currentPage;
+    switch (selectedPage) {
+      case 0:
+        currentPage = FilterPage();
+        break;
+      case 1:
+        currentPage = ProfileUserPage();
+        break;
+      default:
+        currentPage = FilterPage();
+    }
     return Scaffold(
-      body: pages[selectedPage],
+      body: currentPage,
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
